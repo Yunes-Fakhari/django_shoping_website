@@ -1,0 +1,151 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}تأیید کد{% endblock %}
+
+{% block content %}
+<!-- Main Start -->
+<div class="main">
+    <!-- Otp Section Start -->
+    <section class="page-body p-0">
+        <div class="row g-0 ratio_asos">
+            <div class="order-2 order-lg-1 col-lg-5">
+                <div class="content-box">
+                    <div>
+                        <h5>کد تأیید <span class="bg-theme-blue"></span></h5>
+                        <p class="font-md content-color">
+                            ما تایید کد را به شماره موبایل شما ارسال کرده‌ایم
+                        </p>
+
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <span class="font-md edit">
+                                {{ request.session.phone_number }} 
+                                <a href="{% url 'register_page' %}" class="ms-2">
+                                    <i data-feather="edit-3" class="icon-sm"></i>
+                                </a>
+                            </span>
+                            
+                            <!-- بخش تایمر و ارسال مجدد -->
+                            <div style="font-size: 15px;" class="otp-countdown d-flex align-items-center gap-2">
+                                <form id="resendOtpForm" method="post" action="{% url 'resend_otp' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button style="font-size: 15px;" type="submit" class="btn btn-link resend-otp p-0">
+                                        ارسال مجدد کد
+                                    </button>
+                                </form>
+                                <span class="content-color">(</span>
+                                <span class="time">
+                                    <span  id="timer"></span> ثانیه
+                                </span>
+                                <span class="content-color">)</span>
+                            </div>
+                        </div>
+
+                        <form method="post" class="custom-form form-pill">
+                            {% csrf_token %}
+                            <div class="input-box otp-input" dir="rtl">
+                                <input id="otp1" class="otp form-control" name="otp1" type="text" maxlength="1" inputmode="numeric" required>
+                                <input id="otp2" class="otp form-control" name="otp2" type="text" maxlength="1" inputmode="numeric" required>
+                                <input id="otp3" class="otp form-control" name="otp3" type="text" maxlength="1" inputmode="numeric" required>
+                                <input id="otp4" class="otp form-control" name="otp4" type="text" maxlength="1" inputmode="numeric" required>
+                            </div>
+                            <div id="errorMsg" class="text-danger mt-2" style="display: none;">
+                                لطفا کد تأیید را کامل وارد کنید!
+                            </div>
+                            <button id="submitBtn" type="submit" class="btn-solid rounded-pill line-none" disabled>
+                                تایید شماره تلفن<i class="arrow"></i>
+                            </button>
+                            
+                            <a href="{% url 'home_page' %}" class="btn-solid rounded-pill line-none btn-outline mt-3 d-flex justify-content-center">
+                                صفحه اصلی <i class="arrow"></i>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-1 order-lg-2 col-lg-7">
+                <div class="img-box">
+                    <img class="bg-img" src="/static/images/inner-page/banner.jpg" alt="banner" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Otp Section End -->
+</div>
+<!-- Main End -->
+{% endblock %}
+
+{% block footer_references %}
+<script src="/static/js/password-showhide.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- شمارش معکوس ارسال مجدد OTP ---
+        let countdown = 60;
+        let timerDisplay = document.getElementById("timer");
+        let resendButton = document.querySelector(".resend-otp");
+
+        function startCountdown() {
+            resendButton.style.pointerEvents = "none";
+            resendButton.style.opacity = "0.5";
+            countdown = 60;
+
+            let interval = setInterval(() => {
+                timerDisplay.textContent = countdown;
+                countdown--;
+
+                if (countdown < 0) {
+                    clearInterval(interval);
+                    resendButton.style.pointerEvents = "auto";
+                    resendButton.style.opacity = "1";
+                    timerDisplay.textContent = "";
+                }
+            }, 1000);
+        }
+        startCountdown();
+
+        // --- مدیریت اینپوت‌های OTP ---
+        const otpInputs = document.querySelectorAll('.otp');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // تابع اعتبارسنجی
+        const validateInputs = () => {
+            const allFilled = [...otpInputs].every(input => input.value.length === 1);
+            submitBtn.disabled = !allFilled;
+            errorMsg.style.display = allFilled ? 'none' : 'block';
+        };
+
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                input.value = input.value.replace(/\D/g, '');
+                
+                if (input.value.length > 1) {
+                    input.value = input.value.slice(0, 1);
+                }
+
+                if (input.value.length === 1 && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+
+                validateInputs();
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && input.value === '' && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+        });
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+            if (![...otpInputs].every(input => input.value.length === 1)) {
+                e.preventDefault();
+                errorMsg.style.display = 'block';
+                otpInputs[otpInputs.length - 1].focus();
+            }
+        });
+
+        feather.replace();
+    });
+</script>
+{% endblock %}

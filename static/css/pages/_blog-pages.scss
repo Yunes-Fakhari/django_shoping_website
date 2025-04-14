@@ -1,0 +1,259 @@
+/**====================
+   4.2 Blog Pages CSS
+  ========================**/
+/// Blog Box ///
+
+.blog-box {
+  border: $border-blog;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: $border-round-box;
+  overflow: hidden;
+
+  .img-box {
+    width: 100%;
+  }
+  .content-box {
+    width: 100%;
+    padding: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+    > span {
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      margin-top: -3px;
+      margin-bottom: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+      color: var(--theme-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.5s ease;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    h5 {
+      font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
+      color: $title-color;
+      font-weight: 500;
+      line-height: calc(20px + (24 - 22) * ((100vw - 320px) / (1920 - 320)));
+      margin-bottom: 5px;
+      margin-top: -3px;
+      line-height: calc(22px + (24 - 22) * ((100vw - 320px) / (1920 - 320)));
+      transition: all 0.5s ease;
+    }
+    p {
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      color: $content-color;
+      font-weight: normal;
+      margin-bottom: 0;
+      line-height: calc(20px + (23 - 20) * ((100vw - 320px) / (1920 - 320)));
+    }
+
+    &:hover {
+      h5 {
+        color: var(--theme-color);
+      }
+      > span {
+        color: $title-color;
+      }
+    }
+  }
+  .share-box {
+    padding-top: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+    margin-top: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: $border-blog;
+    .sender-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .avatar-img {
+        width: calc(40px + (50 - 40) * ((100vw - 320px) / (1920 - 320)));
+        height: calc(40px + (50 - 40) * ((100vw - 320px) / (1920 - 320)));
+        border-radius: $border-radius-avatar;
+        overflow: hidden;
+        img {
+          width: 100%;
+        }
+      }
+
+      .sender-details {
+        h5 {
+          font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+          font-weight: 500;
+          color: $title-color;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  /// Blog List ///
+  &.blog-list {
+    @media only screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+    .bg-size {
+      &:before {
+        padding-top: calc(200px + (253 - 200) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+    .img-box {
+      width: 30%;
+      @media only screen and (max-width: 767px) {
+        width: 100%;
+      }
+    }
+    .content-box {
+      width: calc(100% - 30%);
+      @media only screen and (max-width: 767px) {
+        width: 100%;
+      }
+    }
+  }
+
+  /// Blog Grid ///
+  &.blog-grid {
+    flex-direction: column;
+    .share-box {
+      padding-top: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+      margin-top: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+      .action-box {
+        gap: 20px;
+        @media only screen and (max-width: 1199px) {
+          gap: 8px;
+        }
+        @media only screen and (max-width: 991px) {
+          gap: 20px;
+        }
+        @media only screen and (max-width: 767px) {
+          gap: 8px;
+        }
+        @media only screen and (max-width: 575px) {
+          gap: 20px;
+        }
+        @media only screen and (max-width: 375px) {
+          gap: 8px;
+        }
+        .like {
+          gap: 5px;
+          @media only screen and (max-width: 1199px) {
+            font-size: 0;
+          }
+          @media only screen and (max-width: 991px) {
+            font-size: 14px;
+          }
+          @media only screen and (max-width: 767px) {
+            font-size: 0;
+          }
+          @media only screen and (max-width: 575px) {
+            font-size: 14px;
+          }
+          @media only screen and (max-width: 375px) {
+            font-size: 0;
+          }
+        }
+      }
+    }
+  }
+
+  /// Blog Detail ///
+  &.blog-detail {
+    display: block;
+    .content-box {
+      > h5 {
+        font-size: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+        line-height: calc(22px + (30 - 22) * ((100vw - 320px) / (1920 - 320)));
+        margin-bottom: calc(7px + (15 - 7) * ((100vw - 320px) / (1920 - 320)));
+      }
+      p {
+        font-weight: normal;
+        line-height: 24px;
+        &:not(:last-of-type) {
+          margin-bottom: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+        }
+      }
+    }
+    .bg-size {
+      &::before {
+        @media only screen and (max-width: 575px) {
+          padding-top: 60%;
+        }
+      }
+    }
+  }
+}
+
+.action-box {
+  display: flex;
+  align-items: center;
+  gap: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+  @media only screen and (max-width: 475px) {
+    gap: 8px;
+  }
+  .like {
+    font-size: 14px;
+    color: $content-color;
+    font-weight: 500;
+    display: flex;
+    line-height: 18px;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    @media only screen and (max-width: 475px) {
+      font-size: 0;
+    }
+
+    svg {
+      width: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+      height: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+      stroke: $content-color;
+      transition: all 0.5s ease;
+    }
+    &.active {
+      svg {
+        stroke: var(--theme-color);
+      }
+    }
+  }
+  .btn {
+    @media only screen and (max-width: 475px) {
+      display: none;
+    }
+  }
+}
+
+.blog-wrap {
+  .blog-list {
+    &:not(:first-child) {
+      margin-top: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+    }
+  }
+  .title-box4 {
+    margin-bottom: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
+  }
+
+  .comments-section {
+    h4 {
+      font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1920 - 320)));
+      color: $title-color;
+      font-weight: 500;
+    }
+  }
+  .replay-form {
+    .post-button {
+      @media only screen and (max-width: 475px) {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+
+  .replay-form {
+    .btn {
+      margin-left: auto;
+    }
+  }
+}

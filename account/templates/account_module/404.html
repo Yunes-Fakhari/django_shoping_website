@@ -1,0 +1,57 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block title %}404{% endblock %}
+
+{% block content %}
+<!-- Main Start -->
+    <main class="main">
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+          <div class="banner">
+            <img class="bg-img bg-top" src="/static/images/inner-page/banner-p.jpg" alt="banner" />
+  
+            <div class="container-lg">
+              <div class="breadcrumb-box">
+                <div class="heading-box">
+                  <h1>خطای 404</h1>
+                </div>
+                <ol class="breadcrumb">
+                  <li><a href="{% url 'home_page' %}">صفحه اصلی</a></li>
+                  <li>
+                    <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
+                  </li>
+                  <li class="current"><a href="404.html">خطای 404</a></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Breadcrumb End -->
+  
+        <!-- 404 Section Start -->
+        <section class="page-not-found">
+          <div class="container">
+            <div class="row gx-md-2 gx-0 gy-md-0 gy-3">
+              <div class="col-md-8 m-auto">
+                <div class="page-image">
+                  <img src="/static/images/inner-page/404.svg" class="img-fluid blur-up lazyload" alt="" />
+                </div>
+              </div>
+  
+              <div class="col-md-8 mx-auto mt-md-5 mt-3">
+                <div class="page-container pass-forgot">
+                  <div>
+                    <h2>صفحه یافت نشد</h2>
+                    <p class="font-md">صفحه مورد نظر شما وجود ندارد یا خطای دیگری رخ داده است. به عقب برگردید، یا برای انتخاب یک مسیر جدید به آنجا بروید.</p>
+                    <a href="{% url 'home_page' %}" class="btn-solid mb-line">برگشت صفحه اصلی <i class="arrow"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 404 Section End -->
+      </main>
+      <!-- Main End -->
+{% endblock %}

@@ -1,0 +1,79 @@
+/*=====================
+ 3.7 Detail Card Section CSS 
+=============================*/
+.detail-card-section {
+  .top-heading {
+    max-width: 732px;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: calc(22px + (46 - 22) * ((100vw - 320px) / (1920 - 320)));
+    margin-top: calc(-5px + (-9 + 5) * ((100vw - 320px) / (1920 - 320)));
+
+    h2 {
+      font-weight: 300;
+      font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1920 - 320)));
+      line-height: calc(28px + (42 - 28) * ((100vw - 320px) / (1920 - 320)));
+      color: $title-color2;
+      strong {
+        font-weight: 600;
+      }
+    }
+    span {
+      font-weight: normal;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      line-height: calc(37px + (42 - 37) * ((100vw - 320px) / (1920 - 320)));
+      color: $title-color;
+      position: relative;
+      display: inline-block;
+      margin-bottom: -10px;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -28px;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 1px;
+        background-color: $title-color2;
+      }
+    }
+  }
+  .row {
+    > div {
+      .detail-card {
+        .content-box {
+          @media only screen and (max-width: 375px) {
+            text-align: left;
+            margin-bottom: 0;
+            margin-top: 0;
+            h3 {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              width: 130px;
+            }
+          }
+        }
+      }
+
+      &:nth-child(2n + 2) {
+        .detail-card {
+          margin-bottom: -4px;
+        }
+      }
+      &:nth-child(2n + 1) {
+        .detail-card {
+          flex-direction: column-reverse;
+          margin-top: -4px;
+          @media only screen and (max-width: 375px) {
+            flex-direction: column;
+            margin: 0;
+            .content-box {
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+  }
+}

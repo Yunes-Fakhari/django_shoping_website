@@ -1,0 +1,52 @@
+/**================
+   2.20 Switch CSS 
+=====================**/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: calc(46px + (50 - 46) * ((100vw - 320px) / (1920 - 320)));
+  height: calc(22px + (25 - 22) * ((100vw - 320px) / (1920 - 320)));
+
+  .switch-state {
+    border-radius: 20px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d4d4d4;
+    transition: 0.4s;
+    [class="dark"] & {
+      background-color: $white;
+    }
+    &:before {
+      position: absolute;
+      content: "";
+      height: calc(13px + (15 - 13) * ((100vw - 320px) / (1920 - 320)));
+      width: calc(13px + (15 - 13) * ((100vw - 320px) / (1920 - 320)));
+      left: 4px;
+      bottom: 5px;
+      background-color: #fff;
+      transition: 0.4s;
+      border-radius: 20px;
+      [class="dark"] & {
+        background-color: $white-light;
+      }
+    }
+  }
+
+  input {
+    display: none;
+
+    &:checked {
+      + .switch-state {
+        background-color: #5b9f51;
+
+        &:before {
+          transform: translateX(26px);
+        }
+      }
+    }
+  }
+}

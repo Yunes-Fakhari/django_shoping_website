@@ -1,0 +1,287 @@
+/**================
+    2.6 Form CSS
+  ===================**/
+
+.form-control {
+  background-color: $white;
+
+  &:focus {
+    box-shadow: none;
+    background-color: $white;
+  }
+}
+
+.custom-form {
+  label {
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: $title-color;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 20px;
+    margin-top: -2px;
+    display: block;
+  }
+  input,
+  .form-control {
+    font-size: 14px;
+    color: $title-color;
+    font-weight: 400;
+    border: 1px solid $border-color3;
+    background-color: $white;
+    &:focus {
+      border: 1px solid var(--theme-color);
+    }
+  }
+  textarea {
+    border-radius: 20px !important;
+  }
+  input[type="file"] {
+    position: relative;
+    padding-left: 120px !important;
+    [dir="rtl"] & {
+      padding-right: 120px !important;
+      padding-left: 48px !important;
+    }
+
+    &::-webkit-file-upload-button {
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 0;
+      margin: 0;
+      padding: 0px 20px 0px;
+      [dir="rtl"] & {
+        right: 0px;
+        left: unset;
+      }
+    }
+  }
+
+  .showHidePassword {
+    cursor: pointer;
+  }
+  .input-box {
+    &:not(:first-of-type) {
+      margin-top: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+    }
+  }
+
+  &.form-pill {
+    input,
+    .form-control {
+      border-radius: 100px;
+      text-align: left;
+      padding: 8px 40px 8px 15px;
+      [dir="rtl"] & {
+        padding: 8px 15px 8px 40px;
+        text-align: right;
+      }
+    }
+    .input-box {
+      input {
+        & + input {
+          margin-top: 15px;
+        }
+      }
+      .icon-input {
+        position: relative;
+        svg,
+        img {
+          width: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+          height: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+          right: 15px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          [class="dark"] & {
+            filter: invert(1);
+            stroke: $title-dark-color;
+          }
+          [dir="rtl"] & {
+            left: 15px;
+            right: unset;
+          }
+        }
+      }
+    }
+  }
+  .otp-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    input {
+      width: 100%;
+      text-align: center !important;
+      margin: 0 !important;
+      border-radius: 24px;
+      text-align: left;
+      padding: calc(8px + (14 - 8) * ((100vw - 320px) / (1920 - 320))) !important;
+    }
+  }
+  .form-control::-webkit-file-upload-button {
+    height: 100%;
+  }
+}
+
+/// Translater Select ///
+.goog-te-combo {
+  padding: 0;
+  margin: 0 !important;
+  outline: none;
+  font-size: 14px !important;
+  color: $title-color !important;
+  border: none;
+  background-color: transparent;
+}
+
+/// Radio Box ///
+.radio-box {
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    + .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 500;
+      color: $title-color;
+      cursor: pointer;
+      &:before {
+        content: "";
+        background: transparent;
+        border-radius: 100%;
+        border: 2px solid var(--theme-color);
+        display: inline-block;
+        width: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
+        height: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
+        position: relative;
+        vertical-align: top;
+        cursor: pointer;
+        text-align: center;
+        transition: all 250ms ease;
+      }
+    }
+    &:checked {
+      + .radio-label {
+        &:before {
+          background-color: var(--theme-color);
+          box-shadow: inset 0 0 0 3px $white;
+        }
+      }
+    }
+    &:focus {
+      + .radio-label {
+        &:before {
+          outline: none;
+          border-color: var(--theme-color);
+        }
+      }
+    }
+    &:disabled {
+      + .radio-label {
+        &:before {
+          box-shadow: inset 0 0 0 3px $white;
+          border-color: var(--theme-color);
+          background: darken($content-color, 25%);
+        }
+      }
+    }
+    + .radio-label {
+      &:empty {
+        &:before {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+/// Check Bos Style ///
+.checkboxes {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  &.style-1 {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    user-select: none;
+    [dir="rtl"] & {
+      padding-left: unset;
+      padding-right: 30px;
+    }
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .checkbox__checkmark {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      height: 22px;
+      width: 22px;
+      background-color: $white;
+      border: 1px solid $border-color5;
+      transition: background-color 0.5s ease;
+      border-radius: 11px;
+      [dir="rtl"] & {
+        right: 0;
+        left: unset;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 4px;
+        width: 5px;
+        height: 10px;
+        border: solid var(--theme-color);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+    }
+    .checkbox__body {
+      color: $title-color;
+      line-height: 1.4;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      transition: color 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        font-size: 14px;
+        color: var(--theme-color);
+      }
+    }
+  }
+
+  &.style-1 input:checked ~ .checkbox__checkmark {
+    border-color: var(--theme-color);
+  }
+  &.style-1 input:checked ~ .checkbox__checkmark:after {
+    opacity: 1;
+  }
+  &.style-1:hover input ~ .checkbox__checkmark {
+    border-color: var(--theme-color);
+  }
+  &.style-1:hover .checkbox__checkmark {
+    border-color: var(--theme-color);
+  }
+  &.style-1:hover .checkbox__checkmark:after {
+    opacity: 1;
+  }
+  &.style-1:hover input ~ .checkbox__body {
+    color: var(--theme-color);
+  }
+}

@@ -1,0 +1,153 @@
+/*=====================
+  2.1 Accordion  CSS 
+==========================*/
+.accordion {
+  .accordion-item {
+    background-color: $white !important;
+    line-height: 23px;
+    padding: 0 calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+    border: $border-blog;
+    border-radius: 10px;
+
+    &:not(:first-of-type) {
+      margin-top: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+    }
+    .accordion-header {
+      padding: 10px 0;
+      border-top: $border-color5;
+      background-color: $white;
+    }
+    .accordion-button {
+      background-color: $white;
+      color: $title-color;
+      line-height: 23px;
+      padding: 0;
+      border: none;
+      align-items: stretch;
+      font-weight: 600;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+
+      &:focus {
+        color: $title-color;
+        outline: none;
+        box-shadow: none;
+        border: none;
+      }
+      &::after {
+        background-image: url("../icons/svg/chevron-right.svg");
+        [class="dark"] & {
+          filter: invert(1);
+        }
+        [dir="rtl"] & {
+          transform-origin: center;
+          transform: rotate(180deg);
+          margin-left: unset;
+          margin-right: auto;
+        }
+      }
+      &:not(.collapsed) {
+        box-shadow: none;
+        &::after {
+          transform: rotate(180deg);
+          [dir="rtl"] & {
+            transform: rotate(0deg);
+          }
+        }
+      }
+    }
+    .accordion-body {
+      padding: 0 0 10px 0;
+      margin-top: -5px;
+      background-color: $white;
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.accordian-style2 {
+  .accordion-item {
+    border: $border-blog;
+    padding: 0;
+    border-radius: 0;
+    .accordion-header {
+      padding: 0;
+      margin: -1px;
+    }
+    .accordion-body {
+      padding: 10px 20px !important;
+      margin-top: 8px;
+    }
+    &:not(:first-of-type) {
+      margin-top: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
+    }
+    .accordion-button {
+      border: $border-blog;
+      box-shadow: none;
+      color: $title-color;
+      border-radius: 5px;
+      padding: 10px calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 500;
+      border-left: 3px solid var(--theme-color) !important;
+      border-radius: 0;
+      background-color: $gray-light3;
+      [dir="rtl"] & {
+        border-right: 3px solid var(--theme-color) !important;
+        border-left: $border-blog !important;
+        text-align: right;
+      }
+
+      &::after {
+        background-color: var(--theme-color);
+        padding: 12px;
+        background-position: center;
+        border-radius: 4px;
+      }
+
+      &:focus,
+      &:hover {
+        color: var(--theme-color);
+      }
+
+      &:not(.collapsed),
+      &:focus {
+        border: $border-blog;
+        color: var(--theme-color);
+        &::after {
+          background-image: url("../icons/svg/minus.svg");
+        }
+      }
+      &::after {
+        background-color: transparent;
+        transition: all 0.3s;
+      }
+      &.collapsed {
+        border: $border-blog;
+        &::after {
+          background-image: url("../icons/svg/plus.svg");
+        }
+      }
+      @media only screen and (max-width: 375px) {
+        span {
+          overflow-x: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 220px;
+        }
+      }
+    }
+    .accordion-body {
+      padding: 10px 0;
+      color: $content-color;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      @media only screen and (max-width: 390px) {
+        text-align: justify;
+        word-break: normal;
+        hyphens: auto;
+      }
+    }
+  }
+}

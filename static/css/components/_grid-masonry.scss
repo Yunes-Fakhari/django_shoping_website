@@ -1,0 +1,157 @@
+/**==================
+    2.7 Grid Masonry CSS
+  =======================**/
+
+.grid {
+  margin-bottom: calc(-6px + (-10 + 6) * ((100vw - 320px) / (1920 - 320)));
+  .ratio-xl .bg-size:before {
+    padding-top: 110%;
+    content: "";
+    display: block;
+  }
+  .ratio-sm .bg-size:before {
+    padding-top: 40%;
+    content: "";
+    display: block;
+  }
+
+  .ratio-md .bg-size:before {
+    padding-top: 50%;
+    content: "";
+    display: block;
+  }
+  .ratio-xxl .bg-size:before {
+    padding-top: 120%;
+    content: "";
+    display: block;
+  }
+
+  .grid-item {
+    .img-box {
+      cursor: url("../icons/svg/zoom.svg"), auto;
+      transition: all 0.5s linear;
+      &:hover {
+        transform: scale(1.1);
+        transition: all 0.3s linear;
+      }
+    }
+  }
+
+  .blog-box {
+    &.blog-grid {
+      .content-box {
+        h5 {
+          font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1920 - 320)));
+        }
+      }
+    }
+  }
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .grid-item {
+    float: left;
+    &:hover {
+      cursor: pointer;
+    }
+    &.grid-item__expanded {
+      width: 66.66%;
+      z-index: 2;
+    }
+  }
+
+  .grid-item,
+  .grid-item img {
+    display: block;
+    max-width: 100%;
+    border: calc(6px + (10 - 6) * ((100vw - 320px) / (1920 - 320))) solid transparent;
+  }
+
+  &.grid-3-masonry {
+    .grid-sizer,
+    .grid-item {
+      width: 33.33%;
+      @media only screen and (max-width: 767px) {
+        width: 50%;
+      }
+      @media only screen and (max-width: 475px) {
+        width: 100%;
+      }
+    }
+  }
+
+  &.grid-2-masonry {
+    .grid-sizer,
+    .grid-item {
+      width: 50%;
+      @media only screen and (max-width: 475px) {
+        width: 100%;
+      }
+    }
+  }
+
+  &.no-space {
+    margin-bottom: 0;
+    .grid-item,
+    .grid-item img {
+      border: none;
+      .blog-box {
+        border-radius: unset;
+        border: none;
+        .img-box {
+          border-radius: unset;
+        }
+      }
+    }
+  }
+
+  &.row-grid {
+    .grid-item,
+    .grid-item img {
+      border: none;
+    }
+    > div {
+      > div {
+        height: 100%;
+      }
+      @media only screen and (max-width: 475px) {
+        width: 100%;
+      }
+    }
+    &.row-2-grid {
+      .blog-box {
+        &.blog-grid {
+          .content-box {
+            h5 {
+              font-size: calc(15px + (18 - 15) * ((100vw - 320px) / (1920 - 320)));
+              &.truncate-2 {
+                -webkit-line-clamp: 1;
+                @media only screen and (max-width: 475px) {
+                  -webkit-line-clamp: 2;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.grid-4-masonry {
+    .grid-sizer,
+    .grid-item {
+      width: 25%;
+      @media only screen and (max-width: 1199px) {
+        width: 33.33%;
+      }
+      @media only screen and (max-width: 767px) {
+        width: 50%;
+      }
+      @media only screen and (max-width: 475px) {
+        width: 100%;
+      }
+    }
+  }
+}

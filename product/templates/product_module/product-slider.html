@@ -1,0 +1,721 @@
+{% extends 'shared/layout.html' %}
+{% load thumbnail %}
+{% load custom_filters %}
+{% load jformat %}
+{% block title %}لیست محصولات{% endblock %}
+
+{% block content %}
+<style>
+  .inventory-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.3) !important;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
+  }
+
+  /* رنگ‌های پررنگ */
+  .glass-success {
+      background: rgba(50, 205, 50, 0.3) !important;
+      color: #f0fff4 !important;
+  }
+  .glass-warning {
+      background: rgba(255, 165, 0, 0.3) !important;
+      color: #fff7e6 !important;
+  }
+  .glass-danger {
+      background: rgba(220, 20, 60, 0.3) !important;
+      color: #ffe6eb !important;
+  }
+
+  /* آیکون جمع‌وجور */
+  .inventory-icon {
+      width: 20px;
+      height: 20px;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+  }
+
+  /* متن فشرده */
+  .inventory-text {
+      font-weight: 600;
+      letter-spacing: -0.3px;
+  }
+
+  /* افکت hover کوچک */
+  .inventory-badge:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+</style>
+    <!-- Main Start -->
+    <main class="main">
+      <!-- Product Section Start -->
+      <section class="product-page product-page-style3 pt-0">
+        <div class="slider-wrap-box ratio_asos">
+          <div class="swiper product-page-slider">
+            <div class="swiper-wrapper">
+                {% for group in product_galleries_group %}
+                    {% for gallery in group %}
+                        <div class="swiper-slide">
+                            <div class="img-wrap">
+                                <div class="img-box">
+                                    <img class="bg-img" src="{{ gallery.image.url }}" alt="{{ product.title }}" />
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <div class="container-lg">
+          <div class="row top-heading-box">
+            <div class="col-xl-9">
+              <div class="view-product">
+                <div class="product-detail-box">
+                  <div class="product-option">
+                    <div class="option-side title-wrap align-items-lg-center">
+                      <h2>{{ product.title }}</h2>
+                      <div class="option rating-option">
+                        <ul class="rating p-0">
+                          <li>
+                            <i class="fill" data-feather="star"></i>
+                          </li>
+                          <li>
+                            <i class="fill" data-feather="star"></i>
+                          </li>
+                          <li>
+                            <i class="fill" data-feather="star"></i>
+                          </li>
+                          <li>
+                            <i class="fill" data-feather="star"></i>
+                          </li>
+                          <li>
+                            <i data-feather="star"></i>
+                          </li>
+                        </ul>
+                        <span>رتبه 120</span>
+                      </div>
+                    </div>
+
+                    <div class="option price">
+                      <!-- قیمت -->
+                      {% if product.discount_percent > 0 %}
+                          <span>قیمت نهایی: {{ final_price|babel_decimal }} تومان</span>
+                          <del>{{ product.price|babel_decimal }} تومان</del>
+                      {% else %}
+                          <span>قیمت: {{ product.price|babel_decimal }} تومان</span>
+                      {% endif %}
+
+                        
+                        <!-- موجودی انبار -->
+                        <div class="mt-2 d-flex align-items-center gap-2">
+                            <span class="inventory-badge 
+                                {% if product.quantity >= 25 %}glass-success
+                                {% elif product.quantity >= 5 %}glass-warning
+                                {% else %}glass-danger{% endif %}">
+                                
+                                <img src="/static/images/icons8-stock-48.png" 
+                                     alt="موجودی" 
+                                     class="inventory-icon">
+                                
+                                <span class="inventory-text">
+                                   موجودی {{ product.quantity }} عدد
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="option">
+                      <p class="content-color">
+                        {{ product.short_description }}
+                      </p>
+                    </div>
+
+                    <div class="d-xl-none">
+                      <div class="option-side">
+                        <div class="option">
+                          <div class="title-box4">
+                            <h4 class="heading">رنگ برند شما:<span class="bg-theme-blue"></span></h4>
+                          </div>
+
+                          <ul class="filter-color">
+                            {% for color in colors %}
+                            <li class="{% if forloop.first %}active{% endif %}">
+                                <div class="color-box" style="background-color: {{ color.code }}"></div>
+                            </li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+
+                        <div class="option">
+                          <div class="title-box4">
+                            <h4 class="heading">مقدار: <span class="bg-theme-blue"></span></h4>
+                          </div>
+
+                          <div class="plus-minus">
+                            <i class="sub" data-feather="minus"></i>
+                            <input type="number" value="1" min="1" max="10" />
+                            <i class="add" data-feather="plus"></i>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="option size">
+                        <div class="title-box4">
+                          <h4 class="heading">اندازه: <span class="bg-theme-blue"></span></h4>
+                          <span class="size-chart" data-bs-toggle="modal" data-bs-target="#sizeChart">نمودار اندازه</span>
+                        </div>
+                        <ul class="size-list">
+                          {% for size in sizes %}
+                            <li class="{% if forloop.first %}active{% endif %}">{{ size.name }}</li>
+                          {% endfor %}
+                        </ul>
+                        
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="option shipping-info">
+                            <div class="title-box4">
+                              <h4 class="heading">اطلاعات حمل و نقل <span class="bg-theme-blue"></span></h4>
+                            </div>
+                            <ul>
+                              <li>100٪ محصولات اصلی</li>
+                              <li>تحویل رایگان در صورت سفارش بالای 1000 تومان. 799</li>
+                              <li>پرداخت هنگام تحویل در دسترس است</li>
+                              <li>بازگرداندن و مبادله آسان 30 روزه</li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="option shipping-info delevery-service">
+                            <div class="title-box4">
+                              <h4 class="heading">گزینه تحویل <span class="bg-theme-blue"></span></h4>
+                            </div>
+                            <ul class="delevery-list">
+                              <li>
+                                <i data-feather="truck"></i>
+                                <span>ارسال رایگان</span>
+                              </li>
+                              <li>
+                                <i data-feather="re-replace"></i>
+                                <span>تعویض 10 روزه</span>
+                              </li>
+                              <li>
+                                <i data-feather="shield"></i>
+                                <span>1 سال گارانتی</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="btn-group btn-responsive">
+                        <a href="javascript:void(0)" class="btn-solid btn-sm addtocart-btn">افزودن به سبد خرید </a>
+                        <a href="javascript:void(0)" class="btn-outline btn-sm wishlist-btn">افزودن به فهرست علاقه مندی ها</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tabs Start -->
+              <div class="description-box mt-4 mt-sm-5 mt-xl-0">
+                <div class="row gy-4">
+                  <div class="col-12">
+                    <!-- Tabs Filter Start -->
+                    <ul class="nav nav-pills nav-tabs2 solid-outline row-tab" id="pills-tab" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button
+                          class="nav-link active"
+                          id="description-tab"
+                          data-bs-toggle="pill"
+                          data-bs-target="#description"
+                          type="button"
+                          role="tab"
+                          aria-controls="description"
+                          aria-selected="true"
+                        >
+                          شرح
+                        </button>
+                      </li>
+
+                      <li class="nav-item" role="presentation">
+                        <button
+                          class="nav-link"
+                          id="specification-tab"
+                          data-bs-toggle="pill"
+                          data-bs-target="#specification"
+                          type="button"
+                          role="tab"
+                          aria-controls="specification"
+                          aria-selected="false"
+                        >
+                          مشخصات
+                        </button>
+                      </li>
+
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="seller-tab" data-bs-toggle="pill" data-bs-target="#seller" type="button" role="tab" aria-controls="seller" aria-selected="false">فروشنده</button>
+                      </li>
+
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="review-tab" data-bs-toggle="pill" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">
+                          نظرات <span>{{ comments_count }}</span>
+                        </button>
+                      </li>
+                    </ul>
+                    <!-- Tabs Filter End -->
+                  </div>
+                  <div class="col-12">
+                    <!-- Tab Content Start -->
+                    <div class="tab-content" id="pills-tabContent">
+                      <!-- Description Tab Content Start -->
+                      <style>
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        table, th, td {
+                            border: 1px solid black;
+                        }
+                        th, td {
+                            padding: 8px;
+                            text-align: center;
+                        }
+                        h2, h3 {
+                            margin-top: 20px;
+                        }
+                        p {
+                            margin-bottom: 10px;
+                        }
+                    </style>
+                      <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <div class="details-product">
+                          <p>
+                            {{ product.description|safe }}
+                          </p>
+
+                        </div>
+                      </div>
+                      <!-- Description Tab Content End -->
+
+                     <!-- Specification Tab Content Start -->
+                    <div class="tab-pane fade" id="specification" role="tabpanel" aria-labelledby="specification-tab">
+                      <div class="specification-wrap">
+                        <div class="table-responsive">
+                          <table class="specification-table table striped">
+                            {% for spec in specifications %}
+                              <tr>
+                                <th>{{ spec.specification_title.title }}</th>
+                                <td>{{ spec.value }}</td>
+                              </tr>
+                            {% empty %}
+                              <tr>
+                                <td colspan="2">هیچ مشخصاتی برای این محصول ثبت نشده است.</td>
+                              </tr>
+                            {% endfor %}
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Specification Tab Content End -->
+                      <!-- Seller Tab Content Start -->
+                      <div class="tab-pane fade" id="seller" role="tabpanel" aria-labelledby="seller-tab">
+                        <div class="seller-info">
+                          <div class="seller-details">
+                            <div class="seller-logo-wrap">
+                              <div class="img-box">
+                                <img src="/static/icons/png/seller.png" alt="seller" />
+                              </div>
+                              <div class="seller-content">
+                                <h5>فروشنده عالی</h5>
+                                <div class="rating-box">
+                                  <ul class="rating p-0 mb">
+                                    <li>
+                                      <i class="fill" data-feather="star"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fill" data-feather="star"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fill" data-feather="star"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fill" data-feather="star"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fill" data-feather="star"></i>
+                                    </li>
+                                  </ul>
+                                  <span>(105 رتبه)</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <ul class="review-rated">
+                              <li>
+                                <span>زمان تحویل</span>
+                                <span>100%</span>
+                              </li>
+                              <li>
+                                <span>پاسخ</span>
+                                <span>90%</span>
+                              </li>
+                              <li>
+                                <span>رتبه‌بندی</span>
+                                <span>95%</span>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <div class="addres-box">
+                            <p>
+                              <span class="contact"><i data-feather="map-pin"></i>آدرس :</span>
+                              <span class="contact-info"> 1418 ریوروود درایو, سوئیت 3245 کتون وود, CA 96052, ایالات متحده </span>
+                            </p>
+                            <p>
+                              <span class="contact"><i data-feather="phone"></i>شماره تماس:</span> <span class="contact-info"> 2545-3566-4525-4525 </span>
+                            </p>
+
+                            <p class="info">
+                              سوپریم‌سلر فروشنده‌ای مشهور در دنیا برای کیفیت و خدمات طبقه‌بندی شده بر اساس و نحوه اتصال آنها به مسکونی و زمین است. اقامتگاه های متصل متعلق به یک فرد مجرد
+                              نهاد اجاره شده، یا به طور جداگانه با قراردادی که شامل یک ساختار خانوادگی یا چندخانواره ای است که برای اشغال یا غیرتجاری در دسترس است.
+                              اهداف ارتباط بین واحدها و مناطق مشترک برای یک نوع فیزیکی می توان از انواع مختلف تصدی مسکن استفاده کرد.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Seller Tab Content End -->
+                      <br>
+                      <!-- Review Tab Content Start -->
+                  <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                    <div class="review-section">
+                      <div class="row gy-4 gy-md-5 g-4 g-xxl-5">
+                        <div class="col-md-10 col-xxl-9 order-4 order-md-3" >
+                          <div class="review-left">
+                            <div class="title-box4">
+                              <h4 class="heading">پرسش و پاسخ مشتریان <span class="bg-theme-blue"></span></h4>
+                            </div>
+                            <div class="question-wrap">
+                              {% for comment in approved_comments %}
+                                <div class="comment-box">
+                                  <div class="img-box">
+                                    <img src="{% if comment.user.profile.image %}{{ comment.user.profile.image.url }}{% else %}/static/images/avatar/avatar.jpg{% endif %}" alt="avatar" />
+                                  </div>
+                                  <div class="avatar-content">
+                                    <div class="name-box">
+                                      <div class="user-info">
+                                        <h5><i data-feather="user"></i> {{ comment.user.username }}</h5>
+                                        <span><i data-feather="clock"></i> {{ comment.updated_at|jformat:"%Y/%m/%d %H:%M" }}</span>
+                                      </div>
+                                    </div>
+                                    <p>
+                                      {{ comment.comment_text }}
+                                    </p>
+                                  </div>
+                                </div>
+
+                                {% if comment.admin_response %}
+                                  <div class="comment-box replay-comment">
+                                    <div class="img-box">
+                                      <img src="{% if comment.admin.profile.image %}{{ comment.admin.profile.image.url }}{% else %}/static/images/avatar/admin_avatar.jpg{% endif %}" alt="avatar" />
+                                    </div>
+                                    <div class="avatar-content">
+                                      <div class="name-box">
+                                        <div class="user-info">
+                                          <h5><i data-feather="user"></i> {{ comment.admin.username }} (ادمین)</h5>
+                                          <span><i data-feather="clock"></i> {{ comment.created_at|jformat:"%Y/%m/%d %H:%M" }}</span>
+                                        </div>
+                                      </div>
+                                      <p>
+                                        {{ comment.admin_response }}
+                                      </p>
+                                    </div>
+                                  </div>
+                                {% endif %}
+                              
+                              {% empty %}
+                                <p>هنوز نظری برای این محصول ثبت نشده است.</p>
+                              {% endfor %}
+
+                              
+                            </div>
+                          </div>
+                          <!-- Reply Form Section Start -->
+                          <div class="replay-form round-wrap-content top-space" id="replaySection">
+                            <div class="title-box4">
+                              <h4 class="heading">نظر بدهید<span class="bg-theme-blue"></span></h4>
+                            </div>
+
+                            {% if user.is_authenticated %}
+                              <form action="{% url 'product_detail' slug=product.slug %}" method="post" class="custom-form form-pill">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <div class="col-12 text-end">
+                                  <button type="submit" class="post-button btn btn-solid btn-sm mb-line"> ارسال نظر <i class="arrow"></i></button>
+                                </div>
+                              </form>
+                            {% else %}
+                              <p>برای ثبت نظر لطفاً <a href="{% url 'login_page' %}">وارد شوید</a>.</p>
+                            {% endif %}
+                          </div>
+                          <!-- Reply Form Section End -->
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>    
+                    </div>
+                    <!-- Tab Content End -->
+                  </div>
+                </div>
+              </div>
+              <!-- Tabs End -->
+            </div>
+
+            <!-- SideBar Start -->
+            <div class="col-3 view-product d-none d-xl-block">
+              <div class="sidebar-inner product-page-sidebar sticky">
+                <div class="back-box d-flex d-lg-none">
+                  <span>Back</span>
+                  <span><i data-feather="x"></i></span>
+                </div>
+                <div class="row gy-3 gx-0 g-lg-4">
+                  <form method="post" action="{% url 'add_to_cart' %}">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      <div class="sidebar-box">
+                        <div class="title-box4">
+                          <h4 class="heading">رنگ برند شما:<span class="bg-theme-blue"></span></h4>
+                        </div>
+                        <ul class="filter-color">
+                          {% for color in colors %}
+                            <li>
+                              <input type="radio" name="color_id" value="{{ color.id }}" id="color{{ color.id }}" style="opacity: 0; position: absolute;" {% if forloop.first %}checked{% endif %}>
+                              <label for="color{{ color.id }}">
+                                <div class="color-box" style="background-color: {{ color.code }};"></div>
+                              </label>
+                            </li>
+                          {% endfor %}
+                        </ul>                        
+                      </div>
+                    </div>
+                    <br>
+                    <div class="col-12">
+                      <div class="sidebar-box">
+                        <div class="mb-4">
+                          <div class="title-box4">
+                            <h4 class="heading">اندازه: <span class="bg-theme-blue"></span></h4>
+                            <span class="size-chart" data-bs-toggle="modal" data-bs-target="#sizeChart">نمودار اندازه</span>
+                          </div>
+                          <ul class="size-list">
+                            {% for size in sizes %}
+                              <li>
+                                <input type="radio" name="size_id" value="{{ size.id }}" id="size{{ size.id }}" style="opacity: 0; position: absolute;" {% if forloop.first %}checked{% endif %}>
+                                <label for="size{{ size.id }}">
+                                  {{ size.name }}
+                                </label>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                  
+                        <div class="title-box4">
+                          <h4 class="heading">تعداد: <span class="bg-theme-blue"></span></h4>
+                        </div>
+                  
+                        <div class="plus-minus">
+                          <i class="sub" data-feather="minus"></i>
+                          <input type="number" name="quantity" value="1" />
+                          <i class="add" data-feather="plus"></i>
+                        </div>
+                  
+                        <div class="btn-group flex-column gap-2 mt-4">
+                          <button type="submit" class="btn-solid btn-sm addtocart-btn mb-line justify-content-center">افزودن به سبد خرید</button>
+                          <a href="{% url 'add_to_favorites' product.id %}" class="btn-outline btn-sm wishlist-btn justify-content-center">افزودن به علاقه‌مندی‌ها</a>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                  </form>
+
+                  <div class="col-12">
+                    <div class="sidebar-box">
+                      <div class="product-option">
+                        <div class="option shipping-info delevery-service mb-0">
+                          <div class="title-box4">
+                            <h4 class="heading">گزینه تحویل<span class="bg-theme-blue"></span></h4>
+                          </div>
+
+                          <ul class="delevery-list">
+                            <li>
+                              <i data-feather="truck"></i>
+                              <span>هزینه ارسال: {% if shipping_cost %} {{ shipping_cost|babel_decimal }} تومان {% else %} رایگان {% endif %}</span>
+                            </li>
+                            <li>
+                              <i data-feather="re-replace"></i>
+                              <span>تعویض {{ exchange_days }} روزه</span>
+                            </li>
+                            <li>
+                              <i data-feather="shield"></i>
+                              <span>{{ warranty_months }} ماه گارانتی</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="sidebar-box p-0 overflow-hidden">
+                      <div class="banner-img">
+                        <img class="bg-img" src="/static/images/fashion/banner/banner3.jpg" alt="banner" />
+                        <div class="sale-card">
+                          <div class="sale-card-wrap">
+                            <div class="offer">
+                              <span> تخفیف تابستانی </span> <h5> 70 <span><span class="percent">%</span> <span class="off"> تخفیف</span> </span> </h5>
+                            </div>
+                            <a href="shop-categories.html" class="shop-btn bg-theme-sun">اکنون خرید کنید</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- SideBar End -->
+          </div>
+        </div>
+      </section>
+      <!-- Product Section End -->
+
+<!-- New Arrived Section Start -->
+<section class="pt-0 ratio_asos">
+  <div class="container-lg">
+    <div class="title-box4">
+      <h4 class="heading font-2xl">شما همچنین ممکن است دوست داشته باشید… <span class="bg-theme-blue"></span></h4>
+    </div>
+
+    <div class="swiper product-slider">
+      <div class="swiper-wrapper">
+        {% for product in related_products %}
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="img-box">
+              <!-- Thumbnail -->
+              <ul class="thumbnail-img">
+                {% if product.productgallery_set.all %}
+                  {% for gallery in product.productgallery_set.all %}
+                    <li class="{% if forloop.first %}active{% endif %} thumb">
+                      <img src="{{ gallery.image.url }}" alt="thumbnail" />
+                    </li>
+                  {% endfor %}
+                {% else %}
+                  <!-- اگر محصول تصاویر گالری ندارد -->
+                  <li class="active thumb">
+                    <img src="{{ product.image.url }}" alt="thumbnail" />
+                  </li>
+                {% endif %}
+              </ul>
+
+              <a href="{{product.slug}}" class="primary-img">
+                <img class="img-fluid bg-img" src="{{ product.image.url }}" alt="{{ product.title }}" />
+              </a>
+
+              <!-- Option -->
+              <ul class="option-wrap">
+                <li>
+                  <a href="{% url 'add_to_favorites' product.id %}" class="wishlist-btn">
+                    <i data-feather="heart"></i>
+                  </a>
+                </li>
+
+                <li data-bs-toggle="tooltip"  data-bs-placement="right">
+                  <a href="javascript:void(0)" class="view-product-btn" data-slug="{{ product.slug }}">
+                    <i data-feather="eye"></i>
+                  </a>
+                </li> 
+                
+              </ul>
+            </div>
+
+            <!-- Content Box -->
+            <div class="content-box">
+              <a href="{{product.slug}}">
+                {% if product.brand %}
+                  <p>{{ product.brand.name }}</p>
+                {% endif %}
+                <h5>{{ product.title }}</h5>
+                <span>{{ product.get_final_price|babel_decimal }} تومان</span>
+                {% if product.discount_percent > 0 %}
+                  <del>{{ product.price|babel_decimal }}</del>
+                {% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- New Arrived Section End -->
+
+    </main>
+    <!-- Main End -->
+    <!-- Size Chart Modal Start -->
+    <div class="modal sizeChart fade" id="sizeChart" tabindex="-1" aria-labelledby="sizeChart" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header p-0">
+            <span class="close-modal" data-bs-toggle="modal" data-bs-target="#sizeChart"><i data-feather="x"></i></span>
+          </div>
+          <div class="modal-body">
+            <div class="size-box">
+              <img class="img-fluid" src="/static/images/fashion/banner/sizechart.jpg" alt="size chart" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Size Chart Modal End -->
+     
+{% endblock %}
+{% block footer_references %}
+{% if messages %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    {% for message in messages %}
+      Swal.fire({
+        icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'warning' %}warning{% elif message.tags == 'success' %}success{% else %}info{% endif %}",
+        title: '{{ message }}',
+        confirmButtonText: 'باشه'
+      });
+    {% endfor %}
+  });
+  var swiper = new Swiper('.swiper-container', {
+  slidesPerView: 4,
+  spaceBetween: 20,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  loop: false, // غیرفعال کردن تکرار
+  });
+</script>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,306 @@
+{% load custom_filters %}
+<!-- Header Start -->
+<header class="header-common">
+    <!-- Top Header -->
+    <div class="top-header">
+      <p class="marquee"><span> فروش تابستانی تمام لباس‌های شنا - 50% تخفیف! اکنون خرید کنید</span></p>
+    </div>
+    <div class="container-lg">
+      <div class="nav-wrap">
+        <!-- Navigation Start -->
+        <nav class="navigation">
+          <div class="nav-section">
+            <div class="header-section">
+              <div class="navbar navbar-expand-xl navbar-light navbar-sticky p-0">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu" aria-controls="primaryMenu">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <a href="{% url 'home_page' %}" class="logo-link">
+                  <img class="logo logo-dark" src="/static/images/logos/logo.png" alt="logo" />
+                  <img class="logo logo-light" src="/static/images/logos/logo-w.png" alt="logo" />
+                </a>
+                <div class="offcanvas offcanvas-collapse order-lg-2" id="primaryMenu">
+                  <div class="offcanvas-header navbar-shadow">
+                    <h5 class="mt-1 mb-0">منو</h5>
+                    <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+
+                  <div class="offcanvas-body">
+                    <!-- Menu-->
+                    <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'product_list' %}">محصولات</a>
+                      </li>
+                      <!-- دسته بندی محصولات -->
+                      <li class="nav-item dropdown dropdown-mega">
+                        <a class="nav-link dropdown-toggle" href="{% url 'product_list' %}" data-bs-toggle="dropdown">دسته بندی</a>
+                        <div class="dropdown-menu mega-element-menu">
+                            <div class="row g-4">
+                                {% for super_category in categories_data1 %}
+                                    <div class="col-xl-3">
+                                        <div class="link-box">
+                                            <h5 class="d-flex align-items-center gap-2">
+                                                
+                                                    <img src="{{ super_category.image }}" 
+                                                        alt="{{ super_category.title }}"
+                                                        class="img-fluid rounded"
+                                                        style="width: 30px; height: 30px; object-fit: cover">
+                                                {{ super_category.title }}
+                                            </h5>
+                                            <div class="dropdown-column">
+                                                {% for category in super_category.categories %}
+                                                    <a class="dropdown-item" href="{% url 'product_list' %}?max_price=&min_price=&categories={{ category.id }}">{{ category.title }}</a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                      </li>
+
+                      
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#">نمونه کار ها</a>
+                      </li>
+                      
+                      <!-- Blog -->
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" ">وبلاگ</a>
+                        <div class="dropdown-menu">
+                          <div class="dropdown-column">
+                            <a class="dropdown-item" href="{% url 'articles_list' %}">فهرست وبلاگ</a>
+                          </div>
+                        </div>
+                      </li>
+
+                      <!-- Pages -->
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'contact_us_page' %}">درباره ما</a>
+                      </li>
+
+                      
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <!-- Navigation End -->
+
+        <!-- Menu Right Start  -->
+        <div class="menu-right">
+          <div class="select-menu">
+            <div class="dropdown select-dropdown">
+              <button id="unitSelected"><span> آمریکا</span> <i data-feather="chevron-down"></i></button>
+              <ul class="onhover-show-div">
+                <li class="unit">تومان آمریکا</li>
+                <li class="unit">یورو</li>
+                <li class="unit">INR</li>
+                <li class="unit">تومان کانادا</li>
+              </ul>
+            </div>
+            <div class="dropdown select-dropdown" id="translate">
+              <button id="languageSelected"><span>انگلیسی</span> <i data-feather="chevron-down"></i></button>
+              <ul class="onhover-show-div">
+                <li class="lang">انگلیسی</li>
+                <li class="lang">چینی</li>
+                <li class="lang">عربی</li>
+                <li class="lang">روسی</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Icon Menu Start -->
+          <ul class="icon-menu">
+            <li>
+              <button class="search-button"><i data-feather="search"></i></button>
+              <!-- Search Input Start -->
+              <div class="search-full">
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i data-feather="search"></i>
+                  </span>
+                  <input type="text" class="form-control search-type" placeholder="اینجا سرچ کنید..." />
+                  <span class="input-group-text close-search">
+                    <i data-feather="x"></i>
+                  </span>
+                </div>
+
+                <!-- Suggestion Start -->
+                <div class="search-suggestion">
+                  <ul>
+                    
+                    <li>
+                      <img style="width: 100px;" src="/static/images/fetchpik.com-iconscout-fcoCDig4Hj.png" alt="icon-search">
+                    </li>
+                  </ul>
+                </div>
+                <!-- Suggestion Start -->
+              </div>
+              <!-- Search Input End -->
+            </li>
+
+            <li class="user"> 
+              <div class="dropdown user-dropdown">
+                <a href="javascript:void(0)"><i data-feather="user"></i></a>
+                <ul class="onhover-show-div">
+                  {% if user.is_authenticated %}
+                    
+                    <li><a href="{% url 'user_panel_dashboard' %}">پنل کاربری</a></li>
+                    {% if user.is_staff or user.is_superuser %}
+                     
+                      <li><a href="{% url 'admin:index' %}">پنل مدیریت </a></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout_page' %}">خروج</a></li>
+                  {% else %}
+                    
+                    <li><a href="{% url 'login_page' %}">ورود به سیستم</a></li>
+                    <li><a href="{% url 'register_page' %}">ثبت نام</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </li>
+
+            <li>
+              <div class="dropdown shopingbag">
+                <a href="javascript:void(0)" class="cart-button"><i data-feather="heart"></i> <span class="notification-label">{{ favorite_items|length }}</span></a>
+                <a href="javascript:void(0)" class="overlay-cart overlay-common"></a>
+                <div class="onhover-cart-dropdown">
+                  <div class="onhover-show-div">
+                    <div class="card-wrap custom-scroll">
+                      {% if favorite_items %}
+                      {% for item in favorite_items %}
+                        <!-- Cart Item Start -->
+                        <div class="cart-card media">
+                          <a href="{% url 'product_detail' slug=item.product.slug %}">
+                            <img src="{{ item.product.get_main_image_url }}" class="img-fluid" alt="{{ item.product.title }}" />
+                          </a>
+                          <div class="media-body">
+                            <a href="{% url 'product_detail' slug=item.product.slug %}">
+                              <h6>{{ item.product.title }}</h6>
+                            </a>
+                          </div>
+                          <!-- در صورت نیاز، می‌توانید دکمه حذف را فعال کنید -->
+                          <form method="post" action="{% url 'favorite_remove' item.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <button type="submit" class="remove-cart"><i data-feather="x"></i></button>
+                          </form>                        
+                        </div>
+                        <!-- Cart Item End -->
+                        {% endfor %}
+                        {% else %}
+                        <!-- در صورت خالی بودن لیست، نمایش محتوای پیشین -->
+                        <div class="wishlist-container">
+                          <a href="wishlist.html">
+                            <img src="/static/icons/fetchpik.com-iconscout-SWeH9xkTXc.png" alt="box">
+                          </a>
+                          <div class="content">
+                            <a href="wishlist.html">
+                              <h6>لیست علاقه‌مندی شما خالی است!!</h6>
+                              <p>بیشتر کاوش کنید و موارد را فهرست کنید.</p>
+                            </a>
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% if favorite_items|length is not 0 %}
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <div class="btn-group block-group">
+                        <a href="{% url 'favorite_list' %}" class="btn-solid">مشاهده همه علاقه مندی ها</a>
+                      </div>
+                      {% endif %}
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Cart Menu Start -->
+            <li>
+              <div class="dropdown shopingbag">
+                <a href="javascript:void(0)" class="cart-button"><i data-feather="shopping-bag"></i> <span class="notification-label">{{ cart_items_count }}</span></a>
+                <a href="javascript:void(0)" class="overlay-cart overlay-common"></a>
+                <div class="onhover-cart-dropdown">
+                  <div class="onhover-show-div">
+                    <div class="dropdown-header">
+                      <div class="control">
+                        <a href="{% url 'user_cart_page' %}">سبد خرید</a>
+                        <button class="back-cart"><i data-feather="arrow-right"></i></button>
+                      </div>
+                    </div>
+
+                    <div class="card-wrap custom-scroll">
+                      {% for item in cart_items %}
+                        <!-- Cart Item Start -->
+                        <div class="cart-card media">
+                          <a href="{% url 'product_detail' slug=item.product.slug %}">
+                            <img src="{{ item.product.get_main_image_url }}" class="img-fluid" alt="{{ item.product.title }}" />
+                          </a>
+                          <div class="media-body">
+                            <a href="{% url 'product_detail' slug=item.product.slug %}">
+                              <h6>{{ item.product.title }}</h6>
+                            </a>
+                            <span>{{ item.product.get_final_price|babel_decimal }} تومان</span>
+                            <p>رنگ: {{ item.color }}</p>
+                            <p>سایز: {{ item.size }}</p>
+                            <div class="quantity">
+                              <span>تعداد: {{ item.count }}</span>
+                            </div>
+                          </div>
+                          <!-- در صورت نیاز، می‌توانید دکمه حذف را فعال کنید -->
+                          <form method="post" action="{% url 'remove_from_cart' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <button type="submit" class="remove-cart"><i data-feather="x"></i></button>
+                          </form>                        
+                        </div>
+                        <!-- Cart Item End -->
+                      {% empty %}
+                      <a href="#"> <img style="width: 200px;" src="/static/icons/fetchpik.com-iconscout-pg3P9GFt6Z.png" class="img-fluid" alt="box" /> </a>
+                      <div class="content">
+                        <a href="#">
+                          <h6 style="text-align: center;">سبد خرید شما خالی است!</h6>
+                        </a>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <div class="dropdown-footer">
+                      <div class="freedelevery">
+                        <p class="terms-condition">ارسال رایگان! برای افزودن محصول بیشتر به سبد خرید خود به خرید ادامه دهید و برای سفارش‌های بیش از <strong>500 تومان</strong></p> ارسال رایگان دریافت کنید.
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">70%</div>
+                        </div>
+                      </div>
+                      <div class="total-price">
+                        <span>مجموع</span>
+                        <span>450 تومان</span>
+                      </div>
+
+                      <div class="btn-group block-group">
+                        {% if cart_items%}
+                        <a href="{% url 'user_cart_page' %}" class="btn-solid">مشاهده سبد خرید</a>
+                        {% else %}
+                        <a href="{% url 'product_list' %}" class="btn-solid">بزن بریم خرید کنیم</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Cart Menu End -->
+          </ul>
+          <!-- Icon Menu End -->
+        </div>
+        <!-- Menu Right End  -->
+      </div>
+    </div>
+  </header>
+  <!-- Header End -->

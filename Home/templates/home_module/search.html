@@ -1,0 +1,147 @@
+{% extends 'shared/layout.html' %}
+{% load thumbnail %}
+{% load poll_extras %}
+{% load render_partial %}
+{% load custom_filters %}
+
+
+{% block title %}
+جستجو محصول
+{% endblock %}
+
+{% block content %}
+    <!-- Main Start -->
+    <main class="main">
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+          <div class="banner">
+            <img class="bg-img bg-top" src="/static/images/inner-page/banner-p.jpg" alt="banner" />
+  
+            <div class="container-lg">
+              <div class="breadcrumb-box">
+                <div class="heading-box">
+                  <h1>جستجو</h1>
+                </div>
+                <ol class="breadcrumb">
+                  <li><a href="{% url 'home_page' %}">صفحه اصلی</a></li>
+  
+                  <li>
+                    <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
+                  </li>
+                  <li class="current"><a href="{% url 'product_mobile_search' %}">جستجو</a></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Breadcrumb End -->
+  
+        <section class="search-page">
+          <div class="container-lg">
+              <!-- جعبه جستجو -->
+              <div class="search-box search-box-side">
+                  <input id="search-input" class="form-control" type="search" 
+                         placeholder="جستجوی محصول..." value="{{ query }}">
+              </div>
+      
+              <!-- نتایج -->
+              <div id="search-results" class="row mt-4">
+                  {% for product in products %}
+                      <div class="col-lg-3 col-md-4 col-6 mb-3">
+                          <div class="product-card">
+                              <!-- تصویر محصول -->
+                              <div class="img-box">
+                                  <a href="{{ product.get_absolute_url }}">
+                                      {% if product.image %}
+                                          <img src="{{ product.image.url }}" class="img-fluid">
+                                      {% endif %}
+                                  </a>
+                              </div>
+      
+                              <!-- اطلاعات قیمت -->
+                              <div class="content-box">
+                                  <a href="{{ product.get_absolute_url }}">
+                                      <h5>{{ product.title }}</h5>
+                                      <div class="price-section">
+                                          {% if product.discount_percent > 0 %}
+                                              <!-- قیمت با تخفیف -->
+                                              <span class="final-price">
+                                                  {{ product.get_final_price|babel_decimal  }} تومان
+                                              </span>
+                                              <!-- قیمت اصلی خط خورده -->
+                                              <del class="original-price">
+                                                  {{ product.price|babel_decimal  }} تومان
+                                              </del>
+                                          {% else %}
+                                              <!-- قیمت بدون تخفیف -->
+                                              <span class="final-price">
+                                                  {{ product.price|babel_decimal  }} تومان
+                                              </span>
+                                          {% endif %}
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  {% empty %}
+                      <p class="text-center py-5">محصولی یافت نشد!</p>
+                  {% endfor %}
+              </div>
+          </div>
+      </section>
+        <!-- New Arrived Section End -->
+      </main>
+      <!-- Main End -->
+       
+{% endblock %}
+{% block footer_references %}
+<script>
+  document.getElementById('search-input').addEventListener('input', function(e) {
+    const query = e.target.value;
+    const resultsContainer = document.getElementById('search-results');
+    
+    if (query.length >= 2) {
+        fetch(`/searchp_m/?q=${encodeURIComponent(query)}`, {
+            headers: {'X-Requested-With': 'XMLHttpRequest'}
+        })
+        .then(response => response.json())
+        .then(data => {
+            resultsContainer.innerHTML = data.products.map(product => `
+                <div class="col-lg-3 col-md-4 col-6 mb-3">
+                    <div class="product-card">
+                        <div class="img-box">
+                            <a href="/products/${product.slug}">
+                                ${product.image_url ? 
+                                    `<img src="${product.image_url}" class="img-fluid">` : 
+                                    '<div class="no-image"></div>'}
+                            </a>
+                        </div>
+                        <div class="content-box">
+                            <a href="/products/${product.slug}">
+                                <h5>${product.title}</h5>
+                                <div class="price-section">
+                                    ${product.discount_percent > 0 ? `
+                                        <span class="final-price">
+                                            ${product.final_price.toLocaleString()} تومان
+                                        </span>
+                                        <del class="original-price">
+                                            ${product.original_price.toLocaleString()} تومان
+                                        </del>
+                                    ` : `
+                                        <span class="final-price">
+                                            ${product.original_price.toLocaleString()} تومان
+                                        </span>
+                                    `}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('') || '<p class="text-center py-5">محصولی یافت نشد!</p>';
+        });
+    } else {
+        resultsContainer.innerHTML = '<p class="text-center py-5">حداقل ۲ کاراکتر وارد کنید</p>';
+    }
+});
+  </script>
+{% endblock %}

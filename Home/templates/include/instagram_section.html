@@ -1,0 +1,56 @@
+{% load custom_filters %}
+{% load static %}
+<!-- Instagram Section Start -->
+<section class="intagram-section pb-0">
+  <div class="container-lg">
+    <div class="title-box">
+      <h2 class="unique-heading">نمونه کار ها</h2>
+      <span class="title-divider1">
+        <span class="squre"></span>
+        <span class="squre"></span>
+      </span>
+      <p>ظرافت تنها با لباسی که می پوشید مشخص نمی شود. این است که چگونه خود را حمل می کنید، چگونه صحبت می کنید، چه می خوانید.</p>
+    </div>
+  </div>
+
+  <div class="swiper instagram-slider ratio_94">
+    <div class="swiper-wrapper">
+      {% for product in products %}
+      <!-- شروع اسلاید -->
+      <div class="swiper-slide">
+        <div class="intagram-card">
+          <div class="img-box">
+            <a href="{% url 'product_detail' slug=product.slug %}">
+              <img class="img-fluid bg-img" src="{{ product.image.url }}" alt="{{ product.title }}" />
+            </a>
+            <div class="on-hover">
+              <div class="content-box">
+                
+                <div class="option-box">
+                  <!-- در اینجا می‌توانید اطلاعات دلخواه محصول مثلا عنوان یا توضیحات مختصر داشته باشید -->
+                  <p>{{ product.brand.title }}</p>
+                  <h5>{{ product.title }}</h5>
+                  <span class="price">{{ product.get_final_price|babel_decimal }} تومان</span>
+                  <div class="control">
+                    <a href="{% url 'add_to_favorites' product.id %}">
+                      <i data-feather="heart"></i>
+                    </a>
+                    <a href="{% url 'product_detail' slug=product.slug %}">
+                      <i data-feather="shopping-bag"></i>
+                    </a>
+                  </div>
+                  <a href="{% url 'product_detail' slug=product.slug %}" class="btn-special">خرید <i class="arrow"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slide End -->
+      {% empty %}
+      <p>هیچ محصولی موجود نیست.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- Instagram Section End -->

@@ -1,0 +1,99 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}ورود به سیستم{% endblock %}
+
+{% block content %}
+<div class="main">
+    <section class="page-body p-0">
+        <div class="row g-0 ratio_asos">
+            <div class="order-2 order-lg-1 col-lg-5">
+                <div class="content-box">
+                    <div>
+                        <h5>ورود به سیستم <span class="bg-theme-blue"></span></h5>
+                        <p class="font-md content-color">برای ادامه وارد حساب خود شوید</p>
+                        <form method="post" class="custom-form form-pill">
+                            {% csrf_token %}
+
+                            <div class="input-box">
+                                <label for="mobile">شماره موبایل</label>
+                                <input 
+                                    class="form-control" 
+                                    type="text" 
+                                    name="mobile" 
+                                    id="mobile" 
+                                    required
+                                    pattern="09\d{9}"
+                                    title="شماره موبایل باید با 09 شروع شود و 11 رقم باشد"
+                                    inputmode="numeric"
+                                    oninput="javascript: if (this.value.length > 11) this.value = this.value.slice(0, 11);"
+                                >
+                            </div>
+
+                            <div class="input-box">
+                                <label for="password">کلمه عبور</label>
+                                <div class="icon-input">
+                                    <input class="form-control" type="password" required name="password" id="password" />
+                                    <img class="showHidePassword" src="/static/icons/svg/eye-1.svg" alt="eye" />
+                                </div>
+                            </div>
+
+                            <a class="forgot-link" href="{% url 'forget_password_page' %}">رمز عبور را فراموش کرده‌اید؟</a>
+
+                            <button type="submit" class="btn-solid rounded-pill line-none">ورود <i class="arrow"></i></button>
+                            <a href="{% url 'home_page' %}" class="btn-solid rounded-pill line-none btn-outline mt-3 d-flex justify-content-center">صفحه اصلی <i class="arrow"></i></a>
+                        </form>
+
+                        <span class="backto-link font-default content-color text-decoration-none">حساب ندارید؟ <a class="text-decoration-underline theme-color" href="{% url 'register_page' %}">ثبت‌نام کنید</a> </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-1 order-lg-2 col-lg-7">
+                <div class="img-box">
+                    <img class="bg-img" src="/static/images/inner-page/banner.jpg" alt="banner" />
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+{% block footer_references %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // نمایش پیام‌های خطا
+        {% if error_messages %}
+            {% for message in error_messages %}
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{{ message }}',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true
+                });
+            {% endfor %}
+        {% endif %}
+
+        // نمایش پیام موفقیت
+        {% if success_message %}
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ success_message }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        {% endif %}
+    });
+
+    // جلوگیری از وارد کردن کاراکتر غیر عددی
+    document.getElementById('mobile').addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>
+{% endblock %}

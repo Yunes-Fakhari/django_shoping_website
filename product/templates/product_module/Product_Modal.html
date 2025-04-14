@@ -1,0 +1,121 @@
+{% load static %}
+{% load custom_filters %}
+<!-- View Product Modal Start -->
+<div class="modal view-product fade" id="viewModal" tabindex="-1" aria-labelledby="viewModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <span class="close-modal d-none d-md-block" data-bs-toggle="modal" data-bs-target="#viewModal">
+            <i data-feather="x"></i>
+          </span>
+          <div class="row gy-4 g-md-0">
+            <!-- ستون تصاویر -->
+            <div class="col-md-7">
+              <div class="slider-box">
+                <span class="close-modal d-md-none" data-bs-toggle="modal" data-bs-target="#viewModal">
+                  <i data-feather="x"></i>
+                </span>
+                <div class="row g-2">
+                  <div class="col-2">
+                    <div class="thumbnail-box">
+                      <div class="swiper thumbnail-img-box thumbnailSlider">
+                        <div class="swiper-wrapper">
+                          {% for gallery in product.productgallery_set.all %}
+                          <div class="swiper-slide">
+                            <img src="{{ gallery.image.url }}" alt="{{ product.title }}" />
+                          </div>
+                          {% endfor %}
+                          {% if not product.productgallery_set.all %}
+                          <div class="swiper-slide">
+                            <img src="{{ product.image.url }}" alt="{{ product.title }}" />
+                          </div>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-10 ratio_square">
+                    <div class="swiper mainslider">
+                      <div class="swiper-wrapper">
+                        {% for gallery in product.productgallery_set.all %}
+                        <div class="swiper-slide">
+                          <img class="bg-img" src="{{ gallery.image.url }}" alt="{{ product.title }}" />
+                        </div>
+                        {% endfor %}
+                        {% if not product.productgallery_set.all %}
+                        <div class="swiper-slide">
+                          <img class="bg-img" src="{{ product.image.url }}" alt="{{ product.title }}" />
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ستون اطلاعات محصول و فرم افزودن به سبد خرید -->
+            <div class="col-md-5">
+              <div class="product-detail-box">
+                <div class="product-option">
+                  <h4>{{ product.title }}</h4>
+                  <div class="گزینه قیمت">
+                    <h5>قیمت</h5>
+                    <span>{{ product.get_final_price|babel_decimal }} تومان</span>
+                    {% if product.discount_percent > 0 %}
+                    <del>{{ product.price|babel_decimal }} تومان</del>
+                    {% endif %}
+                  </div>
+                  <div class="option">
+                    <h5>شرح محصول</h5>
+                    <p class="content-color">{{ product.short_description }}</p>
+                  </div>
+                  <div class="option">
+                    <h5>رنگ</h5>
+                    <ul class="color-list">
+                      {% for color in colors %}
+                      <li class="{% if forloop.first %}active{% endif %}" data-color="{{ color.pk }}"
+                          style="background-color: {{ color.hex_value }};">
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <div class="option">
+                    <h5>اندازه</h5>
+                    <ul class="size-list">
+                      {% for size in sizes %}
+                      <li class="{% if forloop.first %}active{% endif %}" data-size="{{ size.pk }}">
+                        {{ size.title }}
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <div class="option">
+                    <h5>تعداد</h5>
+                    <div class="plus-minus">
+                      <i class="sub" data-feather="minus"></i>
+                      <input type="number" name="quantity" value="{{ add_to_cart_form.quantity.value|default:1 }}" min="1" max="10" />
+                      <i class="add" data-feather="plus"></i>
+                    </div>
+                  </div>
+                  <!-- فرم افزودن به سبد خرید -->
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <!-- فیلدهای پنهانی جهت ارسال انتخاب‌های اولیه -->
+                    <input type="hidden" name="color" value="{% if colors %}{{ colors.first.pk }}{% endif %}">
+                    <input type="hidden" name="size" value="{% if sizes %}{{ sizes.first.pk }}{% endif %}">
+                    
+                    <div class="btn-group">
+                      <button type="submit" class="btn-solid btn-sm addtocart-btn">Add To Cart</button>
+                      <a href="{% url 'product_detail' slug=product.slug %}" class="btn-outline btn-sm">مشاهده کامل</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- پایان ستون اطلاعات -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- View Product Modal End -->

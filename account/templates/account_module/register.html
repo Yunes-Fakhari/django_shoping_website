@@ -1,0 +1,90 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}ثبت نام{% endblock %}
+
+{% block content %}
+    <!-- Main Start -->
+    <div class="main">
+        <section class="page-body p-0">
+          <div class="row g-0 ratio_asos">
+            <div class="order-2 order-lg-1 col-lg-5">
+              <div class="content-box">
+                <div>
+                  <h5>ایجاد حساب<span class="bg-theme-blue"></span></h5>
+                  <p class="font-md content-color">چگونه می توانم سفارش دسترسی، لیست خواسته ها و توصیه را دریافت کنم؟</p>
+  
+                  <form method="post" class="custom-form form-pill">
+                    {% csrf_token %}
+                    <div class="input-box">
+                        <label for="{{ form.phone_number.id_for_label }}">{{ register_form.phone_number.label }}</label>
+                        {{ register_form.phone_number }}
+                        <br>
+                        {% if register_form.phone_number.errors %}
+                            <span class="text-danger" style="padding-right: 20px;">
+                                {{ register_form.phone_number.errors.0 }}
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn-solid rounded-pill line-none theme-color">ثبت نام <i class="arrow"></i></button>
+                </form>
+                
+                <span class="backto-link font-default content-color text-decoration-none">
+                    از قبل یک حساب دارید؟
+                    <a class="text-decoration-underline theme-color" href="{% url 'login_page' %}">ورود به سیستم</a>
+                </span>
+  
+                  <span class="line"><span>یا </span> </span>
+                  <a href="https://www.google.com/" class="button-link"><img src="/static/icons/png/google.png" alt="google" /> ثبت نام کنید </a>
+                  <a href="https://www.facebook.com/" class="button-link"><img src="/static/icons/png/fb.png" alt="facebook" /> ثبت نام بالا </a>
+                </div>
+              </div>
+            </div>
+            <div class="order-1 order-lg-2 col-lg-7">
+              <div class="img-box">
+                <img class="bg-img" src="/static/images/inner-page/banner.jpg" alt="banner" />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- Main End -->
+{% endblock %}
+{% block footer_references %}
+<script src="/static/js/password-showhide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // بررسی وجود پیام‌ها
+    const messages = [
+        {% for message in messages %}
+            {
+                type: "{{ message.tags }}",
+                text: "{{ message }}"
+            },
+        {% endfor %}
+    ];
+
+    // نمایش هر پیام به صورت Toast
+    messages.forEach(message => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end', // موقعیت Toast
+            showConfirmButton: false, // عدم نمایش دکمه تأیید
+            timer: 5000, // بسته شدن خودکار پس از 5 ثانیه
+            timerProgressBar: true, // نمایش نوار پیشرفت
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer); // توقف تایمر هنگام hover
+                toast.addEventListener('mouseleave', Swal.resumeTimer); // ادامه تایمر پس از hover
+            }
+        });
+
+        Toast.fire({
+            icon: message.type === 'error' ? 'error' : message.type,
+            title: message.text
+        });
+    });
+});
+</script>
+{% endblock %}

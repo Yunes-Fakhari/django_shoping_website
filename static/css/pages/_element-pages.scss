@@ -1,0 +1,262 @@
+/**=================
+  4.4 Element Page CSS 
+========================**/
+
+/// Title Page ///
+.title-element {
+  div[class^="title-box"] {
+    margin-bottom: 0px;
+    .content {
+      margin-bottom: -4px;
+    }
+  }
+  .title-box {
+    .content,
+    p {
+      margin-bottom: calc(0px + (-8 + 0) * ((100vw - 320px) / (1920 - 320)));
+    }
+    .title-divider2 {
+      svg {
+        background-color: $white-light;
+        z-index: 2;
+        position: relative;
+      }
+      &::after {
+        z-index: 0;
+      }
+    }
+  }
+  .title-box6 {
+    .content {
+      color: $content-color;
+    }
+  }
+  .title-box5 {
+    .main-title {
+      margin-bottom: calc(-8px + (-15 + 8) * ((100vw - 320px) / (1920 - 320)));
+    }
+  }
+  .theme-color6 {
+    .title-box7 {
+      p {
+        margin-bottom: calc(-1px + (-4 + 1) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+  }
+  section {
+    &:nth-of-type(even) {
+      background-color: $white-light;
+    }
+  }
+}
+.color-strip {
+  section,
+  .section-tag {
+    &:nth-of-type(even) {
+      background-color: $white-light;
+    }
+  }
+}
+
+/// Product Card Page ///
+.product-card-element {
+  .title-box {
+    margin-bottom: 40px;
+  }
+  .bg-dark-section {
+    background-color: $body-dark;
+    .title-box {
+      .unique-heading {
+        color: $white;
+        [class="dark"] & {
+          color: $white-text-dark;
+        }
+      }
+    }
+
+    .product-card5 {
+      &:hover {
+        .content-box {
+          h5 {
+            [class="dark"] & {
+              color: $white-text-dark;
+            }
+          }
+          .thumb-wrapper {
+            span {
+              [class="dark"] & {
+                color: $white-text-dark;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Tabs Element Page ///
+.tabs-element {
+  .title-box {
+    margin-bottom: calc(24px + (40 - 24) * ((100vw - 320px) / (1920 - 320)));
+  }
+  .nav-tabs-star {
+    .nav-link {
+      background-color: transparent;
+      &.active {
+        background-color: transparent;
+      }
+    }
+  }
+  p {
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: $content-color;
+    line-height: 25px;
+    font-weight: normal;
+    @media only screen and (max-width: 767px) {
+      margin-bottom: -3px;
+    }
+  }
+  .hide {
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+  .nav-tabs,
+  .nav-tabs6,
+  .nav-pills {
+    margin-bottom: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+  }
+  .nav-tabs6 {
+    .nav-link {
+      color: $title-color;
+      margin-bottom: -8px;
+      margin-top: -5px;
+      &.active {
+        color: var(--theme-color);
+      }
+    }
+  }
+  .nav-tabs3 {
+    .nav-link {
+      white-space: nowrap;
+    }
+  }
+
+  .tab-pane {
+    p {
+      &:last-child {
+        margin-bottom: -3px;
+      }
+    }
+  }
+}
+
+/// Categories Element Page ///
+.categories-element {
+  .home-catagories-slider {
+    padding: 6px 0;
+    margin: -6px 0;
+  }
+}
+
+.dark-section {
+  background-color: $body-dark;
+  --theme-color2: #825b47;
+  .title-box {
+    .unique-heading {
+      color: $white;
+      [class="dark"] & {
+        color: $white-text-dark;
+      }
+    }
+  }
+  &.special-product-5 {
+    .img-box {
+      .content-box {
+        h5 {
+          [class="dark"] & {
+            color: $white-text-dark;
+          }
+        }
+      }
+    }
+  }
+  &.catagories-style-5 {
+    .catagories-box {
+      .content-box {
+        h5 {
+          [class="dark"] & {
+            color: $white-text-dark;
+          }
+        }
+      }
+    }
+  }
+
+  &.best-seller3 {
+    .product-card-side3 {
+      .content-box {
+        a {
+          h5 {
+            [class="dark"] & {
+              color: $white-text-dark;
+            }
+          }
+        }
+      }
+    }
+    .banner-box {
+      .content-box {
+        span {
+          [class="dark"] & {
+            color: $white-text-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+.buttons-element {
+  .btn-style2 {
+    margin-right: 13px;
+    white-space: nowrap;
+    [dir="rtl"] & {
+      margin-left: 13px;
+      margin-right: unset;
+    }
+  }
+  .btn-box {
+    display: flex;
+    align-items: center;
+    gap: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+    flex-wrap: wrap;
+  }
+}
+
+.button-card-wrapper {
+  .element-card {
+    &:not(:first-of-type) {
+      margin-top: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+    }
+  }
+}
+.element-card {
+  box-shadow: $box-shadow-blog;
+  padding: calc(15px + (30 - 15) * ((100vw - 320px) / (1920 - 320)));
+  border-radius: 5px;
+  .card-header {
+    padding: 0 0 calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320))) 0;
+    h5 {
+      font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
+      color: $title-color;
+      line-height: calc(24px + (28 - 24) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 500;
+      margin-top: calc(-2px + (-4 + 2) * ((100vw - 320px) / (1920 - 320)));
+    }
+  }
+  .card-body {
+    padding: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320))) 0 0 0;
+  }
+}

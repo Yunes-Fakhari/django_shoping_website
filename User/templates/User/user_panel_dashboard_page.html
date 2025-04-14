@@ -1,0 +1,189 @@
+{% extends 'shared/layout.html' %}
+{% load render_partial %}
+
+{% block title %}
+    داشبورد
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main Start -->
+    <main class="main">
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+          <div class="banner">
+            <img class="bg-img bg-top" src="/static/images/inner-page/banner-p.jpg" alt="banner" />
+  
+            <div class="container-lg">
+              <div class="breadcrumb-box">
+                <div class="heading-box">
+                  <h1>داشبورد کاربر</h1>
+                </div>
+                <ol class="breadcrumb">
+                  <li><a href="{% url 'home_page' %}">صفحه اصلی</a></li>
+  
+                  <li>
+                    <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
+                  </li>
+  
+                  <li class="current"><a href="{% url 'user_panel_dashboard' %}">داشبورد کاربر</a></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Dashboard Start -->
+        <section class="user-dashboard">
+          <div class="container-lg">
+            <div class="row g-3 g-xl-4 tab-wrap">
+              <div class="col-lg-4 col-xl-3 sticky">
+                <button class="setting-menu btn-solid btn-sm d-lg-none">منوی تنظیم <i class="arrow"></i></button>
+                {% render_partial 'User.views.user_panel_menu_component' %}
+              </div>
+  
+              <div class="col-lg-8 col-xl-9">
+                <div class="right-content tab-content" id="myTabContent">
+                  <!-- User Dashboard Start -->
+                  <div class="tab-pane show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <div class="dashboard-tab">
+                      {% if user.get_full_name %}
+                        <div class="title-box3">
+                            <h3>
+                              خوش آمدید،
+                              {% if user.get_full_name %}
+                                {{ user.get_full_name }}
+                              {% else %}
+                                {{ user.username }}
+                              {% endif %}
+                              عزیز!
+                            </h3>
+                            <p>
+                              در داشبورد کاربری خود، به سادگی می‌توانید اطلاعات حساب، سفارش‌های ثبت شده و جزئیات مرتبط با آدرس‌ها و کارت‌های ذخیره شده را مدیریت کنید. اینجا مکانی است که شما می‌توانید در صورت نیاز مشخصات خود را به‌روز کنید و از امکانات هوشمند ما برای پیگیری سفارش‌های خود بهره ببرید. از تجربه‌ی کاربری مطمئن و کاربردی لذت ببرید!
+                            </p>
+                          </div>
+                      {% endif %}    
+  
+                      <div class="row g-0 option-wrap">
+                        <div class="col-sm-6 col-xl-4">
+                          <a href="javascript:void(0)" data-class="orders" class="tab-box">
+                            <img src="/static/icons/svg/1.svg" alt="کیف خرید" />
+                            <h5>سفارشات</h5>
+                            <p>سابقه سفارشات قبلی را ببینید</p>
+                          </a>
+                        </div>
+                        <div class="col-sm-6 col-xl-4">
+                          <a href="{% url 'favorite_list' %}" data-class="wishlist" class="tab-box">
+                            <img src="/static/icons/svg/2.svg" alt="wishlist" />
+                            <h5>علاقمندی ها</h5>
+                            <p>لیست خواسته‌های شما ظرف 24 ساعت منقضی می‌شود، لطفاً تسویه حساب را تکمیل کنید</p>
+                          </a>
+                        </div>
+                        <div class="col-sm-6 col-xl-4">
+                          <a href="javascript:void(0)" data-class="profile" class="tab-box">
+                            <img src="/static/icons/svg/5.svg" alt="profile" />
+                            <h5>نمایه</h5>
+                            <p>جزئیات نمایه خود را تکمیل کنید، برخی از اطلاعات موجود نیست</p>
+                          </a>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <!-- User Dashboard End -->
+  
+                  <!-- Order Tabs Start -->
+                  <div class="tab-pane" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                    {% render_partial 'User.views.MyShopping' %}
+                  </div>
+                  <!-- Order Tabs End -->
+  
+
+  
+                  <!-- Profile Tabs Start -->
+                  {% render_partial 'User.views.update_profile' %}
+                  <!-- Profile Tabs End -->
+  
+                  <!-- Security Tabs Start -->
+                  <div class="tab-pane" id="security" role="tabpanel" aria-labelledby="security-tab">
+                    <div class="privacy-tab">
+                      <div class="privacy box">
+                        <div class="title-box3">
+                          <h3>حریم خصوصی</h3>
+                        </div>
+  
+                        <div class="setting-option">
+                          <div class="content-box">
+                            <h6 class="font-roboto">به دیگران اجازه می دهد نمایه من را ببینند</h6>
+                            <p class="font-roboto">همه افراد می توانند نمایه من را ببینند.</p>
+                          </div>
+                          <label class="switch"> <input checked type="checkbox" name="chk1" value="option1" class="setting-check" /><span class="switch-state"></span> </label>
+                        </div>
+  
+                        <div class="setting-option mt-3">
+                          <div class="content-box">
+                            <h6 class="font-roboto">چه کسی این نمایه را فقط برای دیدن نمایه من ذخیره کرده است</h6>
+                            <p class="font-roboto">همه افراد نمی توانند نمایه من را ببینند.</p>
+                          </div>
+                          <label class="switch"> <input type="checkbox" name="chk2" value="option1" class="setting-check" /><span class="switch-state"></span> </label>
+                        </div>
+  
+                        <button class="btn-solid btn-sm">ذخیره تغییرات <i class="arrow"></i></button>
+                      </div>
+  
+                      <div class="account-box">
+                        <div class="title-box3">
+                          <h3>تنظیمات حساب</h3>
+                        </div>
+  
+                        <div class="setting-option">
+                          <div class="content-box">
+                            <h6 class="font-roboto">حذف حساب شما برای همیشه انجام می شود</h6>
+                            <p class="font-roboto">هنگامی که حساب شما حذف شد، از سیستم خارج می شوید و نمی توانید دوباره وارد سیستم شوید.</p>
+                          </div>
+                          <label class="switch"> <input type="checkbox" name="chk3" value="option2" class="setting-check" علامت‌گذاری شد /><span class="switch-state"></span> </label>
+                        </div>
+  
+                        <div class="setting-option mt-3">
+                          <div class="content-box">
+                            <h6 class="font-roboto">حذف حساب شما موقت خواهد بود</h6>
+                            <p class="font-roboto">هنگامی که حساب شما حذف شد، از سیستم خارج خواهید شد و حساب جدیدی ایجاد خواهید کرد.</p>
+                          </div>
+                          <label class="switch"> <input type="checkbox" name="chk4" value="option4" class="setting-check" /><span class="switch-state"></span> </label>
+                        </div>
+  
+                        <button class="btn-solid btn-sm">ذخیره تغییرات <i class="arrow"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Security Tabs End -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Dashboard End -->
+      </main>
+      <!-- Main End -->
+
+{% endblock %}
+{% block footer_references %}
+<script>
+{% if messages %}
+    {% for message in messages %}
+      
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: '{% if "error" in message.tags %}error{% else %}success{% endif %}',
+          title: "{{ message|escapejs }}",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true
+        });
+      
+    {% endfor %}
+{% endif %}
+</script>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% load custom_filters %}
+{% for product in products %}
+<div class="swiper-slide">
+  <div class="product-card">
+    <div class="img-box">
+      <!-- Thumbnail -->
+      <ul class="thumbnail-img">
+        <li class="active thumb">
+          {% if product.productgallery_set.all %}
+            <img src="{{ product.productgallery_set.all.0.image.url }}" alt="thumbnail" />
+          {% else %}
+            <img src="{{ product.image.url }}" alt="thumbnail" />
+          {% endif %}
+        </li>
+        {% if product.productgallery_set.all %}
+          {% for gallery in product.productgallery_set.all|slice:"1:" %}
+            <li class="thumb">
+              <img src="{{ gallery.image.url }}" alt="thumbnail" />
+            </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+
+      <a href="{% url 'product_detail' product.slug %}" class="primary-img">
+        <img class="img-fluid bg-img" src="{{ product.image.url }}" alt="{{ product.title }}" />
+      </a>
+
+      <!-- Arrow label -->
+      {% if product.is_new %}
+      <span class="arrow-label-wrap">
+        <span class="arrow-label bg-theme-green-label">جدید</span>
+      </span>
+      {% endif %}
+      {% if product.is_featured %}
+      <span class="arrow-label-wrap">
+        <span class="arrow-label bg-theme-sun">ویژه</span>
+      </span>
+      {% endif %}
+      {% if product.is_new or product.is_featured %}
+      <span class="arrow-label-wrap">
+        {% if product.is_new %}
+          <span class="arrow-label bg-theme-green-label">جدید</span>
+          {% if product.is_featured %}
+            <br>
+          {% endif %}
+        {% endif %}
+        {% if product.is_featured %}
+          <span class="arrow-label bg-theme-sun">ویژه</span>
+        {% endif %}
+      </span>
+      {% endif %}
+
+      
+      <!-- Rating -->
+      <div class="rating">
+        <span>4.5 <i data-feather="star"></i> </span>
+      </div>
+
+      <!-- Option -->
+      <ul class="option-wrap">
+        <li data-bs-toggle="tooltip" data-bs-placement="right" title="علاقه مندی">
+          <a href="{% url 'add_to_favorites' product.id %}" class="wishlist-btn">
+            <i data-feather="heart"></i>
+          </a>
+        </li>
+        
+        <li data-bs-toggle="tooltip" title="مشاهده سریع" data-bs-placement="right">
+          <a href="javascript:void(0)" class="view-product-btn" data-slug="{{ product.slug }}">
+            <i data-feather="eye"></i>
+          </a>
+        </li> 
+        
+      </ul>
+    </div>
+
+    <!-- Content Box -->
+    <div class="content-box">
+      <a href="{% url 'product_detail' product.slug %}">
+        {% if product.brand %}
+          <p>{{ product.brand.title }}</p>
+        {% endif %}
+        <h5>{{ product.title }}</h5>
+        <span>{{ product.get_final_price|babel_decimal  }} تومان</span>
+        {% if product.discount_percent > 0 %}
+          <del>{{ product.price|babel_decimal  }} تومان</del>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</div>
+{% endfor %}

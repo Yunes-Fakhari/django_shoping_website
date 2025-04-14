@@ -1,0 +1,258 @@
+/**=====================
+ 3.13 Service Section CSS 
+===========================**/
+
+.service-section {
+  .service-box {
+    padding: 0 calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+    .media {
+      align-items: flex-start;
+      justify-content: center;
+      gap: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+      @media only screen and (max-width: 991px) {
+        justify-content: left;
+        [dir="rtl"] & {
+          justify-content: right;
+        }
+      }
+      svg {
+        width: calc(24px + (36 - 24) * ((100vw - 320px) / (1920 - 320)));
+        height: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+        stroke: $title-color;
+        fill: $title-color;
+      }
+      .media-body {
+        overflow: hidden;
+        h5 {
+          font-weight: 500;
+          font-size: calc(13px + (18 - 13) * ((100vw - 320px) / (1920 - 320)));
+          line-height: calc(20px + (26 - 20) * ((100vw - 320px) / (1920 - 320)));
+          text-transform: uppercase;
+          color: $title-color;
+          margin-top: -5px;
+          overflow: hidden;
+          white-space: nowrap;
+          max-width: max-content;
+          text-overflow: ellipsis;
+        }
+        span {
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 20px;
+          display: block;
+          margin-bottom: calc(0px + (-2 - 0) * ((100vw - 320px) / (1920 - 320)));
+          color: $content-color;
+          overflow: hidden;
+          white-space: nowrap;
+          max-width: max-content;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+  .row {
+    > div {
+      position: relative;
+
+      @media only screen and (max-width: 425px) {
+        width: 100%;
+        &::before {
+          display: none;
+        }
+      }
+      &:first-of-type {
+        &::before {
+          display: none;
+        }
+      }
+      &:nth-child(3) {
+        @media only screen and (max-width: 991px) {
+          &::before {
+            display: none;
+          }
+        }
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: calc(20px + (32 - 20) * ((100vw - 320px) / (1920 - 320)));
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background-color: $border-color2;
+        @media only screen and (max-width: 991px) {
+          display: none;
+        }
+        [dir="rtl"] & {
+          right: 0;
+          left: unset;
+        }
+      }
+    }
+  }
+}
+
+.service-section2 {
+  .box-wrap {
+    background-color: #f8fbf7;
+    padding: calc(30px + (54 - 30) * ((100vw - 320px) / (1920 - 320))) 0;
+    [class="dark"] & {
+      background-color: $gray-light2;
+    }
+  }
+  .service-box {
+    .media {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      svg {
+        height: calc(24px + (30 - 24) * ((100vw - 320px) / (1920 - 320)));
+        width: calc(30px + (36 - 30) * ((100vw - 320px) / (1920 - 320)));
+        stroke: var(--theme-color);
+        fill: var(--theme-color);
+      }
+      .media-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+  &.about-service {
+    background-color: $gray-light3;
+    .service-contanner {
+      margin-top: 20px;
+    }
+    .service-box {
+      .media {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        .svg-wrap {
+          padding: 5px;
+          width: calc(50px + (60 - 50) * ((100vw - 320px) / (1920 - 320)));
+          height: calc(50px + (60 - 50) * ((100vw - 320px) / (1920 - 320)));
+          position: relative;
+          border-radius: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            height: calc(24px + (30 - 24) * ((100vw - 320px) / (1920 - 320)));
+            width: calc(28px + (36 - 28) * ((100vw - 320px) / (1920 - 320)));
+          }
+          &::after {
+            inset: 0;
+            position: absolute;
+            content: "";
+            width: inherit;
+            height: inherit;
+            background-color: var(--theme-color);
+            opacity: 0.08;
+            border-radius: inherit;
+          }
+        }
+        .media-body {
+          align-items: flex-start;
+          width: calc(100% - calc(65px + (75 - 65) * ((100vw - 320px) / (1920 - 320))));
+          h5 {
+            font-size: 16px;
+            line-height: 22px;
+            color: $title-color;
+            font-weight: 500;
+            margin-bottom: 4px;
+          }
+          span {
+            font-weight: normal;
+            font-size: 14px;
+            color: $content-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.service-section4 {
+  margin-top: 20px;
+  .row > div::before {
+    background-color: rgba($content-color, 0.4);
+  }
+  .banner-box {
+    margin-top: 6px;
+    padding: calc(25px + (44 - 25) * ((100vw - 320px) / (1920 - 320))) 15px;
+    .media {
+      align-items: center;
+      svg {
+        stroke: $title-dark-color3;
+        fill: $title-dark-color3;
+      }
+      .media-body {
+        h5 {
+          [class="dark"] & {
+            color: $title-dark-color3;
+          }
+        }
+        span {
+          [class="dark"] & {
+            color: $content-dark-color2;
+          }
+        }
+      }
+    }
+  }
+  &.dark-service {
+    .banner-box {
+      .media {
+        svg {
+        }
+        .media-body {
+          h5 {
+            [class="dark"] & {
+              color: $white-text-dark;
+            }
+          }
+          span {
+            [class="dark"] & {
+              color: $content-dark-color2;
+            }
+          }
+        }
+      }
+    }
+    [class="dark"] & {
+      .row > div::before {
+        background-color: rgba($white-text-dark, 0.3);
+      }
+    }
+  }
+}
+
+.service-section5 {
+  .banner-box {
+    .media {
+      svg {
+        stroke: var(--theme-color);
+        fill: var(--theme-color);
+      }
+      .media-body {
+        h5 {
+          color: $white;
+          [class="dark"] & {
+            color: $white-text-dark;
+          }
+        }
+        span {
+          color: $content-color3;
+          [class="dark"] & {
+            color: $content-color3;
+          }
+        }
+      }
+    }
+  }
+}

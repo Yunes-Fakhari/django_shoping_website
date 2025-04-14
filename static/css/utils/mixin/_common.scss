@@ -1,0 +1,91 @@
+/// Flex ///
+@mixin flex($align, $justify) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+@mixin flex-align($align) {
+  display: flex;
+  align-items: $align;
+}
+
+/// widget list ///
+@mixin widget-list {
+  .widget-list {
+    max-width: 84%;
+    @media only screen and (max-width: 1399px) {
+      max-width: unset;
+    }
+
+    @media only screen and (max-width: 390px) {
+      > div {
+        width: 100%;
+      }
+    }
+
+    .widget {
+      padding: calc(6px + (20 - 6) * ((100vw - 320px) / (1920 - 320)));
+      border-radius: 10px;
+      background-color: $gray-light3;
+      display: flex;
+      align-items: flex-start;
+      gap: calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320)));
+      transition: all 0.4s;
+      @media only screen and (max-width: 991px) {
+        padding: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320)));
+      }
+
+      span {
+        width: calc(35px + (40 - 35) * ((100vw - 320px) / (1920 - 320)));
+        height: calc(35px + (40 - 35) * ((100vw - 320px) / (1920 - 320)));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        padding: 10px;
+        position: relative;
+        &::after {
+          inset: 0;
+          position: absolute;
+          transition: all 0.4s;
+          content: "";
+          width: inherit;
+          height: inherit;
+          border-radius: inherit;
+          background-color: var(--theme-color);
+          opacity: 0.07;
+        }
+      }
+      svg {
+        transition: all 0.4s;
+        width: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+        height: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+        stroke: var(--theme-color);
+        position: relative;
+        z-index: 2;
+      }
+      h6 {
+        font-size: calc(15px + (17 - 15) * ((100vw - 320px) / (1920 - 320)));
+        font-weight: 500;
+        color: $title-color;
+      }
+      p {
+        margin-bottom: 0;
+        color: $content-color;
+        margin-top: calc(3px + (5 - 3) * ((100vw - 320px) / (1920 - 320)));
+      }
+      &:hover {
+        transform: translateY(-4px);
+
+        span {
+          &::after {
+            opacity: 1;
+          }
+          svg {
+            stroke: $white;
+          }
+        }
+      }
+    }
+  }
+}

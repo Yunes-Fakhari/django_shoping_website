@@ -1,0 +1,169 @@
+{% load custom_filters %}
+<div class="cart-wrap order-content">
+    <div class="title-box3">
+      <h3>سفارشات من</h3>
+      {% if carts %}
+        <p>از خرید شما سپاسگزاریم! سفارش‌های شما در حال پردازش یا تحویل شده‌اند.</p>
+      {% else %}
+        <p>هنوز سفارشی ثبت نکرده‌اید.</p>
+      {% endif %}
+    </div>
+    
+    <div class="order-wraper">
+      {% for cart in carts %}
+        <div class="order-box">
+          <div class="order-header">
+            <span><i data-feather="box"></i></span>
+            <div class="order-content">
+              {% if cart.payment_date %}
+                <h5 class="order-status success">{{cart.status}}</h5>
+                <p>تاریخ پرداخت: {{ cart.payment_date|date:"d M Y" }}</p>
+              {% else %}
+                <h5 class="order-status pending">در حال پردازش</h5>
+                <p>سفارش در حال پردازش..</p>
+              {% endif %}
+            </div>
+          </div>
+    
+          <div class="order-info">
+            {% for item in cart.items.all %}
+              <div class="product-details" data-productDetail="product-detail">
+                <div class="img-box">
+                  {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}" />
+                  {% endif %}
+                </div>
+                <div class="product-content">
+                  <h5>{{ item.product.title }}</h5>
+                  <span>قیمت: <span>{{ item.unit_price|babel_decimal }} تومان</span></span>
+                  <span>اندازه: <span>{{ item.size }}</span></span>
+                  <span>رنگ: <span>{{ item.color }}</span></span>
+                  <span>تعداد: <span>{{ item.count }}</span></span>
+                  <span>شناسه سفارش: <span>{{ cart.id }}</span></span>
+                </div>
+              </div>
+              <br>
+            {% endfor %}
+            <div class="col-12">
+              <div class="row gy-3 gy-sm-0 g-3 g-md-4">
+                <div class="col-sm-6">
+                  <div class="order-data general-details">
+                    <!-- Payment Method Start -->
+                    <div class="payment-method mt-0">
+                      <h5 class="cart-title">روش پرداخت</h5>
+                      <div class="payment-box">
+                        <img src="/static/icons/png/1.png" alt="card" />
+                        <span class="font-sm title-color"> **** **** **** 6502</span>
+                      </div>
+                    </div>
+                    <!-- Payment Method End -->
+
+                    <a href="{% url 'invoice' cart.id %}" class="btn-solid mb-line btn-sm mt-4">دریافت فاکتور <i class="arrow"></i></a>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="order-data general-details">
+                    <!-- Contact Start -->
+                    <div class="payment-method mt-0">
+                      <h5 class="cart-title">تماس با ما</h5>
+
+                      <div class="payment-box">
+                        <i data-feather="phone"></i>
+                        <span class="font-sm title-color">
+                           <a class="content-color fw-500" href="tel:2554-4454-5646">2554-4454-5646</a>
+                         </span>
+                      </div>
+
+                      <div class="payment-box mt-3">
+                        <i data-feather="phone"></i>
+                        <span class="font-sm title-color">
+                           <a class="content-color fw-500" href="tel:5452-2545-2154">5452-2545-2154</a>
+                         </span>
+                      </div>
+
+                      <div class="payment-box mt-3">
+                        <i data-feather="mail"></i>
+                        <span class="font-sm title-color">
+                           <a class="content-color fw-500" href="mailto:someone@example.com">someone@example.com</a>
+                         </span>
+                      </div>
+                    </div>
+                    <!-- Contact End -->
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <br>
+            <div class="col-12">
+              <div class="order-data general-details">
+                <!-- Address Section Start -->
+                <div class="address-ordered p-0">
+                  <h5 class="cart-title">وضعیت سفارش</h5>
+                  <div class="address">
+                    <h5 class="font-default title-color">{{ user_profile.city }} <span class="badges badges-pill badges-theme">{{cart.status}}</span></h5>
+                    <p class="font-default content-color"><i data-feather="map-pin"></i>
+                      {% if request.user.address %}
+                      {{ request.user.address }}
+                      {% else %}
+                          آدرس ثبت نشده
+                      {% endif %}
+                    </p>
+                  </div>
+                </div>
+                <!-- Address Section End -->
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="road">
+                <!-- خط نقطه‌چین وسط جاده -->
+                <div class="dash-line"></div>
+                
+                <!-- ایستگاه‌ها بالای جاده -->
+                <div class="station station-1 {% if cart.status == 'در حال پردازش' %}active{% endif %}" data-label="در حال پردازش">
+                  1
+                </div>
+                <div class="station station-2 {% if cart.status == 'در حال آماده سازی محصولات' %}active{% endif %}" data-label="در حال آماده سازی محصولات">
+                  2
+                </div>
+                <div class="station station-3 {% if cart.status == 'در حال ارسال به دست شما' %}active{% endif %}" data-label="در حال ارسال به دست شما">
+                  3
+                </div>
+                <div class="station station-final {% if cart.status == 'به شهر شما رسیدیم' %}active{% endif %}" data-label="به شهر شما رسیدیم">
+                  4
+                </div>
+            
+                <!-- کامیون متحرک -->
+                <div class="truck
+                     {% if cart.status == 'در حال پردازش' %}truck-stop-0
+                     {% elif cart.status == 'در حال آماده سازی محصولات' %}truck-stop-33
+                     {% elif cart.status == 'در حال ارسال به دست شما' %}truck-stop-66
+                     {% elif cart.status == 'به شهر شما رسیدیم' %}truck-stop-90{% endif %}">
+                  🚚
+                </div>
+                <img src="/static/images/fetchpik.com-iconscout-3FWoO6lRM4.png" alt="Truck Open" class="truck-img" />
+                
+                
+              </div>
+            </div>
+            <div class="rating-box">
+              <span>به محصول امتیاز دهید: </span>
+              <ul class="rating p-0 mb">
+                <li><i class="fill" data-feather="star"></i></li>
+                <li><i class="fill" data-feather="star"></i></li>
+                <li><i class="fill" data-feather="star"></i></li>
+                <li><i class="fill" data-feather="star"></i></li>
+                <li><i data-feather="star"></i></li>
+              </ul>
+            </div>
+            
+            <br>
+            <div class="order-total">
+              <span>مبلغ کل: <strong>{{ cart.final_price|babel_decimal }} تومان</strong></span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  

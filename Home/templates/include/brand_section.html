@@ -1,0 +1,121 @@
+{% load custom_filters %}
+{% load static %}
+<!-- Brand We Love Section Start -->
+<section class="brand-section pb-0 pan3 wow fadeInUp wow-section-overflow" data-wow-delay="0.3s">
+    <div class="container-lg">
+      <div class="title-box">
+        <h2 class="unique-heading">مارک مورد علاقه ما</h2>
+        <span class="title-divider1">
+          <span class="squre"></span>
+          <span class="squre"></span>
+        </span>
+        <p>پرفروش‌ترین‌های ما را از برندهای نوظهور و تثبیت‌شده در سراسر جهان بخرید</p>
+      </div>
+      <div class="section-wrap">
+        <div class="row gy-4 gy-sm-5 g-0 g-lg-4">
+          <!-- ستون سمت چپ: بنر برند -->
+          <div class="col-lg-5 ratio_94">
+            <div class="brand-wrap">
+              <img class="img-fluid bg-img" src="{% static 'images/fashion/banner/banner3.jpg' %}" alt="banner" />
+  
+              <div class="sale-card">
+                <div class="sale-card-wrap">
+                  <div class="sale-name bg-theme-sun">
+                    <h5>مد مردانه</h5>
+                  </div>
+  
+                  <div class="sale-title">
+                    <h3 class="mega">فروش مگا</h3>
+                    <span>تخفیف ویژه دریافت کنید</span>
+                  </div>
+  
+                  <div class="offer">
+                    <span class="upto">
+                      <span> تا</span>
+                    </span>
+                    <h5>
+                      70 <span>
+                            <span class="percent">%</span>
+                            <span class="off"> خاموش</span>
+                          </span>
+                    </h5>
+                  </div>
+  
+                  <div class="code">
+                    <p>برای موارد انتخابی</p>
+                    <h5>استفاده از کد: ABCDE098</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- ستون سمت راست: محصولات (دو کارت-wrap) -->
+          <div class="col-lg-7">
+            <div class="card-box row g-3 g-sm-4">
+              <!-- کارت اول: ورود جدید -->
+              <div class="col-sm-6">
+                <div class="card-wrap">
+                  <h5 class="title-line"><span> ورود جدید</span></h5>
+  
+                  {% for product in new_products %}
+                  <div class="product-card-side product-side2">
+                    <div class="img-wrap">
+                      <a href="{% url 'product_detail' slug=product.slug %}">
+                        <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}" />
+                      </a>
+                    </div>
+  
+                    <div class="content-box">
+                      <a href="{% url 'product_detail' slug=product.slug %}">
+                        <p>{{ product.brand.name|default:"نام برند" }}</p>
+                        <h5 class="truncate-2">{{ product.title }}</h5>
+                        <span>{{ product.get_final_price|babel_decimal }} تومان</span>
+                        {% if product.discount_percent > 0 %}
+                          <del>{{ product.price|babel_decimal }} تومان</del>
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                  {% empty %}
+                    <p>محصول جدیدی موجود نیست.</p>
+                  {% endfor %}
+                </div>
+              </div>
+  
+              <!-- کارت دوم: ویژه -->
+              <div class="col-sm-6">
+                <div class="card-wrap">
+                  <h5 class="title-line"><span>ویژه</span></h5>
+  
+                  {% for product in featured_products %}
+                  <div class="product-card-side product-side2">
+                    <div class="img-wrap">
+                      <a href="{% url 'product_detail' slug=product.slug %}">
+                        <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}" />
+                      </a>
+                    </div>
+  
+                    <div class="content-box">
+                      <a href="{% url 'product_detail' slug=product.slug %}">
+                        <p>{{ product.brand.name|default:"نام برند" }}</p>
+                        <h5 class="truncate-2">{{ product.title }}</h5>
+                        <span>{{ product.get_final_price|babel_decimal }} تومان</span>
+                        {% if product.discount_percent > 0 %}
+                          <del>{{ product.price|babel_decimal }} تومان</del>
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                  {% empty %}
+                    <p>محصول ویژه موجود نیست.</p>
+                  {% endfor %}
+                </div>
+              </div><!-- end col-sm-6 for featured -->
+            </div><!-- end .card-box -->
+          </div><!-- end col-lg-7 -->
+        </div><!-- end .row -->
+      </div><!-- end .section-wrap -->
+    </div><!-- end .container-lg -->
+  </section>
+  <!-- Brand We Love Section End -->

@@ -1,0 +1,668 @@
+{% extends 'shared/layout.html' %}
+{% load thumbnail %}
+{% load poll_extras %}
+{% load render_partial %}
+{% comment %} <p>{{data}}</p>
+<p>{{message}}</p> {% endcomment %}
+{% block title %}
+صفحه اصلی
+{% endblock %}
+
+{% block content %}
+
+<main class="main">
+  <!-- Home Banner Section Start -->
+  <section class="home-slider-common ratio_40 p-0">
+    <div class="home-slider-common home-slider2 ratio_40 p-0">
+      <div class="swiper home-slider">
+        <div class="swiper-wrapper">
+          <!-- Slide Start -->
+          <div class="swiper-slide">
+            <div class="banner">
+              <div>
+                <img class="bg-img img-fluid" src="/static/images/bag/banner/banner1.jpg" alt="banner" />
+              </div>
+              <!-- Banner Image Left -->
+              <img class="img-fluid banner-left-img d-none d-sm-block" src="/static/images/bag/slide/banner1-1.png"
+                alt="banner" />
+
+              <!-- Content Box -->
+              <div class="content-box">
+                <h1 class="heading">کاوش در فروشگاه با <span> مجموعه مد روز</span></h1>
+                <p class="d-none d-xl-block">الگوی جیبی مجلل با چاپ مرجانی مجلل با طرح‌های چهارگوش ابریشمی خالص معاصر در
+                  سایه‌های الهام‌گرفته از روند.</p>
+                <a href="{% url 'product_list' %}" class="btn-style2">اکنون سفارش دهید</a>
+              </div>
+              <!-- Banner Image Right -->
+              <img class="img-fluid banner-right-img" src="/static/images/bag/slide/banner1-2.png" alt="banner" />
+            </div>
+          </div>
+          <!-- Slide End -->
+
+          <!-- Slide Start -->
+          <div class="swiper-slide">
+            <div class="banner">
+              <div>
+                <img class="bg-img img-fluid" src="/static/images/fashion/banner/banner1.jpg" alt="banner" />
+              </div>
+              <!-- Banner Image Left -->
+              <img class="img-fluid banner-left-img" src="/static/images/fashion/slider/banner1-1.png" alt="" />
+
+              <div class="content-box">
+                <h1 class="heading">
+                  <strong> جدیدترین</strong> <span> مجموعه <img class="shape" src="/static/svg/shape.svg"
+                      alt="shape" /></span> مورد علاقه خود را پیدا کنید. استایل در اینجا
+                </h1>
+                <p>ما سعی می کنیم بهترین ها را برای مشتریان خود ارائه دهیم و سعی می کنیم مطمئن شویم که همیشه بهترین
+                  خدمات را برای شما ارائه می دهیم.</p>
+                <a href="{% url 'product_list' %}" class="btn-solid">خرید <i class="arrow"></i></a>
+              </div>
+
+              <!-- Banner Image Right -->
+              <img class="img-fluid banner-right-img" src="/static/images/fashion/slider/banner1-2.png" alt="" />
+
+              <!-- Card Box Start -->
+              <div class="card-box">
+                <div class="card-wrap">
+                  <div class="card card1">
+                    <div class="img-wrap">
+                      <a href="product.html"> <img class="img-fluid" src="/static/images/fashion/slider/banner1-c2.png"
+                          alt="card" /> </a>
+                    </div>
+                    <div class="content">
+                      <a href="product.html">
+                        <h5>ژاکت زمستانی <span>سبک اوزیو</span></h5>
+                        <h6>120.00 تومان</h6>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="card card2">
+                    <div class="img-wrap">
+                      <a href="product.html"> <img class="img-fluid" src="/static/images/fashion/slider/banner1-c1.png"
+                          alt="card" /> </a>
+                    </div>
+                    <div class="content">
+                      <a href="product.html">
+                        <h5>پیراهن زنانه <span>Bluezone</span></h5>
+                        <h6>110.00 تومان</h6>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Box Start -->
+            </div>
+          </div>
+          <!-- Slide End -->
+
+          <!-- Slide Start -->
+          <div class="swiper-slide">
+            <div class="banner">
+              <div>
+                <img class="bg-img img-fluid" src="/static/images/bag/banner/banner1.jpg" alt="banner" />
+              </div>
+              <!-- Banner Image Left -->
+              <img class="img-fluid banner-left-img d-none d-sm-block" src="/static/images/bag/slide/banner1-1.png"
+                alt="banner" />
+
+              <!-- Content Box -->
+              <div class="content-box">
+                <h1 class="heading">کاوش در فروشگاه با <span> مجموعه مد روز</span></h1>
+                <p class="d-none d-xl-block">نقشه جیبی مجلل با چاپ مرجانی مجلل با طرح‌های الهام‌گرفته از مد روز.</p>
+                <a href="{% url 'product_list' %}" class="btn-style2">اکنون سفارش دهید</a>
+              </div>
+
+              <!-- Banner Image Right -->
+              <img class="img-fluid banner-right-img" src="/static/images/bag/slide/banner1-2.png" alt="banner" />
+            </div>
+          </div>
+          <!-- Slide End -->
+        </div>
+        <div class="swiper-pagination small"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Home Banner Section End -->
+
+  <!-- Brand Style 1 Start -->
+  <section>
+    <div class="title-box">
+      <h2 class="unique-heading">برند های تجاری</h2>
+      <span class="title-divider1"><span class="squre"></span><span class="squre"></span></span>
+    </div>
+
+    <div class="catagories-section catagories-style-2">
+      <div class="swiper home-catagories-2">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="catagories">
+              <a href="{% url 'product_list' %}">
+                <div class="img-wrap">
+                  <img src="/static/images/bag/brand/brand1.png" alt="jeans" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="catagories">
+              <a href="{% url 'product_list' %}">
+                <div class="img-wrap">
+                  <img src="/static/images/bag/brand/brand2.png" alt="jeans" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="catagories">
+              <a href="{% url 'product_list' %}">
+                <div class="img-wrap">
+                  <img src="/static/images/bag/brand/brand3.png" alt="jeans" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="catagories">
+              <a href="{% url 'product_list' %}">
+                <div class="img-wrap">
+                  <img src="/static/images/bag/brand/brand4.png" alt="jeans" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="catagories">
+              <a href="{% url 'product_list' %}">
+                <div class="img-wrap">
+                  <img src="/static/images/bag/brand/brand5.png" alt="jeans" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="catagories">
+              <a href="{% url 'product_list' %}">
+                <div class="img-wrap">
+                  <img src="/static/images/bag/brand/brand6.png" alt="jeans" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="catagories">
+              <a href="{% url 'product_list' %}">
+                <div class="img-wrap">
+                  <img src="/static/images/bag/brand/brand3.png" alt="jeans" />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Brand Style 1 End -->
+
+  <!-- Offer Section Start -->
+  <section class="offer-section pb-0">
+    <div class="container-lg">
+      <div class="row g-4 g-lg-6">
+        <div class="col-6 col-sm-3">
+          <div class="offer">
+            <h5 class="offer-heading">
+              20% تخفیف بگیرید
+              <span class="bg-theme-pink"></span>
+            </h5>
+            <p>در سفارشات بیش از 20 تومان*</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-3">
+          <div class="offer">
+            <h5 class="offer-heading">
+              23% تخفیف بگیرید
+              <span class="bg-theme-yellow"></span>
+            </h5>
+            <p>در سفارشات بیش از 50 تومان*</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-3">
+          <div class="offer">
+            <h5 class="offer-heading">
+              47% تخفیف بگیرید
+              <span class="bg-theme-orange"></span>
+            </h5>
+            <p>در سفارشات بیش از 99 تومان*</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-3">
+          <div class="offer">
+            <h5 class="offer-heading">
+              کد : CODE09
+              <span class="bg-theme-blue"></span>
+            </h5>
+            <p>اعمال کد و دریافت تخفیف</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Offer Section End -->
+
+  <!-- Detail Card Section Start -->
+  <section class="detail-card-section ratio_asos pb-0 wow-section-overflow">
+    <div class="container-lg">
+      <div class="top-heading">
+        <h2><strong>مد</strong> لزوماً در مورد برچسب ها نیست. این <strong>درباره برندها نیست.</strong> "درباره چیز دیگری
+          است که از درون شما می آید."</h2>
+        <span>رالف لورن</span>
+      </div>
+      <div class="row gy-4 g-2 g-sm-3 g-xl-4">
+        <div class="col-6 col-md-3 col-lg-3 span3 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="detail-card">
+            <div class="img-wrap">
+              <a href="#"><img class="img-fluid bg-img" src="static/images/fashion/product/front/1.jpg"
+                  alt="product" /></a>
+            </div>
+            <div class="content-box">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3 span3 wow fadeInUp" data-wow-delay="0.4s">
+          <div class="detail-card">
+            <div class="img-wrap">
+              <a href="#"><img class="img-fluid bg-img" src="static/images/fashion/product/front/2.jpg"
+                  alt="product" /></a>
+            </div>
+            <div class="content-box">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3 span3 wow fadeInUp" data-wow-delay="0.5s">
+          <div class="detail-card">
+            <div class="img-wrap">
+              <a href="#"><img class="img-fluid bg-img" src="static/images/fashion/product/front/3.jpg"
+                  alt="product" /></a>
+            </div>
+            <div class="content-box">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-3 span3 wow fadeInUp" data-wow-delay="0.6s">
+          <div class="detail-card">
+            <div class="img-wrap">
+              <a href="#"><img class="img-fluid bg-img" src="static/images/fashion/product/front/4.jpg"
+                  alt="product" /></a>
+            </div>
+            <div class="content-box">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Detail Card Section End -->
+
+  <!-- Top Product Section Start -->
+  <section class="pb-0">
+    <div class="container-lg">
+      <div class="title-box">
+        <h2 class="unique-heading">مجموعه برتر</h2>
+        <span class="title-divider1"><span class="squre"></span><span class="squre"></span></span>
+        <p>مجموعه ای آگاهانه که کاملاً از ضایعات محصولات غذایی، پنبه بازیافتی، سایر مواد پایدارتر ساخته شده است.</p>
+      </div>
+
+      <!-- Tabs Start -->
+      <div class="nav-tabs-star">
+        <!-- Tabs Filter Start -->
+        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+          {% for super_cat in categories_data1 %}
+          <li class="nav-item" role="presentation">
+            <button class="nav-link {% if forloop.first %}active{% endif %}" id="super-cat-{{ super_cat.id }}-tab"
+              data-bs-toggle="pill" data-bs-target="#super-cat-{{ super_cat.id }}" type="button" role="tab"
+              aria-controls="super-cat-{{ super_cat.id }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+              {{ super_cat.title }}
+            </button>
+          </li>
+          {% endfor %}
+        </ul>
+        <!-- Tabs Filter End -->
+
+        <!-- Tab Content Start -->
+        <div class="tab-content ratio_asos" id="pills-tabContent">
+          <!-- Women Tab Content Start -->
+          {% for super_cat in categories_data1 %}
+          <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="super-cat-{{ super_cat.id }}"
+            role="tabpanel" aria-labelledby="super-cat-{{ super_cat.id }}-tab">
+            <div class="swiper product-slider">
+              <div class="swiper-wrapper">
+                {% render_partial 'Home.views.FeaturedProductListView' super_category_id=super_cat.id %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- Women Tab Content End -->
+        </div>
+        <!-- Tab Content End -->
+      </div>
+      <!-- Tabs End -->
+    </div>
+  </section>
+  <!-- Top Product Section End -->
+
+  <!-- Special Product Section Start -->
+  <section class="special-product pb-0 wow-section-overflow">
+    <div class="container-lg">
+      <div class="title-box">
+        <h2 class="unique-heading">محصولات خاص</h2>
+        <span class="title-divider1"><span class="squre"></span><span class="squre"></span></span>
+        <p>پانل‌های شیک ساختاریافته با ظاهری بی‌نقص با مدادهای پشتی برجسته.</p>
+      </div>
+
+      <div class="row g-2 g-lg-3 g-xxl-4">
+        <div class="col-md-4 col-xl-5">
+          <div class="row g-2 g-lg-3">
+            <div class="col-12 ratio2_3 span3 wow fadeInLeft" data-wow-delay="0.6s">
+              <div class="product-box">
+                <a href="#" class="img-wrap">
+                  <img class="img-fluid bg-img" src="static/images/fashion/category/1.jpg" alt="product" />
+                </a>
+
+                <div class="catagories-small-label">
+                  <a href="#">
+                    <span>بهترین برند</span>
+                    <h3>دروغ می‌گوید پیراهن لباس‌های مرد</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 ratio_asos span3 wow fadeInLeft" data-wow-delay="0.7s">
+              <div class="product-box">
+                <a href="#" class="img-wrap">
+                  <img class="img-fluid bg-img" src="static/images/fashion/category/2.jpg" alt="product" />
+                </a>
+
+                <div class="catagories-small-label">
+                  <a href="#">
+                    <span>همه مجموعه</span>
+                    <h3>لوازم جانبی</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 ratio_asos span3 wow fadeInLeft" data-wow-delay="0.8s">
+              <div class="product-box">
+                <a href="#" class="img-wrap">
+                  <img class="img-fluid bg-img" src="static/images/fashion/category/3.jpg" alt="product" />
+                </a>
+                <div class="catagories-small-label">
+                  <a href="#">
+                    <span>برترین مارک</span>
+                    <h3>تاپ های زنانه</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5 col-xl-5 ratio_124 span3 wow fadeInUp" data-wow-delay="0.9s">
+          <div class="product-box">
+            <a href="#" class="img-wrap">
+              <img class="img-fluid bg-img" src="static/images/fashion/category/4.jpg" alt="product" />
+            </a>
+
+            <div class="catagories-large-label">
+              <a href="#">
+                <span>مجموعه بیرون رفتن</span>
+                <h3>در حال انجام مجموعه</h3>
+
+                <ul class="timer" dir="ltr">
+                  <li><span class="days time-value"></span> <span class="timer-label">روزها</span></li>
+                  <li><span class="hours time-value"></span> <span class="timer-label">ساعت ها</span></li>
+                  <li><span class="minutes time-value"></span> <span class="timer-label">دقیقه</span></li>
+                  <li><span class="seconds time-value"></span> <span class="timer-label">ثانیه ها</span></li>
+                </ul>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-xl-2">
+          <div class="row g-2 g-lg-3 ratio_163">
+            <div class="col-6 col-md-12 span3 wow fadeInRight" data-wow-delay="0.7s">
+              <div class="product-box">
+                <a href="#" class="img-wrap">
+                  <img class="img-fluid bg-img" src="static/images/fashion/category/5.jpg" alt="product" />
+                </a>
+
+                <div class="catagories-small-label">
+                  <a href="#">
+                    <span>بهترین مجموعه</span>
+                    <h3>کیف زن</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-12 span3 wow fadeInRight" data-wow-delay="0.7s">
+              <div class="product-box">
+                <a href="#" class="img-wrap">
+                  <img class="img-fluid bg-img" src="static/images/fashion/category/6.jpg" alt="product" />
+                </a>
+
+                <div class="catagories-small-label">
+                  <a href="#">
+                    <span>سبک جدید</span>
+                    <h3>مجموعه معمولی</h3>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Special Product Section End -->
+
+  <!-- New Arrived Section Start -->
+  <section class="pb-0 ratio_asos">
+    <div class="container-lg">
+      <div class="title-box">
+        <h2 class="unique-heading">موارد جدید</h2>
+        <span class="title-divider1"><span class="squre"></span><span class="squre"></span></span>
+        <p>بهترین راه‌ها برای تغییر کمد لباس تابستانی به کمد لباس پاییزی.</p>
+      </div>
+
+      <div class="swiper product-slider">
+        <div class="swiper-wrapper">
+          {% render_partial 'Home.views.NewProductListView' %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- New Arrived Section End -->
+
+  <!-- Just For You Section Start -->
+  <div class="sub-banner section-t-space ratio_asos">
+    <div class="sub-banner">
+      <img class="bg-img img-fluid" src="static/images/fashion/banner/banner2.jpg" alt="banner" />
+
+      <div class="content-box">
+        <div class="heading-wrap">
+          <span class="span-1">موارد جدید</span>
+          <span class="span-2">فقط </span>
+          <span class="span-3">برای</span>
+          <span class="span-4">شما</span>
+        </div>
+        <a href="javascript:void(0)" class="site-button">WWW.Clay.COM
+          <img class="pointer" src="static/icons/svg/pointer.svg" alt="pointer" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Just For You Section End -->
+
+  <!-- Brand We Love Section Start -->
+  {% render_partial 'Home.views.BrandSectionView' %}
+  <!-- Brand We Love Section End -->
+
+  <!-- Instagram Section Start -->
+  {% render_partial 'Home.views.InstagramSectionView' %}
+  <!-- Instagram Section End -->
+  <br>
+  <br>
+  <!-- Service Section start -->
+  <section class="service-section">
+    <div class="container-lg">
+      <div class="row g-3 g-md-4 g-lg-0">
+        <div class="col-6 col-lg-3">
+          <div class="service-box">
+            <div class="media">
+              <svg fill="#000000" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M2.84375 13C1.285156 13 0 14.285156 0 15.84375L0 42C0 43.660156 1.339844 45 3 45L7.09375 45C7.570313 47.835938 10.035156 50 13 50C15.964844 50 18.429688 47.835938 18.90625 45L28.15625 45C28.894531 45 29.554688 44.6875 30.0625 44.21875C30.582031 44.675781 31.246094 44.992188 32 45L33.09375 45C33.570313 47.835938 36.035156 50 39 50C42.300781 50 45 47.300781 45 44C45 40.699219 42.300781 38 39 38C36.035156 38 33.570313 40.164063 33.09375 43L32 43C31.8125 43 31.527344 42.871094 31.3125 42.65625C31.097656 42.441406 31 42.183594 31 42L31 23C31 22.625 31.625 22 32 22L40 22C40.785156 22 41.890625 22.839844 42.65625 23.75C42.664063 23.761719 42.679688 23.769531 42.6875 23.78125L42.84375 24L38 24C36.40625 24 35 25.289063 35 27L35 31C35 31.832031 35.375 32.5625 35.90625 33.09375C36.4375 33.625 37.167969 34 38 34L48 34L48 42C48 42.375 47.375 43 47 43L45 43L45 45L47 45C48.660156 45 50 43.660156 50 42L50 32.375C50 30.085938 48.40625 28.0625 48.40625 28.0625L48.375 28.0625L44.25 22.5625L44.25 22.53125L44.21875 22.5C43.296875 21.386719 41.914063 20 40 20L32 20C31.644531 20 31.316406 20.074219 31 20.1875L31 15.90625C31 14.371094 29.789063 13 28.1875 13 Z M 2.84375 15L28.1875 15C28.617188 15 29 15.414063 29 15.90625L29 42.15625C29 42.625 28.628906 43 28.15625 43L18.90625 43C18.429688 40.164063 15.964844 38 13 38C10.035156 38 7.570313 40.164063 7.09375 43L3 43C2.625 43 2 42.371094 2 42L2 15.84375C2 15.375 2.367188 15 2.84375 15 Z M 38 26L44.34375 26L46.78125 29.25C46.78125 29.25 47.6875 30.800781 47.875 32L38 32C37.832031 32 37.5625 31.875 37.34375 31.65625C37.125 31.4375 37 31.167969 37 31L37 27C37 26.496094 37.59375 26 38 26 Z M 13 40C15.222656 40 17 41.777344 17 44C17 46.222656 15.222656 48 13 48C10.777344 48 9 46.222656 9 44C9 41.777344 10.777344 40 13 40 Z M 39 40C41.222656 40 43 41.777344 43 44C43 46.222656 41.222656 48 39 48C36.777344 48 35 46.222656 35 44C35 41.777344 36.777344 40 39 40Z">
+                  </path>
+                </g>
+              </svg>
+              <div class="media-body" style="padding-top: 10px;">
+                <h5>ارسال رایگان</h5>
+                <span>از همه سفارش‌های بیش از 200 تومان</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="service-box">
+            <div class="media">
+              <svg fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M180,104v32a4.0002,4.0002,0,0,1-4,4H89.65723l17.17089,17.17188a3.99957,3.99957,0,1,1-5.65624,5.65624L77.17432,138.83057a4.00885,4.00885,0,0,1-.50147-.6128c-.06445-.09716-.10889-.20263-.16455-.30371a3.892,3.892,0,0,1-.20215-.38427,3.85086,3.85086,0,0,1-.12646-.40723c-.03321-.11328-.07715-.22168-.10059-.33936a4.00772,4.00772,0,0,1,0-1.5664c.02344-.11768.0669-.22608.10059-.33936a2.35233,2.35233,0,0,1,.32861-.7915c.05566-.10156.1001-.20655.16455-.30371a4.00885,4.00885,0,0,1,.50147-.6128l23.99756-23.99755a3.99957,3.99957,0,0,1,5.65624,5.65624L89.65723,132H172V104a4,4,0,0,1,8,0Zm48-48V200a12.01312,12.01312,0,0,1-12,12H40a12.01312,12.01312,0,0,1-12-12V56A12.01312,12.01312,0,0,1,40,44H216A12.01312,12.01312,0,0,1,228,56Zm-8,0a4.004,4.004,0,0,0-4-4H40a4.004,4.004,0,0,0-4,4V200a4.004,4.004,0,0,0,4,4H216a4.004,4.004,0,0,0,4-4Z">
+                  </path>
+                </g>
+              </svg>
+              <div class="media-body" style="padding-top: 10px;">
+                <h5>بازگشت رایگان</h5>
+                <span>پول را ظرف 30 روز برگردانید</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="service-box">
+            <div class="media">
+              <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M256 640v192h640V384H768v-64h150.976c14.272 0 19.456 1.472 24.64 4.288a29.056 29.056 0 0 1 12.16 12.096c2.752 5.184 4.224 10.368 4.224 24.64v493.952c0 14.272-1.472 19.456-4.288 24.64a29.056 29.056 0 0 1-12.096 12.16c-5.184 2.752-10.368 4.224-24.64 4.224H233.024c-14.272 0-19.456-1.472-24.64-4.288a29.056 29.056 0 0 1-12.16-12.096c-2.688-5.184-4.224-10.368-4.224-24.576V640h64z">
+                  </path>
+                  <path
+                    d="M768 192H128v448h640V192zm64-22.976v493.952c0 14.272-1.472 19.456-4.288 24.64a29.056 29.056 0 0 1-12.096 12.16c-5.184 2.752-10.368 4.224-24.64 4.224H105.024c-14.272 0-19.456-1.472-24.64-4.288a29.056 29.056 0 0 1-12.16-12.096C65.536 682.432 64 677.248 64 663.04V169.024c0-14.272 1.472-19.456 4.288-24.64a29.056 29.056 0 0 1 12.096-12.16C85.568 129.536 90.752 128 104.96 128h685.952c14.272 0 19.456 1.472 24.64 4.288a29.056 29.056 0 0 1 12.16 12.096c2.752 5.184 4.224 10.368 4.224 24.64z">
+                  </path>
+                  <path d="M448 576a160 160 0 1 1 0-320 160 160 0 0 1 0 320zm0-64a96 96 0 1 0 0-192 96 96 0 0 0 0 192z">
+                  </path>
+                </g>
+              </svg>
+              <div class="media-body" style="padding-top: 10px;">
+                <h5>خرید ایمن</h5>
+                <span>شما در دستان امنی هستید</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="service-box">
+            <div class="media">
+              <svg fill="#c0c0c0" viewBox="0 0 64 64"
+                style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1"
+                xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g id="ICON">
+                    <path
+                      d="M35.596,48.159l-2.631,9.822c-0.114,0.424 0.063,0.873 0.435,1.106c0.372,0.233 0.853,0.196 1.185,-0.091l3.731,-3.231c0,0 1.616,4.663 1.616,4.663c0.143,0.411 0.535,0.683 0.97,0.673c0.434,-0.011 0.813,-0.301 0.935,-0.719l1.673,-5.708l1.652,5.705c0.121,0.418 0.499,0.71 0.935,0.721c0.435,0.012 0.828,-0.26 0.971,-0.672l1.616,-4.663c-0,0 3.731,3.231 3.731,3.231c0.332,0.287 0.813,0.324 1.185,0.091c0.372,-0.233 0.549,-0.682 0.435,-1.106l-2.631,-9.822c1.919,-1.981 3.101,-4.68 3.101,-7.654c-0,-6.074 -4.931,-11.005 -11.005,-11.005c-6.074,-0 -11.005,4.931 -11.005,11.005c0,2.974 1.182,5.673 3.101,7.654Zm1.689,1.426l-1.545,5.765l2.383,-2.063c0.251,-0.217 0.593,-0.296 0.914,-0.21c0.32,0.086 0.577,0.325 0.686,0.639c-0,-0 1.075,3.101 1.075,3.101l1.572,-5.365c-1.874,-0.191 -3.609,-0.854 -5.085,-1.867Zm12.43,0c-1.468,1.008 -3.194,1.669 -5.056,1.864l1.549,5.352l1.069,-3.085c0.109,-0.314 0.366,-0.553 0.686,-0.639c0.321,-0.086 0.663,-0.007 0.914,0.21c-0,0 2.383,2.063 2.383,2.063l-1.545,-5.765Zm-46.715,-15.585l0,15c-0,0.796 0.316,1.559 0.879,2.121c0.562,0.563 1.325,0.879 2.121,0.879c6.483,-0 26.5,-0 26.5,-0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1c0,-0 -20.017,-0 -26.5,-0c-0.265,0 -0.52,-0.105 -0.707,-0.293c-0.188,-0.187 -0.293,-0.442 -0.293,-0.707l0,-15c0,-0.552 -0.448,-1 -1,-1c-0.552,-0 -1,0.448 -1,1Zm0,-28l0,24c0,0.552 0.448,1 1,1c0.552,-0 1,-0.448 1,-1l0,-18l30,-0c0.552,-0 1,-0.448 1,-1c-0,-0.552 -0.448,-1 -1,-1l-30,-0c0,0 -0,-4 -0,-4c0,-0.552 0.448,-1 1,-1c0,0 51.5,0 51.5,0c0.552,0 1,0.448 1,1c0,0 0,4 0,4c0,-0 -19.5,-0 -19.5,-0c-0.552,-0 -1,0.448 -1,1c-0,0.552 0.448,1 1,1l19.5,-0l-0,37c-0,0.552 -0.448,1 -1,1l-2.5,-0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1l2.5,-0c1.657,0 3,-1.343 3,-3l0,-43c-0,-1.657 -1.343,-3 -3,-3l-51.5,0c-1.657,0 -3,1.343 -3,3Zm40.5,25.5c4.97,0 9.005,4.035 9.005,9.005c-0,4.97 -4.035,9.005 -9.005,9.005c-4.97,-0 -9.005,-4.035 -9.005,-9.005c0,-4.97 4.035,-9.005 9.005,-9.005Zm-14.5,13.5l-0,-2c-0,-1.657 -1.343,-3 -3,-3l-14,-0c-1.657,-0 -3,1.343 -3,3l0,2c0,1.657 1.343,3 3,3l14,0c1.657,0 3,-1.343 3,-3Zm15.374,-12.127c-0.176,-0.317 -0.511,-0.514 -0.874,-0.514c-0.363,0 -0.698,0.197 -0.874,0.514l-1.979,3.559c-0,0 -3.997,0.783 -3.997,0.783c-0.356,0.07 -0.646,0.327 -0.758,0.672c-0.113,0.346 -0.029,0.724 0.218,0.99l2.774,2.982c-0,0 -0.491,4.043 -0.491,4.043c-0.044,0.36 0.111,0.716 0.405,0.93c0.293,0.213 0.68,0.25 1.009,0.097l3.693,-1.716c0,0 3.693,1.716 3.693,1.716c0.329,0.153 0.716,0.116 1.009,-0.097c0.294,-0.214 0.449,-0.57 0.405,-0.93l-0.491,-4.043c0,0 2.774,-2.982 2.774,-2.982c0.247,-0.266 0.331,-0.644 0.218,-0.99c-0.112,-0.345 -0.402,-0.602 -0.758,-0.672l-3.997,-0.783c0,0 -1.979,-3.559 -1.979,-3.559Zm-17.374,10.127l-0,2c-0,0.552 -0.448,1 -1,1l-14,0c-0.552,0 -1,-0.448 -1,-1c-0,-0 0,-2 0,-2c0,-0.552 0.448,-1 1,-1l14,-0c0.552,-0 1,0.448 1,1Zm16.5,-7.583l1.331,2.394c0.143,0.257 0.393,0.438 0.682,0.495l2.688,0.526c-0,0 -1.866,2.006 -1.866,2.006c-0.2,0.215 -0.295,0.509 -0.26,0.801l0.33,2.719c0,-0 -2.484,-1.154 -2.484,-1.154c-0.267,-0.124 -0.575,-0.124 -0.842,-0l-2.484,1.154c-0,-0 0.33,-2.719 0.33,-2.719c0.035,-0.292 -0.06,-0.586 -0.26,-0.801l-1.866,-2.006c0,0 2.688,-0.526 2.688,-0.526c0.289,-0.057 0.539,-0.238 0.682,-0.495l1.331,-2.394Zm-33.5,1.583l18.5,-0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-18.5,-0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm0,-4l21,0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-21,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm0,-4l23,0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-23,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm0,-4l43,0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-43,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm0,-4l43,0c0.552,0 1,-0.448 1,-1c0,-0.552 -0.448,-1 -1,-1l-43,-0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Zm9,-4l25.5,0c0.552,-0 1,-0.448 1,-1c-0,-0.552 -0.448,-1 -1,-1l-25.5,0c-0.552,-0 -1,0.448 -1,1c-0,0.552 0.448,1 1,1Zm-11,-10.5c0.552,-0 1,0.448 1,1c0,0.552 -0.448,1 -1,1c-0.552,-0 -1,-0.448 -1,-1c0,-0.552 0.448,-1 1,-1Zm4,-0c0.552,-0 1,0.448 1,1c0,0.552 -0.448,1 -1,1c-0.552,-0 -1,-0.448 -1,-1c0,-0.552 0.448,-1 1,-1Zm4,-0c0.552,-0 1,0.448 1,1c0,0.552 -0.448,1 -1,1c-0.552,-0 -1,-0.448 -1,-1c0,-0.552 0.448,-1 1,-1Z">
+                    </path>
+                  </g>
+                </g>
+              </svg>
+              <div class="media-body" style="padding-top: 10px;">
+                <h5>بیش از 10000 سبک</h5>
+                <span>ما همه چیز مورد نیاز شما را داریم</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Service Section End -->
+</main>
+<!-- Main End -->
+{% endblock %}
+{% block footer_references %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // نمایش پیام‌های خطا
+        {% if error_messages %}
+            {% for message in error_messages %}
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{{ message }}',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true
+                });
+            {% endfor %}
+        {% endif %}
+
+        // نمایش پیام موفقیت
+        {% if success_message %}
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ success_message }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        {% endif %}
+    });
+</script>
+{% endblock %}

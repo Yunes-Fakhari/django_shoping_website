@@ -1,0 +1,397 @@
+/**================
+  2.22 Title CSS 
+=====================**/
+.title-box {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 540px;
+  margin-top: calc(-8px + (-13 + 8) * ((100vw - 320px) / (1920 - 320)));
+  margin-bottom: calc(18px + (30 - 18) * ((100vw - 320px) / (1920 - 320)));
+
+  .unique-heading {
+    font-weight: 600;
+    font-size: calc(18px + (28 - 18) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(32px + (45 - 32) * ((100vw - 320px) / (1920 - 320)));
+    color: $title-color2;
+    position: relative;
+    display: inline-block;
+  }
+  .title-divider1 {
+    width: calc(110px + (160 - 110) * ((100vw - 320px) / (1920 - 320)));
+    height: 2px;
+    background-color: var(--theme-color);
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    margin: calc(2px + (4.5 - 2) * ((100vw - 320px) / (1920 - 320))) auto;
+
+    .squre {
+      width: calc(8px + (9 - 8) * ((100vw - 320px) / (1920 - 320)));
+      height: calc(8px + (9 - 8) * ((100vw - 320px) / (1920 - 320)));
+      display: block;
+      position: relative;
+      background-color: var(--theme-color);
+      &::after {
+        content: "";
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        background-color: inherit;
+      }
+      &:first-of-type {
+        &::after {
+          left: -14px;
+          [dir="rtl"] & {
+            right: -14px;
+            left: unset;
+          }
+        }
+      }
+      &:last-of-type {
+        &::after {
+          right: -14px;
+          [dir="rtl"] & {
+            left: -14px;
+            right: unset;
+          }
+        }
+      }
+    }
+  }
+  .title-divider2 {
+    display: block;
+    padding: 0 3px;
+    position: relative;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      padding: 0 4px;
+      background-color: $white;
+      stroke: var(--theme-color);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(150px + (200 - 150) * ((100vw - 320px) / (1920 - 320)));
+      height: 1px;
+      z-index: -1;
+      background-color: var(--theme-color);
+    }
+  }
+  p {
+    font-weight: normal;
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: $content-color;
+    line-height: calc(20px + (32 - 20) * ((100vw - 320px) / (1920 - 320)));
+    margin-top: calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: -2px;
+  }
+}
+
+/// Gradient Title ///
+.gradient-title {
+  background-image: linear-gradient(100deg, $title-color, var(--theme-color));
+  background-clip: text;
+  display: inline-block;
+  -webkit-background-clip: text;
+  cursor: pointer;
+  color: transparent !important;
+  background-clip: text;
+  font-weight: 500;
+}
+
+/// Inner Page Title ///
+.title-box2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  .heading-2 {
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
+    color: $title-color;
+  }
+}
+
+/// User Dashboard Title ///
+.title-box3 {
+  margin-bottom: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
+  gap: 15px;
+  h4 {
+    font-size: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+    color: $title-color;
+    font-weight: 500;
+    line-height: 22px;
+    margin-top: -2px;
+  }
+  p {
+    font-size: calc(14px + (15 - 14) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 500;
+    line-height: 20px;
+    color: $content-color;
+    margin-top: calc(8px + (10 - 8) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: 0;
+  }
+}
+
+.title-line {
+  font-weight: 500;
+  font-size: calc(17px + (20 - 17) * ((100vw - 320px) / (1920 - 320)));
+  line-height: 29px;
+  text-align: left;
+  color: $title-color;
+  position: relative;
+  margin-top: -4px;
+  margin-bottom: -4px;
+  [dir="rtl"] & {
+    text-align: right;
+  }
+  span {
+    background-color: $white;
+    padding-right: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+    [dir="rtl"] & {
+      padding-left: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+      padding-right: unset;
+    }
+  }
+  &::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: $border-color5;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: -1;
+    transform: translateY(-50%);
+  }
+}
+
+.title-box4 {
+  position: relative;
+  margin-bottom: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+  .heading {
+    font-weight: 500;
+    font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(20px + (22 - 20) * ((100vw - 320px) / (1920 - 320)));
+    position: relative;
+    cursor: pointer;
+    z-index: 2;
+    display: inline-block;
+    margin-top: -2px;
+    span {
+      width: 100%;
+      height: 50%;
+      display: block;
+      transition: all 0.5s ease;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      bottom: 0px;
+      position: absolute;
+    }
+  }
+}
+
+.title-box5 {
+  margin-bottom: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
+  .sub-title {
+    margin-top: calc(-1px + (-3 - 1) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(20px + (29 - 20) * ((100vw - 320px) / (1920 - 320)));
+    color: var(--theme-color);
+    display: flex;
+    align-items: center;
+    gap: calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320)));
+    .line {
+      width: calc(15px + (25 - 15) * ((100vw - 320px) / (1920 - 320)));
+      height: 1px;
+      background-color: var(--theme-color);
+    }
+  }
+  .main-title {
+    font-weight: 600;
+    font-size: calc(18px + (36 - 18) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(30px + (57 - 30) * ((100vw - 320px) / (1920 - 320)));
+    color: $title-color2;
+    margin-top: 5px;
+  }
+  &.side-by-side {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media only screen and (max-width: 767px) {
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      .sub-title {
+        justify-content: center;
+      }
+      .nav-tabs5 {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    @media only screen and (max-width: 455px) {
+      .nav-tabs5 {
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+
+.title-box6 {
+  margin-bottom: calc(22px + (30 - 22) * ((100vw - 320px) / (1920 - 320)));
+
+  .main-title {
+    font-weight: 600;
+    font-size: calc(18px + (34 - 18) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(30px + (49 - 30) * ((100vw - 320px) / (1920 - 320)));
+    color: var(--theme-color);
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin-top: calc(-6px + (-9 + 6) * ((100vw - 320px) / (1920 - 320)));
+    &::after {
+      content: "";
+      width: 100%;
+      height: 40%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: var(--theme-color);
+      opacity: 0.1;
+      z-index: -1;
+    }
+  }
+  .content {
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(23px + (26 - 23) * ((100vw - 320px) / (1920 - 320)));
+    color: $white;
+    margin-top: 10px;
+    max-width: 570px;
+  }
+  &.side-by-side {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media only screen and (max-width: 1199px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: calc(18px + (25 - 18) * ((100vw - 320px) / (1199 - 320)));
+      > div {
+        width: 100%;
+        text-align: center;
+        .main-title {
+          margin-bottom: 10px;
+        }
+        p {
+          margin: 0 auto;
+        }
+      }
+      .nav {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    @media only screen and (max-width: 455px) {
+      .nav {
+        .border-list-item {
+          display: none;
+        }
+        .nav-link {
+          line-height: 18px;
+        }
+      }
+    }
+  }
+}
+
+.title-box7 {
+  margin-bottom: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
+  .heading {
+    font-weight: 600;
+    font-size: calc(16px + (32 - 16) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(28px + (51 - 28) * ((100vw - 320px) / (1920 - 320)));
+    text-transform: uppercase;
+    margin-top: calc(-7px + (-14 + 7) * ((100vw - 320px) / (1920 - 320)));
+    span {
+      color: var(--theme-color);
+    }
+  }
+  svg {
+    margin-top: -13px;
+    width: 136px;
+    height: 13px;
+    fill: var(--theme-color);
+  }
+  p {
+    font-weight: 400;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(20px + (29 - 20) * ((100vw - 320px) / (1920 - 320)));
+    color: $content-color2;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  &.side-by-side {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media only screen and (max-width: 1199px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: calc(15px + (24 - 15) * ((100vw - 320px) / (1920 - 320)));
+      > div {
+        width: 100%;
+        text-align: center;
+        .main-title {
+          margin-bottom: 15px;
+        }
+        p {
+          margin: 0 auto;
+        }
+      }
+      .nav {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    @media only screen and (max-width: 455px) {
+      .nav {
+        .border-list-item {
+          display: none;
+        }
+        .nav-link {
+          line-height: 18px;
+        }
+      }
+    }
+  }
+}
+
+.title-square {
+  padding: 7px calc(7px + (32 - 7) * ((100vw - 320px) / (1920 - 320)));
+  background-color: var(--theme-color);
+  color: $white;
+  font-weight: 500;
+  font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+  line-height: 23px;
+  display: inline-block;
+  text-align: center;
+  [class="dark"] & {
+    color: $white-text-dark;
+  }
+}

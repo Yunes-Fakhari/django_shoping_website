@@ -1,0 +1,117 @@
+/**=====================
+  1.2 Typography CSS
+==========================**/
+
+body {
+  font-family: $font_0;
+  font-size: 14px;
+  color: $title-color;
+}
+
+li {
+  display: inline-block;
+  font-size: 14px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+a {
+  color: $title-color;
+  transition: 0.5s ease;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    transition: 0.5s ease;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+h1 {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 400;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 400;
+}
+
+h6 {
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 400;
+}
+
+$font-size-palets: (
+  default: 14px,
+  default2: 16px,
+  sm: calc(12px + (14 - 12) * ((100vw - 320px) / (1920 - 320))),
+  md: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))),
+  lg: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320))),
+  xl: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320))),
+  2xl: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320))),
+);
+@each $name, $value in $font-size-palets {
+  .font-#{$name} {
+    font-size: $value !important;
+  }
+}
+.fw-500 {
+  font-weight: 500 !important;
+}
+
+.theme-color {
+  color: var(--theme-color) !important;
+}
+
+.theme-bg-color {
+  background-color: var(--theme-color);
+}
+.content-color {
+  color: $content-color !important;
+}
+.title-color {
+  color: $title-color;
+}
+.font-danger {
+  color: $theme-denger !important;
+}
+
+.content-color3 {
+  color: $content-color3 !important;
+}

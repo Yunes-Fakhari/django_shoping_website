@@ -1,0 +1,175 @@
+/**==========================
+    4.1  Authentic Pages CSS
+  ================================**/
+
+.page-body {
+  width: 100%;
+  margin: 0 auto;
+  background-color: $white;
+  overflow: hidden;
+  position: relative;
+  .edit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--theme-color);
+    }
+  }
+  .bg-size {
+    height: 100vh;
+    @media only screen and (max-width: 991px) {
+      height: 70vh;
+    }
+    @media only screen and (max-width: 575px) {
+      height: 50vh;
+    }
+  }
+  .custom-form {
+    &.form-pill {
+      .input-box {
+        .form-control {
+          padding: calc(8px + (11 - 8) * ((100vw - 320px) / (1920 - 320))) 40px calc(8px + (11 - 8) * ((100vw - 320px) / (1920 - 320))) 15px;
+        }
+        .icon-input {
+          img,
+          svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+
+  .content-box {
+    padding: 20px calc(20px + (200 - 20) * ((100vw - 991px) / (1920 - 991)));
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media only screen and (max-width: 991px) {
+      padding: calc(15px + (30 - 15) * ((100vw - 320px) / (991 - 320))) calc(15px + (165 - 15) * ((100vw - 320px) / (991 - 320)));
+    }
+    > div {
+      width: 100%;
+    }
+
+    h5 {
+      display: inline-block;
+      font-size: calc(22px + (30 - 22) * ((100vw - 320px) / (1920 - 320)));
+      font-weight: 500;
+      font-family: $font_1;
+      line-height: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
+      margin-bottom: calc(6px + (10 - 6) * ((100vw - 320px) / (1920 - 320)));
+      color: $title-color;
+      position: relative;
+      span {
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        left: 0;
+        transition: all 0.5s;
+        bottom: 0;
+      }
+      &:hover {
+        span {
+          height: 100%;
+        }
+      }
+    }
+    p {
+      margin-top: 5px;
+      margin-bottom: 25px;
+    }
+
+    .button-link {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: 100px;
+      width: 100%;
+      gap: 13px;
+      justify-content: center;
+      color: $content-color;
+      font-size: 14px;
+      background-color: $gray-light3;
+      box-shadow: 0 0 8px $box-shadow;
+      margin-top: 20px;
+      img {
+        width: 18px;
+        height: 18px;
+        object-fit: cover;
+      }
+    }
+    .line {
+      display: block;
+      width: 100%;
+      position: relative;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+      &::after {
+        content: "";
+        height: 1px;
+        background-color: $border-color3;
+        width: 100%;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      span {
+        padding: 0 6px;
+        background-color: $white;
+        color: $content-color;
+        position: relative;
+        z-index: 2;
+        width: max-content;
+      }
+    }
+    .forgot-link {
+      margin-top: 5px;
+      float: right;
+      color: $content-color;
+      transition: all 0.5s;
+      &:hover {
+        color: $title-color;
+      }
+      [dir="rtl"] & {
+        float: left;
+      }
+    }
+    button {
+      width: 100%;
+      margin-top: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+      justify-content: center;
+      padding: calc(9px + (11 - 9) * ((100vw - 320px) / (1920 - 320))) calc(20px + (50 - 20) * ((100vw - 320px) / (1920 - 320)));
+    }
+    .backto-link {
+      text-decoration: underline;
+      margin: 0 auto;
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .otp-countdown {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+
+      a {
+        text-decoration: underline;
+        color: $content-color;
+      }
+    }
+  }
+}

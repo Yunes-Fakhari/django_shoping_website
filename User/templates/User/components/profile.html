@@ -1,0 +1,84 @@
+{% load widget_tweaks %}
+<div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="profile">
+        <div class="title-box3">
+          <h3>اطلاعات پایه</h3>
+        </div>
+      
+        <form action="{% url 'edit_profile_page' %}" method="post" enctype="multipart/form-data" class="custom-form form-pill">
+          {% csrf_token %}
+          <div class="row g-3 g-xl-4">
+            <!-- نام کامل -->
+            <div class="col-sm-6">
+              <div class="input-box">
+                <label for="fullname">نام کامل</label>
+                {% render_field form.fullname %}
+              </div>
+            </div>
+            <!-- ایمیل -->
+            <div class="col-sm-6">
+              <div class="input-box">
+                <label for="email">ایمیل</label>
+                {% render_field form.email %}
+              </div>
+            </div>
+            <!-- موبایل -->
+            <div class="col-sm-4">
+              <div class="input-box">
+                <label for="mobile">موبایل</label>
+                {% render_field form.mobile %}
+              </div>
+            </div>
+            <!-- جنسیت -->
+            <div class="col-sm-4">
+              <div class="input-box">
+                <label for="gender">جنسیت</label>
+                {% render_field form.gender %}
+              </div>
+            </div>
+            <!-- مکان -->
+            <div class="col-sm-4">
+              <div class="input-box">
+                <label for="location">مکان</label>
+                {% render_field form.location class="form-control" id="location" %}
+              </div>
+            </div>
+            <!-- عکس نمایه -->
+            <div class="col-12">
+              <div class="input-box">
+                <label for="photo">عکس نمایه</label>
+                {% render_field form.photo %}
+              </div>
+            </div>
+            <!-- آدرس -->
+            <div class="col-12">
+              <div class="input-box">
+                <label for="address">آدرس</label>
+                {% render_field form.address %}
+              </div>
+            </div>
+            <!-- کد ملی -->
+            <div class="col-sm-6">
+              <div class="input-box">
+                <label for="legendry_code">کد ملی</label>
+                {% render_field form.legendry_code %}
+              </div>
+            </div>
+            <!-- کد پستی -->
+            <div class="col-sm-6">
+              <div class="input-box">
+                <label for="post_code">کد پستی</label>
+                {% render_field form.post_code %}
+              </div>
+            </div>
+          </div>
+      
+          <div class="btn-box">
+            <button type="reset" class="btn-outline btn-sm">لغو</button>
+            <button type="submit" class="btn-solid btn-sm">
+              ذخیره تغییرات <i class="arrow"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+</div>

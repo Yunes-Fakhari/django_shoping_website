@@ -1,0 +1,101 @@
+/// Root Color ///
+:root {
+  --theme-color: #0f8fac;
+}
+
+.theme-color2 {
+  --theme-color: #d97819;
+}
+.theme-color3 {
+  --theme-color: #5b9f51;
+}
+.theme-color4 {
+  --theme-color: #c69057;
+}
+.theme-color5 {
+  --theme-color: #dc9749;
+  --theme-color2: #825b47;
+}
+.theme-color6 {
+  --theme-color: #c18340;
+}
+
+/// Font Color ///
+$title-color: #262834;
+$title-color2: #1f1f1f;
+$title-color3: #2b2b2b;
+$content-color: #767676;
+$content-color2: rgba($title-color3, 0.7);
+
+/// Dark Demo color ///
+
+/// Font Color ///
+$title-color4: var(--theme-color2);
+$content-color3: rgba(#b6a094, 0.9);
+$content-light: rgba(#ffffff, 0.7);
+
+/// Theme Color ///
+$bg-dark-light: #232227;
+$body-dark: #17161a;
+$bg-dark2: #111010;
+$gradient-product: linear-gradient(180deg, #985c3d 0%, rgba(22, 14, 19, 0) 100%);
+$dark-border: 1px solid #36343e;
+
+/// Theme Color ///
+$white: #ffffff;
+$white-light: #f8f8f8;
+$black: #000;
+$bg-dark: #2b2b2b;
+$black-light: #262834;
+$theme-light-color: rgba(var(--theme-color), 0.1);
+$gray-light: #f7f7f7;
+$gray-light2: rgba(#e5e5e5, 0.3);
+$gray-light3: #fafafa;
+$card-bg: #e5e6e9;
+$theme-denger: #ff5353;
+$theme-green-light: #f1f8f0;
+$theme-gold: #ffca63;
+$theme-success: #008000;
+/// Gradient ///
+
+$text-bg: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(0deg, #b66d1f, #b66d1f);
+$bg-gradient: linear-gradient(165.23deg, #e5e6e9 8.65%, #eaebed 87.81%);
+$bg-gradient2: linear-gradient(180deg, rgba(248, 247, 247, 0.7) 0%, #f8f7f7 53.93%);
+$dark-gradient: linear-gradient(90deg, #262834 6.15%, #20222f 50%);
+
+/// Border Color ///
+$border-color: #f0f3f8;
+$border-color2: #c4c4c4;
+$border-color3: #dddddd;
+
+$border-color4: rgba($border-color3, 0.4);
+$border-color5: rgba($border-color3, 0.5);
+
+/// Border Radius ///
+$border-round-box: 10px;
+
+/// Box Shadow ///
+$box-shadow: #eeeeee;
+
+/// Border Radius Avatar ///
+$border-radius-avatar: 30% 70% 70% 30% / 30% 30% 70% 70%;
+
+/// Font Family ///
+$font_0: "Jost", sans-serif;
+$font_1: "Montserrat", sans-serif;
+$font_3: "Leckerli One", "cursive";
+
+/// Blog Pages ///
+$box-shadow-blog: 0 0 20px rgba($border-color3, 0.4);
+$border-blog: 1px solid $border-color5;
+
+/// Dark ///
+$title-dark-color: #262834;
+$title-dark-color2: #1f1f1f;
+$title-dark-color3: #2b2b2b;
+$white-text-dark: #f0f0f0;
+$content-dark-color: #767676;
+$content-dark-color2: rgba($title-color3, 0.7);
+$gray-light-dark-theme: #2e343b;
+$image-dark-theme: #2e343b;
+$black-light-dark: #262834;

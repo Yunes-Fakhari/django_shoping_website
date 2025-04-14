@@ -1,0 +1,56 @@
+/*===================
+ 2.18 Sale Box CSS 
+=======================*/
+.sale-box {
+  padding: 16px;
+  height: 100%;
+  h5 {
+    font-size: calc(32px + (60 - 32) * ((100vw - 320px) / (1920 - 320)));
+    line-height: 1.09;
+    text-transform: uppercase;
+    font-family: $font_1;
+    color: $title-color;
+    text-align: left;
+    strong {
+      font-weight: 800;
+      display: inline-block;
+      color: $white;
+      padding: 0 8px;
+      background-color: var(--theme-color);
+    }
+    span {
+      display: block;
+      font-weight: 500;
+    }
+  }
+  p {
+    font-weight: 500;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(22px + (26 - 22) * ((100vw - 320px) / (1920 - 320)));
+    color: $white;
+    margin-top: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: calc(14px + (19 - 14) * ((100vw - 320px) / (1920 - 320)));
+  }
+  .shape-wrap {
+    margin-left: -16px;
+    margin-right: -6px;
+    margin-bottom: -12px;
+    position: relative;
+    .content {
+      position: absolute;
+      left: 20px;
+      top: 43%;
+      transform: translateY(-50%);
+      span {
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 20px;
+      }
+      h4 {
+        font-weight: 700;
+        font-size: calc(32px + (70 - 32) * ((100vw - 320px) / (1920 - 320)));
+        line-height: calc(25px + (65 - 25) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+  }
+}

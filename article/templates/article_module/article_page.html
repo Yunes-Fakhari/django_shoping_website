@@ -1,0 +1,183 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block title %}
+  لیست مقالات
+{% endblock %}
+
+{% block content %}
+<main class="main">
+  <!-- بخش Breadcrumb -->
+  <div class="breadcrumb-wrap">
+    <div class="banner">
+      <img class="bg-img bg-top" src="{% static 'assets/images/inner-page/banner-p.jpg' %}" alt="banner" />
+      <div class="container-lg">
+        <div class="breadcrumb-box">
+          <div class="heading-box">
+            <h1>شبکه وبلاگ</h1>
+          </div>
+          <ol class="breadcrumb">
+            <li><a href="{% url 'home_page' %}">صفحه اصلی</a></li>
+            <li>
+              <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
+            </li>
+            <li class="current"><a href="{% url 'articles_list' %}">شبکه وبلاگ</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- پایان Breadcrumb -->
+
+  <section class="ratio2_3">
+    <div class="container-lg">
+      <div class="blog-wrap">
+        <div class="row g-3 g-xxl-4">
+          {% for article in object_list %}
+          <div class="col-sm-6 col-lg-4">
+            <div class="blog-box blog-grid">
+              <!-- لینک به صفحه جزئیات مقاله -->
+              <a href="{{article.id }}" class="img-box">
+                {% if article.image %}
+                  <img class="bg-img" src="{{ article.image.url }}" alt="{{ article.title }}" />
+                {% else %}
+                  <img class="bg-img" src="{% static 'assets/images/blog/grid/default.jpg' %}" alt="{{ article.title }}" />
+                {% endif %}
+              </a>
+              <div class="content-box">
+                <!-- نمایش تاریخ ایجاد مقاله (با فرمت دلخواه، یا استفاده از فیلتر jalali_date در صورت نیاز) -->
+                <span>
+                  <i data-feather="clock"></i> 
+                  {{ article.create_date|date:"d M Y" }}
+                  {# یا در صورت نصب فیلتر تبدیل تاریخ به شمسی: {{ article.create_date|jalali_date:"%d %B %Y" }} #}
+                </span>
+                <a href="{{article.id }}">
+                  <h5 class="truncate-2">{{ article.title }}</h5>
+                </a>
+                <a href="{{article.id }}">
+                  <p class="truncate-2">
+                    {{ article.short_description|striptags|cut:"&nbsp;"|truncatewords:30 }}
+                  </p>
+                </a>
+                <div class="share-box">
+                  <div class="sender-box">
+                    <div class="avatar-img">
+                    {% if article.author.avatar %}
+                        <img src="{{ article.author.avatar.url }}" alt="{{ article.author.username }}" />
+                    {% else %}
+                        <img src="{% static 'assets/images/avatar/default.png' %}" alt="{{ article.author.username }}" />
+                    {% endif %}
+                    </div>
+                    <div class="sender-details">
+                      <h5>توسط {{ article.author.username }}</h5>
+                    </div>
+                  </div>
+                  <div class="action-box">
+                    <span class="like">
+                      <i class="like-btn" data-type="like" data-feather="thumbs-up"></i>
+                      <span class="count">{{ article.likes }}</span>
+                    </span>
+                    <span class="like">
+                      <i class="like-btn" data-type="dislike" data-feather="thumbs-down"></i>
+                      <span class="count">{{ article.dislikes }}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+            <p>هیچ مقاله‌ای یافت نشد.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Pagination Start -->
+      <div class="pagination-wrap justify-content-center">
+        <ul class="pagination">
+          {% if is_paginated %}
+            {% if page_obj.has_previous %}
+              <li>
+                <a href="?page={{ page_obj.previous_page_number }}" class="prev">&laquo;</a>
+              </li>
+            {% endif %}
+
+            {% for num in paginator.page_range %}
+              {% if page_obj.number == num %}
+                <li>
+                  <a href="?page={{ num }}" class="active">{{ num }}</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="?page={{ num }}">{{ num }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <li>
+                <a href="?page={{ page_obj.next_page_number }}" class="next">&raquo;</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        </ul>
+      </div>
+      <!-- Pagination End -->
+    </div>
+  </section>
+</main>
+{% endblock %}
+{% block footer_references %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // انتخاب تمام دکمه‌های لایک/دیس‌لایک
+      const likeButtons = document.querySelectorAll('.like-btn');
+    
+      // تابع کمکی برای به‌روزرسانی مقدار عددی شمارش داخل المان span
+      const updateCount = (span, delta) => {
+        const current = parseInt(span.textContent, 10) || 0;
+        span.textContent = current + delta;
+      };
+    
+      // تابع مدیریت رویداد کلیک روی دکمه‌ها
+      const handleVoteClick = (event) => {
+        const btn = event.currentTarget;
+        // استفاده از dataset برای خواندن نوع دکمه (like یا dislike)
+        const thisType = btn.dataset.type; 
+        const otherType = thisType === 'like' ? 'dislike' : 'like';
+    
+        // دریافت container اصلی (action-box)
+        const actionBox = btn.closest('.action-box');
+    
+        // المان شمارش دکمه فعلی
+        const currentCountSpan = btn.parentElement.querySelector('.count');
+    
+        // المان دکمه مخالف در همین container
+        const otherBtn = actionBox.querySelector(`.like-btn[data-type="${otherType}"]`);
+        const otherCountSpan = otherBtn.parentElement.querySelector('.count');
+    
+        // اگر دکمه مخالف فعال است، آن را غیرفعال می‌کنیم و شمارش آن را کاهش می‌دهیم
+        if (otherBtn.classList.contains('active')) {
+          otherBtn.classList.remove('active');
+          updateCount(otherCountSpan, -1);
+        }
+    
+        // تغییر وضعیت دکمه فعلی و به‌روزرسانی شمارش آن
+        if (btn.classList.contains('active')) {
+          btn.classList.remove('active');
+          updateCount(currentCountSpan, -1);
+        } else {
+          btn.classList.add('active');
+          updateCount(currentCountSpan, 1);
+        }
+      };
+    
+      // افزودن event listener به تمام دکمه‌ها
+      likeButtons.forEach(btn => {
+        btn.addEventListener('click', handleVoteClick);
+      });
+    });
+    </script>
+    
+    
+{% endblock %}

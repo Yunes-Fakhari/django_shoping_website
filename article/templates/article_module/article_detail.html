@@ -1,0 +1,374 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block title %}
+مشاهده مقاله
+{% endblock %}
+
+{% block content %}
+<!-- Main Start -->
+<main class="main">
+  <!-- Breadcrumb Start -->
+  <div class="breadcrumb-wrap">
+    <div class="banner">
+      <img class="bg-img bg-top" src="/static/images/inner-page/banner-p.jpg" alt="banner" />
+
+      <div class="container-lg">
+        <div class="breadcrumb-box">
+          <div class="heading-box">
+            <h1>جزئیات وبلاگ</h1>
+          </div>
+          <ol class="breadcrumb">
+            <li><a href="{% url 'home_page' %}">صفحه اصلی</a></li>
+            <li>
+              <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
+            </li>
+            <li class="current"><a href="#">جزئیات وبلاگ</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Breadcrumb End -->
+
+  <!-- Blog Detail Section Start -->
+  <section>
+    <div class="container-lg">
+      <div class="row gy-5 g-lg-3 g-xxl-4">
+        <div class="col-lg-3 order-3 order-lg-1">
+          <div class="sidebar-inner sticky">
+            <div class="search-box reverse">
+              <input class="form-control" type="search" placeholder="اینجا جستجو کنید..." />
+              <span class="search">
+                <i data-feather="search"></i>
+              </span>
+            </div>
+
+            <div class="row g-3 g-lg-4">
+              <div class="col-sm-6 col-lg-12 order-2 order-lg-1">
+                <div class="sidebar-box">
+                  <div class="title-box4">
+                    <h4 class="heading">دسته‌ها <span class="bg-theme-blue"></span></h4>
+                  </div>
+                  <ul class="catagories-side">
+                    <li>
+                      <a href="blog-grid.html">
+                        <span>
+                          <i data-feather="arrow-right"></i>
+                          روش
+                        </span>
+                        <span class="notification">32</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="blog-grid.html">
+                        <span>
+                          <i data-feather="arrow-right"></i>
+                          روندها
+                        </span>
+                        <span class="notification">32</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="blog-grid.html">
+                        <span>
+                          <i data-feather="arrow-right"></i>
+                          طراح
+                        </span>
+                        <span class="notification">5</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="blog-grid.html">
+                        <span>
+                          <i data-feather="arrow-right"></i>
+                          لباس شنا
+                        </span>
+                        <span class="notification">15</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="blog-grid.html">
+                        <span>
+                          <i data-feather="arrow-right"></i>
+                          کیف های دستی
+                        </span>
+                        <span class="notification">6</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-lg-12 order-3 order-lg-2">
+                <div class="sidebar-box">
+                  <div class="title-box4">
+                    <h4 class="heading">آخرین پست‌ها <span class="bg-theme-blue"></span></h4>
+                  </div>
+                  <div class="post-wrap">
+                    {% for item in latest_articles %}
+                    <a href="{{ item.id }}" class="post-box">
+                      <div class="img-box">
+                        {% if item.image %}
+                        <img src="{{ item.author.avatar.url }}" alt="{{ item.title }}" />
+                        {% else %}
+                        <img src="/path/to/default/image.jpg" alt="{{ item.title }}" />
+                        {% endif %}
+                      </div>
+                      <div class="content-box">
+                        <h5>{{ item.title }}</h5>
+                        <span>{{ item.create_date|date:"d/m/Y H:i" }}</span>
+                      </div>
+                    </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-none d-lg-block col-lg-12 order-3">
+                <div class="sidebar-box">
+                  <div class="title-box4">
+                    <h4 class="heading">پیشنهادات<span class="bg-theme-blue"></span></h4>
+                  </div>
+
+                  <div class="banner-img">
+                    <img class="bg-img" src="/static/images/fashion/banner/banner3.jpg" alt="banner" />
+
+                    <div class="sale-card">
+                      <div class="sale-card-wrap">
+                        <div class="offer">
+                          <span> فروش تابستانی </span>
+                          <h5>
+                            70 <span><span class="percent">%</span> <span class="off"> خاموش</span> </span>
+                          </h5>
+                        </div>
+                        <a href="shop-categories.html" class="shop-btn bg-theme-sun">اکنون خرید کنید</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12 order-1 order-lg-4">
+                <div class="sidebar-box">
+                  <div class="title-box4">
+                    <h4 class="heading">برچسب‌های محبوب <span class="bg-theme-blue"></span></h4>
+                  </div>
+                  <ul class="tags">
+                    <li>
+                      <a href="javascript:void(0)"> تی شرت </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)"> کیف های دستی</a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)"> روندها </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)"> مد</a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0)"> طراح </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-9 order-1 order-lg-2 ratio_36">
+          <div class="blog-wrap">
+            <!-- Blog Section Start -->
+            <div class="blog-box blog-detail">
+              <div class="img-box">
+                {% if article.image %}
+                <img class="bg-img" src="{{ article.image.url }}" alt="{{ article.title }}" />
+                {% else %}
+                <img class="bg-img" src="{% static 'assets/images/blog/detail/default.jpg' %}"
+                  alt="{{ article.title }}" />
+                {% endif %}
+              </div>
+              <div class="content-box">
+                <span>
+                  <i data-feather="clock"></i>
+                  {{ article.create_date|date:"d M Y" }}
+                </span>
+                <h5>{{ article.title }}</h5>
+                <div class="article-content">
+                  {{ article.text|safe }}
+                </div>
+
+                <div class="share-box">
+                  <div class="sender-box">
+                    <div class="avatar-img">
+                      {% if article.author.avatar %}
+                      <img src="{{ article.author.avatar.url }}" alt="{{ article.author.username }}" />
+                      {% else %}
+                      <img src="{% static 'assets/images/avatar/default.png' %}" alt="{{ article.author.username }}" />
+                      {% endif %}
+                    </div>
+                    <div class="sender-details">
+                      <h5>توسط {{ article.author.username }}</h5>
+                    </div>
+                  </div>
+                  <!-- دکمه‌های لایک/دیس‌لایک با داده داینامیک -->
+                  <div class="action-box">
+                    <span class="like">
+                      <i class="like-btn" data-type="dislike" data-feather="thumbs-down"></i>
+                      <span class="count">{{ article.dislikes }}</span>
+                    </span>
+                    <span class="like">
+                      <i class="like-btn" data-type="like" data-feather="thumbs-up"></i>
+                      <span class="count">{{ article.likes }}</span>
+                    </span>
+                    <a href="#replaySection" class="btn btn-solid btn-sm replay-btn">پاسخ</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Blog Section End -->
+
+            <!-- Comment Section Start -->
+            <div class="comments-section round-wrap-content top-space">
+              <div class="title-box4">
+                <h4 class="heading">نظرات ({{ comments_count }})<span class="bg-theme-blue"></span></h4>
+              </div>
+
+              <div class="comment-wrapper">
+                {% for comment in comments %}
+                <div class="comment-box">
+                  <div class="img-box">
+                    {% if comment.user.avatar %}
+                    <img src="{{ comment.user.avatar.url }}" alt="{{ comment.user.username }}" />
+                    {% else %}
+                    <img src="{% static 'assets/images/avatar/default.png' %}" alt="{{ comment.user.username }}" />
+                    {% endif %}
+                  </div>
+                  <div class="avatar-content">
+                    <div class="name-box">
+                      <div class="user-info">
+                        <h5><i data-feather="user"></i> {{ comment.user.username }}</h5>
+                        <span><i data-feather="clock"></i> {{ comment.create_date|date:"d M Y" }}</span>
+                      </div>
+                      <div class="action-box ms-auto">
+                        <span class="like">
+                          <i class="like-btn" data-type="dislike" data-feather="thumbs-down"></i>
+                          <span class="count">0</span>
+                        </span>
+                        <span class="like">
+                          <i class="like-btn" data-type="like" data-feather="thumbs-up"></i>
+                          <span class="count">0</span>
+                        </span>
+                        <a href="#replaySection" class="replay-btn"><i data-feather="corner-up-left"></i> پاسخ</a>
+                      </div>
+                    </div>
+                    <p>{{ comment.text }}</p>
+                  </div>
+                </div>
+                {% empty %}
+                <p>هنوز نظری ثبت نشده است.</p>
+                {% endfor %}
+              </div>
+            </div>
+            <!-- Comment Section End -->
+
+            <!-- Reply From Section Start -->
+            <div class="replay-form round-wrap-content top-space" id="replaySection">
+              <div class="title-box4">
+                <h4 class="heading">نظر بدهید<span class="bg-theme-blue"></span></h4>
+              </div>
+
+              <form id="article-comment-form" action="{% url 'add_article_comment' %}" method="post" class="custom-form form-pill">
+                {% csrf_token %}
+                <div class="row g-3 g-sm-4">
+                  <div class="col-12">
+                    <div class="input-box">
+                      <label for="comment">نظرات</label>
+                      <textarea class="form-control" id="comment" name="article_comment" cols="30" rows="5"></textarea>
+                    </div>
+                  </div>
+                  <input type="hidden" name="article_id" value="{{ article.id }}">
+                  <input type="hidden" name="parent_id" value="">
+                  <div class="col-12 text-end">
+                    <button type="submit" class="post-button btn btn-solid btn-sm mb-line">
+                      ارسال نظر <i class="arrow"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- Reply From Section End -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Blog Detail Section End -->
+</main>
+<!-- Main End -->
+
+
+
+{% endblock %}
+
+{% block footer_references %}
+<!-- جاوااسکریپت برای مدیریت رویدادهای کلیک روی دکمه‌های لایک/دیس‌لایک -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const likeButtons = document.querySelectorAll('.like-btn');
+
+    // تابع کمکی برای به‌روزرسانی شمارش
+    const updateCount = (span, delta) => {
+      const current = parseInt(span.textContent, 10) || 0;
+      span.textContent = current + delta;
+    };
+
+    // تابع مدیریت کلیک روی لایک/دیس‌لایک
+    const handleVoteClick = (event) => {
+      const btn = event.currentTarget;
+      const thisType = btn.dataset.type; // 'like' یا 'dislike'
+      const otherType = thisType === 'like' ? 'dislike' : 'like';
+      const actionBox = btn.closest('.action-box');
+
+      const currentCountSpan = btn.parentElement.querySelector('.count');
+      const otherBtn = actionBox.querySelector(`.like-btn[data-type="${otherType}"]`);
+      const otherCountSpan = otherBtn.parentElement.querySelector('.count');
+
+      // اگر دکمه مخالف فعال است، ابتدا آن را غیرفعال و شمارش آن را کاهش می‌دهیم
+      if (otherBtn.classList.contains('active')) {
+        otherBtn.classList.remove('active');
+        updateCount(otherCountSpan, -1);
+      }
+
+      // تغییر وضعیت دکمه جاری و به‌روز رسانی شمارش مربوطه
+      if (btn.classList.contains('active')) {
+        btn.classList.remove('active');
+        updateCount(currentCountSpan, -1);
+      } else {
+        btn.classList.add('active');
+        updateCount(currentCountSpan, 1);
+      }
+    };
+
+    likeButtons.forEach(btn => {
+      btn.addEventListener('click', handleVoteClick);
+    });
+  });
+  {% if messages %}
+    document.addEventListener("DOMContentLoaded", function() {
+      {% for message in messages %}
+        Swal.fire({
+          // استفاده از متن پیام؛ در صورت نیاز می‌توانید سفارشی‌سازی بیشتری اعمال کنید
+          title: "{{ message|escapejs }}",
+          icon: "{% if 'error' in message.tags %}error{% elif 'success' in message.tags %}success{% else %}info{% endif %}",
+          confirmButtonText: "باشه"
+        });
+      {% endfor %}
+    });
+  {% endif %}
+</script>
+{% endblock %}

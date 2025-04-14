@@ -1,0 +1,133 @@
+{% extends 'shared/layout.html' %}
+{% load custom_filters %}
+{% block title %}
+    نتیجه پرداخت
+{% endblock %}
+{% load multiply %}
+{% block content %}
+    <!-- Main Start -->
+    <main class="main">
+        <!-- Top Section Start -->
+        <section class="p-0">
+          <div class="success-icon">
+            <div class="img-wrap">
+              <img class="success-img img-fluid" src="/static/svg/order-success.svg" alt="vector" />
+              <img class="check" src="/static/svg/check.svg" alt="check" />
+            </div>
+  
+            <div class="success-contain">
+              <h1>سفارش با موفقیت ثب شد.</h1>
+              <h5 class="font-light">پرداخت با موفقیت انجام شد و در حال پردازش محصولات هستیم.</h5>
+              <h6 class="font-light">شناسه تراکنش:267676GHERT105467</h6>
+            </div>
+          </div>
+        </section>
+        <!-- Top Section End -->
+  
+        <!-- Compare Section Start -->
+        <section class="section-b-space order-success">
+          <div class="container-lg">
+            <div class="row g-3 g-md-4 cart">
+              <div class="col-md-7 col-lg-7 col-xl-8">
+                <div class="cart-wrap">
+                  <div class="items-list">
+                    <table class="table cart-table">
+                      <thead>
+                        <tr>
+                          <th class="d-none d-sm-table-cell">محصول</th>
+                          <th class="d-none d-sm-table-cell">قیمت</th>
+                          <th class="d-none d-lg-table-cell">تعداد</th>
+                          <th class="d-none d-xl-table-cell">جمع</th>
+                        </tr>
+                      </thead>
+  
+                      <tbody>
+                        {% for item in cart_items %}
+                            <tr>
+                                <td>
+                                <div class="product-detail">
+                                    <img class="pr-img" src="{{ item.product.get_main_image_url }}" alt="{{ item.product.title }}">
+                                    <div class="details">
+                                    <h4 class="title-color font-default2">{{ item.product.title }}</h4>
+                                    <span class="sold-by">فروش توسط: <span>{{ item.product.brand }}</span></span>
+                                    <span class="size d-flex gap-2">اندازه: <span>{{ item.size }}</span></span>
+                                    <span class="size d-flex gap-2">رنگ: <span>{{ item.color }}</span></span>
+                                    <span class="size d-inline-flex gap-2 d-lg-none">تعداد: <span>{{ item.count }}</span></span>
+                                    <span class="size d-flex gap-2 d-sm-none">قیمت: <span>{{ item.count|mul:item.final_price|babel_decimal }} تومان</span></span>
+                                    </div>
+                                </div>
+                                </td>
+                                <td class="price d-none d-sm-table-cell">{{ item.final_price|babel_decimal }} تومان</td>
+                                <td class="price d-none d-lg-table-cell">{{ item.count }}</td>
+                                <td class="total d-none d-xl-table-cell">
+                                    {{ item.total_price }} تومان
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- بخش نمایش جزئیات سفارش و اطلاعات حمل و نقل -->
+        <div class="col-md-5 col-lg-5 col-xl-4">
+            <div class="summery-box">
+              <div class="row g-3 g-lg-4">
+                <div class="col-12">
+                  <div class="summery-wrap">
+                    <div class="cart-wrap grand-total-wrap">
+                      <div>
+                        <div class="order-summery-box">
+                          <h5 class="cart-title">جزئیات قیمت ({{ cart_items|length }} مورد)</h5>
+                          <ul class="order-summery">
+                            <li>
+                              <span>کل مبلغ</span>
+                              <span>{{ total_price|babel_decimal }} تومان</span>
+                            </li>
+                            <!-- در صورت نیاز می‌توانید در این بخش اطلاعات تخفیف، هزینه ارسال یا سایر موارد را اضافه کنید -->
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- اطلاعات حمل و نقل -->
+                <div class="col-12">
+                  <div class="summery2">
+                    <div class="row g-4">
+                      <div class="col-12">
+                        <div class="order-summery-box">
+                          <h5 class="cart-title">آدرس حمل و نقل</h5>
+                        </div>
+                        <ul>
+                          <li>{{ request.user.first_name }} {{ request.user.last_name }}</li>
+                          <li>{{ request.user.address|default:"آدرس موجود نیست" }}</li>
+                          <li>شماره تماس: {{ request.user.mobile|default:"شماره تماس موجود نیست" }}</li>
+                        </ul>
+                      </div>
+                      <div class="col-12">
+                        <div class="delivery-box">
+                          <p class="d-flex flex-column g-0 title-color font-md mb-0">
+                            تاریخ پرداخت:
+                            <strong>{{ payment_date|date:"Y-m-d H:i" }} </strong>
+                          </p>
+                          <a href="{% url 'invoice' cart_id %}" class="font-danger font-md fw-500">دریافت فاکتور</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- پایان بخش اطلاعات حمل و نقل -->
+              </div>
+            </div>
+          </div> <!-- پایان بخش جزئیات سفارش -->
+            </div>
+          </div>
+        </section>
+        <!-- Compare Section End -->
+      </main>
+      <!-- Main End -->
+{% endblock %}
+
+

@@ -1,0 +1,406 @@
+/**=================
+   2.9 Modal CSS 
+ =====================**/
+.modal-backdrop {
+  z-index: 10 !important;
+}
+.modal {
+  @media only screen and (max-width: 620px) {
+    &.fade {
+      transition: unset;
+      .modal-dialog {
+        transition: unset;
+      }
+    }
+  }
+
+  .modal-dialog {
+    @media only screen and (min-width: 576px) {
+      max-width: 600px;
+    }
+    @media only screen and (max-width: 620px) {
+      align-items: end;
+      margin: 0;
+      max-width: 100%;
+      &.modal-dialog-centered {
+        min-height: 100%;
+      }
+    }
+    .modal-content {
+      border-radius: 25px;
+      background-color: $white;
+      @media only screen and (max-width: 620px) {
+        border-radius: calc(15px + (25 - 15) * ((100vw - 320px) / (1920 - 320))) calc(15px + (25 - 15) * ((100vw - 320px) / (1920 - 320))) 0 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      .modal-header {
+        padding: calc(20px + (25 - 20) * ((100vw - 767px) / (1920 - 767))) calc(15px + (25 - 15) * ((100vw - 767px) / (1920 - 767)));
+        border: none;
+        .modal-title {
+          font-size: calc(19px + (20 - 19) * ((100vw - 767px) / (1920 - 767)));
+          line-height: 22px;
+          margin-bottom: -2px;
+          font-weight: 500;
+          color: var(--theme-color);
+        }
+
+        .close-modal {
+          position: absolute;
+          right: -50px;
+          top: -20px;
+          display: flex;
+          cursor: pointer;
+          align-items: center;
+          justify-content: center;
+          [dir="rtl"] & {
+            left: -50px;
+            right: unset;
+          }
+          svg {
+            width: calc(28px + (32 - 28) * ((100vw - 767px) / (1920 - 767)));
+            height: calc(28px + (32 - 28) * ((100vw - 767px) / (1920 - 767)));
+            stroke: $white;
+            [class="dark"] & {
+              stroke: $title-color;
+            }
+          }
+
+          @media only screen and (max-width: 767px) {
+            position: relative;
+            inset: 0;
+            border-radius: 100px;
+            [dir="rtl"] & {
+              inset: 0;
+            }
+            svg {
+              stroke: $content-color;
+              width: calc(18px + (32 - 18) * ((100vw - 320px) / (1920 - 320)));
+              height: calc(18px + (32 - 18) * ((100vw - 320px) / (1920 - 320)));
+            }
+          }
+        }
+      }
+      .modal-body {
+        padding: 0 calc(15px + (25 - 15) * ((100vw - 767px) / (1920 - 767)));
+        @media only screen and (max-width: 575px) {
+          max-height: 50vh;
+          overflow-y: auto;
+          padding-bottom: 2px;
+        }
+        &.full-grid-mobile {
+          @media only screen and (max-width: 425px) {
+            .row {
+              > div {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+      .modal-footer {
+        border: none;
+        padding: calc(20px + (25 - 20) * ((100vw - 767px) / (1920 - 767))) calc(15px + (25 - 15) * ((100vw - 767px) / (1920 - 767)));
+        .btn-box {
+          display: flex;
+          align-items: center;
+          justify-content: stretch;
+          gap: calc(13px + (20 - 13) * ((100vw - 767px) / (1920 - 767)));
+          margin: 0;
+          width: 100%;
+          .btn {
+            width: 100%;
+            padding: calc(9px + (12 - 9) * ((100vw - 767px) / (1920 - 767))) calc(15px + (20 - 15) * ((100vw - 767px) / (1920 - 767)));
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+  &.dark-modal {
+    .modal-dialog {
+      .modal-content {
+        background-color: $bg-dark-light;
+      }
+    }
+  }
+}
+/// View Product Modal ///
+.view-product {
+  .modal-dialog {
+    @media only screen and (min-width: 576px) {
+      max-width: calc(655px + (950 - 655) * ((100vw - 767px) / (1920 - 767)));
+    }
+    @media only screen and (max-width: 767px) {
+      padding: 12px;
+    }
+    .modal-content {
+      border-radius: 10px;
+      @media only screen and (max-width: 767px) {
+        height: calc(100vh - 24px);
+        border-radius: 10px 10px 10px 10px;
+      }
+
+      .modal-body {
+        padding: 9px;
+        position: relative;
+        @media only screen and (max-width: 767px) {
+          max-height: 100%;
+          overflow-y: scroll;
+          padding: 15px;
+          .slider-box {
+            .close-modal {
+              position: absolute;
+              inset: unset;
+              right: calc(10px + (20 - 10) * ((100vw - 320px) / (767 - 320)));
+              top: calc(16px + (20 - 16) * ((100vw - 320px) / (767 - 320)));
+              z-index: 4;
+              padding: calc(3px + (5 - 3) * ((100vw - 320px) / (767 - 320)));
+              background-color: #c5c5c5;
+              svg {
+                stroke: $title-color;
+              }
+            }
+          }
+          .product-detail-box {
+            padding: 0;
+          }
+        }
+        @media only screen and (max-width: 375px) {
+          .btn-group {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    .close-modal {
+      position: absolute;
+      right: calc(-35px + (-60 + 35) * ((100vw - 767px) / (1920 - 767)));
+      top: -35px;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      [dir="rtl"] & {
+        left: -60px;
+        right: unset;
+      }
+      svg {
+        width: calc(28px + (32 - 28) * ((100vw - 767px) / (1920 - 767)));
+        height: calc(28px + (32 - 28) * ((100vw - 767px) / (1920 - 767)));
+        stroke: $white;
+        [class="dark"] & {
+          stroke: $title-color;
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        position: relative;
+        inset: 0;
+        border-radius: 100px;
+        svg {
+          stroke: $content-color;
+          width: calc(18px + (32 - 18) * ((100vw - 320px) / (1920 - 320)));
+          height: calc(18px + (32 - 18) * ((100vw - 320px) / (1920 - 320)));
+        }
+      }
+    }
+  }
+  &.view-dark-product {
+    .product-detail-box {
+      .product-option {
+        h4 {
+          color: $white;
+        }
+        .option {
+          h5 {
+            color: $white;
+          }
+          p {
+            color: $content-color3 !important;
+          }
+          .no-available {
+            font-size: 14px;
+            color: $content-color3;
+          }
+          .size-list {
+            li {
+              background-color: $bg-dark2;
+              color: $white;
+              border-color: transparent;
+              &.active {
+                background-color: var(--theme-color);
+              }
+            }
+          }
+        }
+        .price {
+          span {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.product-gallery-modal {
+  .modal-dialog {
+    width: 100%;
+    padding: 0;
+    @media only screen and (min-width: 621px) {
+      max-width: calc(450px + (950 - 450) * ((100vw - 320px) / (1920 - 320)));
+    }
+
+    .modal-content {
+      position: relative;
+
+      @media only screen and (max-width: 767px) {
+        height: unset;
+      }
+      @media only screen and (max-width: 620px) {
+        border-radius: 10px 10px 0px 0px;
+      }
+
+      .close-modal {
+        @media only screen and (max-width: 767px) {
+          display: none;
+        }
+      }
+      .modal-body {
+        padding: 9px !important;
+        max-height: fit-content !important;
+        overflow: unset;
+      }
+    }
+  }
+}
+
+/// Action Conform ///
+.action-conform {
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+        justify-content: center;
+        .close-modal {
+          @media only screen and (max-width: 767px) {
+            display: none;
+          }
+        }
+      }
+
+      .modal-body {
+        text-align: center;
+        p {
+          line-height: 23px;
+          color: $content-color;
+          margin-bottom: 0;
+        }
+      }
+      .modal-footer {
+        justify-content: center;
+        gap: 9px;
+      }
+    }
+  }
+}
+
+/// Size Chart ///
+.sizeChart {
+  .modal-dialog {
+    @media only screen and (max-width: 767px) {
+      align-items: end;
+      margin: 0;
+      max-width: 100%;
+      &.modal-dialog-centered {
+        min-height: 100%;
+      }
+    }
+    .modal-content {
+      @media only screen and (max-width: 767px) {
+        border-radius: calc(15px + (25 - 15) * ((100vw - 320px) / (1920 - 320))) calc(15px + (25 - 15) * ((100vw - 320px) / (1920 - 320))) 0 0;
+        border: none;
+        box-shadow: none;
+      }
+      .modal-header {
+        @media only screen and (max-width: 767px) {
+          display: none;
+        }
+      }
+      .modal-body {
+        padding: calc(10px + (20 - 10) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+  }
+}
+
+/// Cookies Bar ///
+.cookie-bar {
+  position: fixed;
+  background-color: $white;
+  bottom: -200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+  padding: 20px;
+  &.show {
+    bottom: 20px;
+    transition: all 0.5s ease;
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    @media only screen and (max-width: 575px) {
+      bottom: 80px;
+    }
+  }
+  &.cookies-bar-1 {
+    border-radius: 5px;
+    text-align: center;
+    max-width: 320px;
+    z-index: 8;
+    border: $border-blog;
+    box-shadow: $box-shadow-blog;
+    transition: all 0.5s ease;
+    @media only screen and (max-width: 575px) {
+      width: 290px;
+    }
+
+    &.left-cookies {
+      left: 20px;
+      @media only screen and (max-width: 575px) {
+        left: 15px;
+      }
+    }
+
+    &.right-cookies {
+      right: 20px;
+      @media only screen and (max-width: 575px) {
+        right: 15px;
+      }
+    }
+    .content {
+      h5 {
+        margin-top: 10px;
+        margin-bottom: 8px;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 25px;
+      }
+      p {
+        color: $content-color;
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .cookies-bar-2 {
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

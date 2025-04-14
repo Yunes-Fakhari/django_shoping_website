@@ -1,0 +1,158 @@
+{% load poll_extras %}
+{% load thumbnail %}
+{% load custom_filters %}
+{% load jformat %}
+{% load poll_extras %}
+<!-- Cart Section Start -->
+<form method="POST" action="{% url 'user_cart_page' %}">
+    {% csrf_token %}
+    <!-- Cart Section Start -->
+    <section class="section-b-space card-page">
+      <div class="container-lg">
+        <div class="row g-3 g-md-4 cart">
+          <div class="col-md-7 col-lg-8">
+            <div class="cart-wrap">
+              <div class="items-list">
+                <table class="table cart-table m-md-0">
+                  <thead>
+                    <tr>
+                      <th class="d-none d-sm-table-cell">محصول</th>
+                      <th class="d-none d-sm-table-cell">قیمت</th>
+                      <th class="d-none d-lg-table-cell">تعداد</th>
+                      <th class="d-none d-xl-table-cell">جمع</th>
+                    </tr>
+                  </thead>
+  
+                  <tbody>
+                    {% for item in cart_items %}
+                    <tr id="cart-item-{{ item.id }}">
+                      <td>
+                        <a href="{% url 'product_detail' item.product.slug %}" class="product-link">
+                            <div class="product-detail">
+                              <img class="pr-img" src="{{ item.product.get_main_image_url }}" alt="{{ item.product.title }}" />
+                              <div class="details">
+                                <h4 class="title-color font-default2">{{ item.product.title }}</h4>
+                                <span class="size gap-2 d-flex">اندازه: <span>{{ item.size }}</span></span>
+                                <span class="size gap-2 d-flex">رنگ: <span>{{ item.color }}</span></span>
+                                <span class="size gap-2 d-flex">
+                                  قیمت: 
+                                      <span>{{ item.product.get_final_price|babel_decimal }} تومان</span>  <!-- تغییر این خط -->
+                                </span>
+                                <!-- در صورت نیاز می‌توانید سایر جزئیات را نیز داخل لینک قرار دهید -->
+                              </div>
+                            </div>
+                          </a>
+                      </td>
+                      
+                      <td class="price d-none d-sm-table-cell">
+                        {{ item.product.get_final_price|babel_decimal }} تومان
+                      </td>
+                      
+                      <!-- در نمایش دسکتاپ، کنترل تعداد به صورت plus/minus -->
+                      <td class="d-none d-lg-table-cell">
+                        <div class="plus-minus">
+                          <i class="sub" data-feather="minus"></i>
+                          <input type="number" name="quantity_{{ item.id }}" value="{{ item.count }}" min="1" max="20" />
+                          <i class="add" data-feather="plus"></i>
+                        </div>
+                      </td>
+                      
+                      <td class="total d-none d-xl-table-cell">
+                        {{ item.product.get_final_price|multiply:item.count|babel_decimal }} تومان
+                      </td>
+                      
+                      <td>
+                        <button type="button" class="remove-cart-btn" onclick="removeFromCart('{{ item.id }}')">
+                            <i><img src="/static/icons/icons8-delete-48.png" alt="حذف"></i>
+                          </button>
+                      </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                      <td colspan="5">
+                        <p>سبد خرید شما خالی است.</p>
+                        <img style="width: 150px;" src="/static/icons/fetchpik.com-iconscout-ElLUZexvRn.png" alt="">
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+  
+          <!-- بخش خلاصه قیمت -->
+          <div class="col-md-5 col-lg-4">
+            <div class="summery-wrap">
+              <div class="coupon-box">
+                <h5 class="cart-title">کوپن</h5>
+                <div class="text-wrap">
+                  <h4><i data-feather="tag"></i> اعمال کوپن</h4>
+                  <a href="javascript:void(0)" class="btn btn-outline btn-sm">اعمال</a>
+                </div>
+                <p class="content-color font-md mb-0">
+                  <a href="login.html" class="theme-color">ورود</a> برای دیدن بهترین کوپن برای شما
+                </p>
+              </div>
+  
+              <div class="cart-wrap grand-total-wrap">
+                <div>
+                  <div class="order-summery-box">
+                    <h5 class="cart-title">جزئیات قیمت ({{ cart_items_count }} مورد)</h5>
+                    <ul class="order-summery">
+                      <li>
+                        <span>مجموع قیمت</span>
+                        <span>{{ cart_subtotal|babel_decimal }} تومان</span>
+                      </li>
+  
+                      <li>
+                        <span>سود شما از این خرید</span>
+                        <span class="theme-color">{{ cart_total_discount|babel_decimal }} تومان</span>
+                      </li>
+  
+                      <li>
+                        <span>تخفیف کوپن</span>
+                        <a href="javascript:void(0)" class="font-danger">0</a>
+                      </li>
+  
+                      <li>
+                        <span>هزینه ارسال</span>
+                        <span>{{ delivery_cost|babel_decimal }} تومان</span>
+                      </li>
+  
+                      <li class="pb-0">
+                        <span>مبلغ کل</span>
+                        <span>{{ cart_total|babel_decimal  }} تومان</span>
+                      </li>
+                    </ul>
+                    
+                    <!-- ردیف جدید برای دکمه‌های عملیاتی -->
+                    <div class="row g-3 mt-2">
+                        <div class="col-12">
+                            <button type="submit" class="btn-solid checkout-btn">
+                              بروزرسانی سبد خرید
+                            </button>
+                        </div>
+                      <div class="col-12">
+                        <a href="{% url 'checkout_page' %}" id="checkout-btn" class="btn-solid checkout-btn">
+                          تسویه حساب <i class="arrow"></i>
+                        </a>
+                      </div>
+                      
+                      <div class="col-12">
+                        <a href="{% url 'product_list' %}" class="btn-outline w-100 justify-content-center checkout-btn">
+                          بازگشت به فروشگاه
+                        </a>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- … سایر بخش‌های مورد نیاز … -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>

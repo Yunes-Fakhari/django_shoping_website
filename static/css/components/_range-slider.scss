@@ -1,0 +1,100 @@
+/**====================
+   2.16 Range Slider CSS 
+===========================**/
+.range-slider {
+  [dir="rtl"] & {
+    direction: ltr;
+  }
+  .price-input {
+    width: 100%;
+    display: flex;
+    margin: 0px 0 35px;
+    .field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      > span {
+        white-space: nowrap;
+        @media only screen and (max-width: 1200px) {
+          font-size: 0;
+          strong {
+            font-size: 14px;
+          }
+        }
+      }
+      input {
+        border: 1px solid $border-color3;
+        border-radius: 100px;
+        padding: 5px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 18px;
+        color: var(--theme-color);
+      }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+    .separator {
+      display: flex;
+      width: calc(0px + (130 - 0) * ((100vw - 320px) / (1920 - 320)));
+      font-size: 19px;
+      align-items: center;
+      justify-content: center;
+      @media only screen and (max-width: 1200px) {
+        width: calc(60px + (130 - 60) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+  }
+
+  .slider {
+    height: 5px;
+    position: relative;
+    background: #ddd;
+    border-radius: 5px;
+    .progress {
+      height: 100%;
+      left: 25%;
+      right: 25%;
+      position: absolute;
+      border-radius: 5px;
+      background: var(--theme-color);
+    }
+  }
+
+  .range-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    input {
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      top: -5px;
+      background: none;
+      pointer-events: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      height: 17px;
+      width: 17px;
+      border-radius: 50%;
+      background: var(--theme-color);
+      pointer-events: auto;
+      -webkit-appearance: none;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+    }
+    input[type="range"]::-moz-range-thumb {
+      height: 17px;
+      width: 17px;
+      border: none;
+      border-radius: 50%;
+      background: var(--theme-color);
+      pointer-events: auto;
+      -moz-appearance: none;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+    }
+  }
+}

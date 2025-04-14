@@ -1,0 +1,188 @@
+{% load custom_filters %}
+{% load multiply %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاکتور خرید</title>
+    <style>
+        /* استایل‌های پایه برای قالب فاکتور */
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url('../../../../static/fonts/irsans.ttf') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: MyCustomFont;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .company-info {
+            text-align: right;
+        }
+
+        .invoice-info {
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            /* برای فعال کردن گوشه‌های گرد */
+            border: 1px solid #ddd;
+            border-radius: 15px;
+        }
+
+        /* استایل سلول‌های جدول */
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        /* تنظیم گرد کردن گوشه‌های هدر */
+        thead tr th:first-child {
+            /* اولین سلول در هدر (در حالت RTL، این سلول روی سمت راست است) */
+            border-top-right-radius: 15px;
+        }
+
+        thead tr th:last-child {
+            /* آخرین سلول در هدر (در RTL، این سلول روی سمت چپ است) */
+            border-top-left-radius: 15px;
+        }
+
+        /* تنظیم گرد کردن گوشه‌های آخرین ردیف جدول */
+        tbody tr:last-child td:first-child {
+            /* اولین سلول در آخرین ردیف (سمت راست) */
+            border-bottom-right-radius: 15px;
+        }
+
+        tbody tr:last-child td:last-child {
+            /* آخرین سلول در آخرین ردیف (سمت چپ) */
+            border-bottom-left-radius: 15px;
+        }
+
+        .client-info,
+        .summary {
+            margin-bottom: 20px;
+        }
+
+        .summary p {
+            font-size: 1.1em;
+            text-align: right;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .print-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-container">
+        <!-- هدر: اطلاعات شرکت و فاکتور -->
+        <header>
+            <div class="company-info">
+                <img src="/static/images/icons8-receipt-64.png" alt="لوگوی شرکت" style="max-width: 150px;">
+                <p>
+                    شرکت نمونه<br>
+                    تهران، خیابان نمونه<br>
+                    تلفن: 021-12345678
+                </p>
+            </div>
+            <div class="invoice-info">
+                <h2>فاکتور خرید</h2>
+                <p>شماره فاکتور : {{ cart.id }}</p>
+                <p>تاریخ : {{ cart.payment_date|date:"Y/m/d" }}</p>
+            </div>
+        </header>
+
+        <!-- اطلاعات مشتری -->
+        <section class="client-info">
+            <h3>اطلاعات مشتری</h3>
+            <p>نام : {{ cart.user.get_full_name }}</p>
+            <p>ایمیل : {{ cart.user.email }}</p>
+            {% if cart.user.address %}
+            <p>آدرس : {{ cart.user.address }}</p>
+            {% endif %}
+            <p>تلفن : {{ cart.user.mobile }}</p>
+        </section>
+
+        <!-- جزئیات سفارش -->
+        <section class="order-details">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>محصول</th>
+                        <th>تعداد</th>
+                        <th>قیمت واحد (تومان)</th>
+                        <th>جمع (تومان)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.items.all %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ item.product.title }}</td>
+                        <td>{{ item.count }}</td>
+                        <td>{{ item.unit_price|babel_decimal }}</td>
+                        <td>{{ item.count|mul:item.unit_price|babel_decimal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- جمع نهایی -->
+        <section class="summary">
+            <p>جمع کل : {{ cart.final_price|babel_decimal }} تومان</p>
+        </section>
+
+        <footer>
+            <p>با تشکر از خرید شما</p>
+            <button style="font-family: MyCustomFont;" class="print-button" onclick="window.print()">چاپ فاکتور</button>
+        </footer>
+    </div>
+</body>
+
+</html>

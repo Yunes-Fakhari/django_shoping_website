@@ -1,0 +1,246 @@
+{% extends 'shared/layout.html' %}
+{% load poll_extras %}
+{% load thumbnail %}
+{% load custom_filters %}
+
+{% block title %}
+    سبد خرید
+{% endblock %}
+
+{% block content %}
+<style>
+    .messages { display: none; }
+    
+    .custom-toast-container {
+        margin-top: 32px !important; /* فاصله از بالای صفحه */
+    }
+    
+    .swal2-toast-title {
+        font-size: 14px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5 !important; /* تراز عمودی متن */
+        padding: 4px 0 !important; /* فاصله داخلی متن */
+    }
+    
+    .swal2-toast {
+        min-height: 48px !important; /* حداقل ارتفاع باکس */
+        align-items: center !important; /* مرکز سازی عمودی */
+    }
+</style>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+        {% include "User/user_cart_content.html" %}
+{% endblock %}
+{% block footer_references %}
+<script>
+function removeFromCart(itemId) {
+    Swal.fire({
+        title: 'آیا مطمئن هستید؟',
+        text: 'این محصول از سبد خرید شما حذف خواهد شد.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'حذف',
+        cancelButtonText: 'لغو',
+        reverseButtons: true,
+        focusCancel: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch("{% url 'remove_cart_detail' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: new URLSearchParams({
+                    'item_id': itemId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // در صورت نیاز می‌توانید ردیف مورد نظر را حذف کنید:
+                    let row = document.getElementById('cart-item-' + itemId);
+                    if (row) {
+                        row.remove();
+                    }
+                    // نمایش پیام موفقیت و سپس رفرش صفحه
+                    Swal.fire('حذف شد!', '', 'success').then(() => {
+                        window.location.reload();
+                    });
+                } else {
+                    Swal.fire('خطا', data.message || 'عملیات حذف با خطا مواجه شد.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                Swal.fire('خطا', 'خطایی در ارسال درخواست به وجود آمده است.', 'error');
+            });
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const messages = document.querySelectorAll('.messages li');
+    
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        width: 'auto',
+        background: '#fff',
+        color: '#000',
+        iconColor: '#ff4444',
+        padding: '0.75em 1.5em',
+        customClass: {
+            container: 'custom-toast-container',
+            title: 'swal2-toast-title'
+        },
+        didOpen: (toast) => {
+            toast.style.fontSize = '14px';
+            toast.style.whiteSpace = 'nowrap';
+        }
+    });
+
+    messages.forEach(message => {
+        Toast.fire({
+            icon: 'error',
+            title: message.innerText,
+        });
+    });
+});
+function handleCheckout(e) {
+    e.preventDefault();
+    
+    {% if cart_items %}
+        let productsList = '';
+        {% for item in cart_items %}
+            productsList += `
+                <div class="swal-product-item">
+                    <div class="swal-product-info">
+                        <h4>${'{{ item.product.title|escapejs }}'}</h4>
+                        <div class="swal-product-details">
+                            <span>رنگ: ${'{{ item.color|escapejs }}'}</span>
+                            <span>سایز: ${'{{ item.size|escapejs }}'}</span>
+                            <span>تعداد: ${'{{ item.count }}'}</span>
+                        </div>
+                    </div>
+                    <div class="swal-product-price">
+                        ${'{{ item.product.get_final_price|multiply:item.count|babel_decimal|escapejs }}'} تومان
+                    </div>
+                </div>
+            `;
+        {% endfor %}
+
+        Swal.fire({
+            title: 'تأیید نهایی خرید',
+            html: `
+                <div class="swal-products-container">
+                    ${productsList}
+                    <div class="swal-total-price">
+                        <span>مبلغ کل:</span>
+                        <span>${'{{ cart_total|babel_decimal|escapejs }}'} تومان</span>
+                    </div>
+                </div>
+            `,
+            imageUrl: '/static/images/fetchpik.com-iconscout-onqJxFM1bt.png',
+            imageWidth: 160,
+            imageHeight: 160,
+            imageAlt: 'آیکن تأیید خرید',
+            showCancelButton: true,
+            confirmButtonText: 'نهایی کردن خرید',
+            cancelButtonText: 'لغو خرید',
+            width: '400px',
+            customClass: {
+                popup: 'custom-swal-popup',
+                htmlContainer: 'custom-swal-html',
+                image: 'custom-swal-image'
+            },
+            didOpen: () => {
+                const style = document.createElement('style');
+                style.textContent = `
+                    .custom-swal-image {
+                        margin: 10px auto;
+                        border: 2px solid #2ecc71;
+                        border-radius: 50%;
+                        padding: 5px;
+                        background: #fff;
+                    }
+                    .swal-products-container {
+                        max-height: 50vh;
+                        overflow-y: auto;
+                        padding: 5px;
+                    }
+                    .swal-product-item {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 8px 5px;
+                        border-bottom: 1px solid #eee;
+                        font-size: 13px;
+                    }
+                    .swal-product-info h4 {
+                        margin: 0 0 3px 0;
+                        font-size: 14px;
+                        color: #2c3e50;
+                    }
+                    .swal-product-details {
+                        display: flex;
+                        gap: 10px;
+                        font-size: 12px;
+                        color: #7f8c8d;
+                    }
+                    .swal-product-price {
+                        font-size: 13px;
+                        font-weight: bold;
+                        color: #27ae60;
+                    }
+                    .swal-total-price {
+                        font-size: 14px !important;
+                        padding: 10px 5px;
+                        display: flex;
+                        justify-content: space-between;
+                        border-top: 2px solid #bdc3c7;
+                        margin-top: 10px;
+                    }
+                    .swal2-title {
+                        font-size: 16px !important;
+                        color: #2c3e50 !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{% url 'checkout_page' %}";
+            }
+        });
+    {% else %}
+        Swal.fire({
+            title: 'سبد خرید خالی است!',
+            text: 'لطفا ابتدا محصولاتی به سبد خرید اضافه کنید',
+            icon: 'warning',
+            confirmButtonText: 'متوجه شدم'
+        });
+    {% endif %}
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const checkoutBtn = document.querySelector('a[href="{% url 'checkout_page' %}"]');
+    if(checkoutBtn) {
+        checkoutBtn.addEventListener('click', handleCheckout);
+    }
+});
+
+</script>
+    
+{% endblock %}
+

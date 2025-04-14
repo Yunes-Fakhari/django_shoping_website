@@ -1,0 +1,155 @@
+/**================
+   2.4 Breadcrumb CSS 
+=====================**/
+.breadcrumb-wrap {
+  background-color: $gray-light3;
+  .banner {
+    padding: calc(38px + (50 - 38) * ((100vw - 320px) / (1920 - 320))) 0;
+    [class="dark"] & {
+      background-image: none !important;
+      background-color: $image-dark-theme;
+    }
+
+    .heading-box {
+      h1 {
+        font-size: calc(24px + (30 - 24) * ((100vw - 320px) / (1920 - 320)));
+        font-family: $font_1;
+        color: $title-color;
+        margin-top: -3px;
+      }
+    }
+    .search-box {
+      width: 50%;
+      margin-top: 15px;
+    }
+
+    .breadcrumb-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+    }
+    .breadcrumb {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(6px + (10 - 6) * ((100vw - 320px) / (1920 - 320)));
+      margin-bottom: calc(-4px + (-6 + 4) * ((100vw - 320px) / (1920 - 320)));
+
+      li {
+        a {
+          font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+          color: $content-color;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        svg {
+          stroke: $content-color;
+          width: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+          height: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+          [dir="rtl"] & {
+            transform: rotate(180deg);
+            transform-origin: center;
+          }
+        }
+
+        &.current {
+          a {
+            color: var(--theme-color);
+          }
+        }
+        a {
+          &:hover {
+            color: var(--theme-color);
+          }
+        }
+      }
+    }
+  }
+}
+
+/// order Tracking Breadcrumb ///
+.progtrckr {
+  margin: 25px 0 -11px;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+
+  li {
+    display: inline-block;
+    text-align: center;
+    margin: 10px 0;
+
+    h5 {
+      margin-top: 20px;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-weight: 500;
+    }
+
+    &:before {
+      position: relative;
+      top: -2px;
+      float: left;
+      left: 50% !important;
+      line-height: 1;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    &.steps-item {
+      color: $content-color;
+      border-top: 4px solid $gray-light2;
+      width: 100% !important;
+      position: relative;
+      &:before {
+        content: "";
+        color: $content-color;
+        background-color: $white;
+        border: 4px solid $gray-light2;
+        border-radius: 100px;
+        padding: 12px;
+      }
+      &::after {
+        content: "";
+        background-image: url("../icons/svg/active.svg");
+        background-size: 15px 15px;
+        background-position: center;
+        width: 15px;
+        height: 15px;
+
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 50%;
+        top: -9px;
+        transform: translateX(-50%);
+      }
+      h6 {
+        font-size: 13px;
+        margin-top: 8px;
+      }
+    }
+
+    &.progtrckr-done {
+      color: $black;
+      border-top: 4px solid var(--theme-color);
+      width: 100% !important;
+
+      &:before {
+        content: "";
+        background-color: var(--theme-color);
+        border-color: var(--theme-color);
+      }
+
+      h6 {
+        font-size: 13px;
+        margin-top: 8px;
+        color: $content-color;
+      }
+    }
+  }
+}

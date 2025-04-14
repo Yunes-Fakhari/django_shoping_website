@@ -1,0 +1,359 @@
+/**===================
+  2.10 Nav Tabs CSS
+========================**/
+.nav {
+  .nav-link {
+    .notification {
+      border-radius: 100px;
+      font-size: 12px;
+      background-color: var(--theme-color);
+      color: $white;
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 18px;
+      transform: unset;
+      margin-left: 5px;
+      [class="dark"] & {
+        color: $title-color;
+        margin-right: 5px;
+        margin-left: unset;
+      }
+    }
+  }
+}
+
+.nav-tabs-star {
+  .nav-pills {
+    padding-bottom: calc(10px + (14 - 10) * ((100vw - 320px) / (1920 - 320)));
+    justify-content: center;
+    gap: calc(6px + (13 - 6) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+
+    li {
+      margin-top: -4px;
+      > svg {
+        width: calc(14px + (17 - 14) * ((100vw - 320px) / (1920 - 320)));
+        height: calc(14px + (17 - 14) * ((100vw - 320px) / (1920 - 320)));
+        stroke: var(--theme-color);
+      }
+    }
+    .nav-link {
+      text-transform: uppercase;
+      background-color: $white;
+      font-weight: 500;
+      line-height: 23px;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+      color: $title-color;
+      padding: 0 6px;
+      position: relative;
+      transition: all 0.6s;
+      &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 3px;
+        bottom: calc(-10px + (-14 + 10) * ((100vw - 320px) / (1920 - 320)));
+        left: 50%;
+        width: 0;
+        transition: all 0.6s;
+        transform: translateX(-50%);
+        background-color: var(--theme-color);
+      }
+      &.active {
+        color: var(--theme-color);
+        background-color: $white;
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+  &.filter {
+    .nav-pills {
+      gap: calc(3px + (13 - 3) * ((100vw - 320px) / (1920 - 320)));
+      li {
+        > svg {
+          width: calc(13px + (17 - 13) * ((100vw - 320px) / (1920 - 320)));
+          height: calc(13px + (17 - 13) * ((100vw - 320px) / (1920 - 320)));
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs2 {
+  border: none;
+  flex-direction: column;
+  gap: calc(6px + (8 - 6) * ((100vw - 320px) / (1920 - 320)));
+  margin-top: 20px;
+  &.row-tab {
+    flex-direction: row !important;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $border-color5 !important;
+  }
+  li {
+    .nav-link {
+      padding: 7px 15px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: $content-color;
+      font-weight: 500;
+      font-size: calc(15px + (16 - 15) * ((100vw - 320px) / (1920 - 320)));
+      line-height: 20px;
+      text-align: left;
+      width: 100%;
+      position: relative;
+      transition: all 0.5s;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: auto;
+          transform-origin: center;
+          transform: rotate(180deg);
+        }
+        svg {
+          width: 18px;
+          height: 18px;
+          stroke: $title-color;
+          transition: all 0.5s;
+        }
+        [dir="rtl"] & {
+          margin-left: unset;
+          margin-right: auto;
+        }
+      }
+      &::after {
+        content: "";
+        width: 100%;
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        position: absolute;
+        inset: 0;
+        transition: all 0.5s;
+        z-index: 2;
+        opacity: 0.1;
+      }
+      &.active,
+      &:hover {
+        color: var(--theme-color);
+        background-color: $white;
+        span {
+          svg {
+            stroke: var(--theme-color);
+          }
+        }
+        &::after {
+          background-color: var(--theme-color);
+        }
+      }
+    }
+  }
+
+  &.solid-outline {
+    li {
+      .nav-link {
+        background-color: $white !important;
+        border: 1px solid var(--theme-color);
+        color: var(--theme-color);
+        &::after {
+          display: none;
+        }
+        span {
+          transition: all 0.5s;
+        }
+        &.active,
+        &:hover {
+          color: $white;
+          background-color: var(--theme-color) !important;
+          [class="dark"] & {
+            color: $title-color;
+          }
+          span {
+            background-color: $white;
+            color: var(--theme-color);
+            svg {
+              stroke: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs3 {
+  display: flex;
+  flex-direction: row !important;
+  width: 100%;
+  gap: 0 !important;
+  padding: 0 calc(0px + (20 - 0) * ((100vw - 320px) / (1920 - 320)));
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba($border-color3, 0.5);
+    z-index: 1;
+  }
+  .nav-link {
+    position: relative;
+    border: 1px solid transparent !important;
+    background-color: $white !important;
+    color: $title-color;
+    font-weight: 500;
+    border-radius: 8px;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    transition: all 0.5s;
+    &.active {
+      z-index: 2;
+      border: 1px solid $border-color5 !important;
+      border-bottom: 1px solid $white !important;
+      border-radius: 8px 8px 0 0;
+      color: var(--theme-color);
+    }
+  }
+}
+
+.nav-tabs4 {
+  border: none;
+  display: flex;
+  gap: calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320)));
+  justify-content: center;
+  padding: 4px;
+  margin: -4px;
+  @media only screen and (max-width: 593px) {
+    justify-content: flex-start;
+  }
+  .nav-item {
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320))) calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+      border: 1px solid $border-color5;
+      border-radius: 10px;
+      box-shadow: none;
+      box-shadow: 0 0 10px rgba($border-color3, 0.3);
+      background-color: $white;
+
+      &.active {
+        border-radius: 10px;
+        border-color: var(--theme-color);
+        background-color: $white;
+      }
+      span {
+        font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+        color: $title-color;
+        font-weight: 500;
+        line-height: 22px;
+        white-space: nowrap;
+      }
+      svg {
+        width: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
+        stroke: var(--theme-color);
+        height: calc(20px + (24 - 20) * ((100vw - 320px) / (1920 - 320)));
+      }
+    }
+  }
+}
+
+.nav-tabs5 {
+  @extend .nav-tabs2;
+  padding: 0 !important;
+  margin-top: 0;
+  gap: calc(8px + (17 - 8) * ((100vw - 320px) / (1920 - 320)));
+
+  &.row-tab {
+    border: none !important;
+  }
+  &.round-tab {
+    button {
+      border-radius: 5px !important;
+    }
+  }
+
+  li {
+    min-width: max-content;
+    .nav-link {
+      padding: calc(8px + (10 - 8) * ((100vw - 320px) / (1920 - 320))) calc(10px + (26 - 10) * ((100vw - 320px) / (1920 - 320)));
+      background-color: $gray-light;
+      font-weight: 500;
+      font-size: calc(12px + (18 - 12) * ((100vw - 320px) / (1920 - 320)));
+      line-height: calc(18px + (29 - 18) * ((100vw - 320px) / (1920 - 320)));
+      border-radius: 0;
+      color: $title-color3;
+      &.active {
+        background-color: var(--theme-color);
+        color: $white;
+        [class="dark"] & {
+          color: $white-text-dark;
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs6 {
+  gap: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+  .nav-link {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 29px;
+    color: $content-light;
+    padding: 0;
+    background-color: transparent;
+    transition: all 0.4s linear;
+    &.active,
+    &:hover {
+      color: var(--theme-color);
+    }
+  }
+  li {
+    display: flex;
+    align-items: center;
+    .dashed-border {
+      width: 4px;
+      height: 1px;
+      background-color: var(--theme-color);
+      position: relative;
+      display: block;
+      align-items: center;
+      gap: 3px;
+      &::after,
+      &::before {
+        content: "";
+        width: inherit;
+        height: inherit;
+        background-color: inherit;
+        position: absolute;
+      }
+
+      &::after {
+        left: 8px;
+      }
+      &::before {
+        right: 8px;
+      }
+    }
+  }
+}
