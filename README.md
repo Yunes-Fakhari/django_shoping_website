@@ -5,7 +5,9 @@
 
 *(Replace with your actual screenshot URL)*
 
-## 🔥 Key Features
+
+##🎥 Video Demo
+Watch our full feature walkthrough: (https://drive.google.com/file/d/1XCiLKr5215w9FuRDE4Pj91O7JPZqHZb-/view?usp=drive_link)
 
 ### 📱 **User Authentication**
 - Phone number registration/login using MeliPayamak SMS API 
@@ -48,6 +50,4 @@
 - **Payment**: ZarinPal API
 - **SMS**: MeliPayamak API
   
-##🎥 Video Demo
-Watch our full feature walkthrough: (https://drive.google.com/file/d/1XCiLKr5215w9FuRDE4Pj91O7JPZqHZb-/view?usp=drive_link)
 
