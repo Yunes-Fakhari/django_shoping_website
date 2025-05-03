@@ -1,6 +1,6 @@
 # 🛍️ Django E-Commerce & CMS Platform
 
-**A Full-Stack E-Commerce Solution with Advanced Features**  
+**A Full-Stack E-Commerce Solution **  
 *Built with Django, Python, and Modern Web Technologies*
 
 ![Project Screenshot](https://via.placeholder.com/800x400.png?text=Awesome+Django+E-Commerce+Dashboard)  
@@ -38,7 +38,7 @@
 - Real-time sales analytics
 - Inventory reports
 - Customer behavior insights
-- Exportable data formats (CSV, Excel, PDF)
+- Exportable data formats 
 
 ![Analytics Dashboard](https://via.placeholder.com/400x200.png?text=Sales+Analytics+Dashboard)
 
@@ -49,10 +49,8 @@
 - Product review/rating system
 
 ## 🛠️ Tech Stack
-- **Backend**: Django 4.x, Django REST Framework
-- **Database**: PostgreSQL
-- **Authentication**: JWT, OTP
-- **Async Tasks**: Celery + Redis
+- **Backend**: Django 4
+- **Database**: MySQL
 - **Search**: ElasticSearch
 - **Payment**: ZarinPal API
 - **SMS**: MeliPayamak API
